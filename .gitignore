@@ -1,6 +1,9 @@
 *.csv
 *.gff3
+*.gff
 .vscode/
+!test_set/**/*.gff3
+!test_set/**/*.gff
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
