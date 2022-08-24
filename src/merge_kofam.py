@@ -21,5 +21,5 @@ except FileNotFoundError:
     print(f"Cannot find the file")
     sys.exit()
 
-data_merged = pd.merge(data_1, data_2, on=["ID", "start", "end"], how="outer")
+data_merged = pd.merge(data_1, data_2, on=["sequence_no"], how="outer")
 data_merged.to_csv(create_savename(abs_dir, "merged"), index=False)

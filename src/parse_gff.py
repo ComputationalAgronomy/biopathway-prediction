@@ -27,7 +27,7 @@ def parse_gff(filename):
             for read_line in f.readlines():
                 if read_line.startswith("##FASTA"):
                     break
-                if read_line.startswith(("##", "#!")) or read_line == "":
+                if read_line.startswith(("##", "#!")) or read_line == "\n":
                     continue
                 line.append(read_line)
     except FileNotFoundError:
@@ -36,17 +36,17 @@ def parse_gff(filename):
 
     # extract columns
     # column
-    # 1: sequence ID
-    # 2: source
-    # 3: feature type (mRNA, domain, exon, ...)
-    # 4: feature start
-    # 5: feature end
-    # 6: score (e_value or p_value for predictions)
-    # 7: strand
-    # 8: phase
-    # 9: attributes
+    # 0: sequence ID
+    # 1: source
+    # 2: feature type (mRNA, domain, exon, ...)
+    # 3: feature start
+    # 4: feature end
+    # 5: score (e_value or p_value for predictions)
+    # 6: strand
+    # 7: phase
+    # 8: attributes
 
-    # 1, 4, 5, 9
+    # 0, 3, 4, 8
     data = {"ID": [],
             "start": [],
             "end": [],
@@ -54,17 +54,17 @@ def parse_gff(filename):
             "gene": [],
             "product": []}
 
-    for i, column in enumerate(line):
-        value = column.split("\t")
+    for i, content in enumerate(line):
+        columns = content.split("\t")
         try:
             # for NCBI gff3 screening
-            if value[2] == "gene":
+            if columns[2] == "gene":
                 continue
 
-            value_list = [value[item] for item in (0, 3, 4)]
-            attr_ec = re.search("eC_number=([^;]*)", value[8])
-            attr_gene = re.search("gene=([^;]*)", value[8])
-            attr_product = re.search("product=([^;]*)", value[8])
+            value_list = [columns[item] for item in (0, 3, 4)]
+            attr_ec = re.search("eC_number=([^;]*)", columns[8])
+            attr_gene = re.search("gene=([^;]*)", columns[8])
+            attr_product = re.search("product=([^;]*)", columns[8])
             for attr in (attr_ec, attr_gene, attr_product): 
                 if attr is not None:
                     attr = attr.group(1).strip("\n")
@@ -75,7 +75,7 @@ def parse_gff(filename):
                 data[key].append(value_list[num])
         except IndexError:
             print(f"index error at line: {i}")
-            repr(column)
+            print(repr(content))
 
     data = pd.DataFrame(data)
     return data
@@ -93,7 +93,7 @@ if os.path.isdir(name):
                     index=False)
 elif os.path.isfile(name):
     data = parse_gff(name)
-    data.to_csv(create_savename(abs_dir, name))
+    data.to_csv(create_savename(abs_dir, name), index=False)
 else:
     print("Invalid file or directory name")
     sys.exit()
