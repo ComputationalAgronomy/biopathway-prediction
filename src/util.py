@@ -15,13 +15,15 @@ def create_savename(abs_dir, filename, filenum=1):
     """This function will create a proper filename for the output file"""
     if filenum == 1:
         filename = os.path.basename(filename).split(".")[0]
-        output_filename = os.path.join(abs_dir,
-                                       create_folder(abs_dir, "output"),
-                                       f"{filename}_{filenum}.csv")
+        foldername = "output"
+        create_folder(abs_dir, foldername)
+        filename = os.path.join(abs_dir,
+                                "output",
+                                f"{filename}_{filenum}.csv")
     else:
-        output_filename = re.sub(f"_(\d+)\.csv$", filenum, output_filename)
-    if not os.path.exists(output_filename):
-        return output_filename
+        filename = re.sub("_(\d+)\.csv$", f"_{str(filenum)}.csv", filename)
+    if not os.path.exists(filename):
+        return filename
     else:
         return create_savename(abs_dir, filename, filenum + 1)
 

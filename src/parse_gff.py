@@ -51,6 +51,7 @@ def parse_gff(filename):
             "start": [],
             "end": [],
             "ec_number": [],
+            "gene": [],
             "product": []}
 
     for i, column in enumerate(line):
@@ -62,23 +63,19 @@ def parse_gff(filename):
 
             value_list = [value[item] for item in (0, 3, 4)]
             attr_ec = re.search("eC_number=([^;]*)", value[8])
+            attr_gene = re.search("gene=([^;]*)", value[8])
             attr_product = re.search("product=([^;]*)", value[8])
-            if attr_ec is not None:
-                attr_ec = attr_ec.group(1)
-                value_list.append(attr_ec)
-            else:
-                value_list.append("-")
-            if attr_product is not None:
-                attr_product = attr_product.group(1).strip("\n")
-                value_list.append(attr_product)
-            else:
-                value_list.append("-")
-
+            for attr in (attr_ec, attr_gene, attr_product): 
+                if attr is not None:
+                    attr = attr.group(1).strip("\n")
+                    value_list.append(attr)
+                else:
+                    value_list.append("-")
             for num, key in enumerate(data):
                 data[key].append(value_list[num])
         except IndexError:
             print(f"index error at line: {i}")
-            print(f"{column}")
+            repr(column)
 
     data = pd.DataFrame(data)
     return data
