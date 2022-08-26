@@ -60,7 +60,6 @@ def parse_gff(filename):
             # for NCBI gff3 screening
             if columns[2] == "gene":
                 continue
-
             value_list = [columns[item] for item in (0, 3, 4)]
             attr_ec = re.search("eC_number=([^;]*)", columns[8])
             attr_gene = re.search("gene=([^;]*)", columns[8])
@@ -78,6 +77,7 @@ def parse_gff(filename):
             print(repr(content))
 
     data = pd.DataFrame(data)
+    data.astype({"start": "int64", "end": "int64"})
     return data
 
 

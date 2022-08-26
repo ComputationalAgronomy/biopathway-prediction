@@ -47,7 +47,8 @@ except FileNotFoundError:
 
 # parse files
 
-data_1 = {"sequence_no": [],
+data_1 = {"ID": [],
+          "sequence_no": [],
           "start": [],
           "end": []
          }
@@ -63,7 +64,8 @@ data_1 = {"sequence_no": [],
 # 5: e_value
 # 6: KO definition
 
-data_2 = {"sequence_no": [],
+data_2 = {"ID": [],
+        "sequence_no": [],
         "KO": [],
         "ec_number": [],
         "product": []}
@@ -71,10 +73,11 @@ data_2 = {"sequence_no": [],
 for i, content in enumerate([x[0] for x in line_1]):
     columns = content.split(maxsplit=1)
     value_list = []
+    id = re.search("\|([A-Z]+_[A-Z]+\d+\.\d+)", columns[0])
     seq = re.search("_(\d+)$", columns[0])
-    start = re.search("location=[a-z]*\(?(\d+)", columns[1])
-    end = re.search("location=[a-z]*\(?\d+\.\.(\d+)", columns[1])
-    for attr in (seq, start, end): 
+    start = re.search("location=[a-z]*\(?>?<?(\d+)", columns[1])
+    end = re.search("location=[a-z]*\(?>?<?\d+\.\.>?<?(\d+)", columns[1])
+    for attr in (id, seq, start, end): 
         if attr is not None:
             attr = attr.group(1)
             value_list.append(attr)
@@ -86,11 +89,12 @@ for i, content in enumerate([x[0] for x in line_1]):
 for i, content in enumerate(line_2):
     columns = content.split(maxsplit=6)
     value_list = []
+    id = re.search("\|([A-Z]+_[A-Z]+\d+\.\d+)", columns[1])
     seq = re.search("_(\d+)$", columns[1])
     ko = columns[2]
     ec = re.search("EC:([^\]]+)", columns[6])
     product = re.search("([^\[]*)", columns[6])
-    for attr in (seq, ko, ec, product): 
+    for attr in (id, seq, ko, ec, product): 
         if attr is not None:
             if not isinstance(attr, str):
                 attr = attr.group(1).strip(" ").strip("\n").strip("\"")
@@ -105,4 +109,3 @@ data_2 = pd.DataFrame(data_2)
 
 data_1.to_csv(create_savename(abs_dir, file1), index=False)
 data_2.to_csv(create_savename(abs_dir, file2), index=False)
-

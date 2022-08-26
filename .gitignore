@@ -2,6 +2,7 @@
 *.gff3
 *.gff
 .vscode/
+example/
 !test_set/**/*.gff3
 !test_set/**/*.gff
 
