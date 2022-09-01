@@ -77,7 +77,6 @@ def parse_gff(filename):
             print(repr(content))
 
     data = pd.DataFrame(data)
-    data.astype({"start": "int64", "end": "int64"})
     return data
 
 

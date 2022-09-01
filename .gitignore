@@ -3,8 +3,7 @@
 *.gff
 .vscode/
 example/
-!test_set/**/*.gff3
-!test_set/**/*.gff
+test_set/**/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
