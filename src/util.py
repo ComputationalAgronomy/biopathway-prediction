@@ -8,7 +8,7 @@ def create_folder(abs_dir, foldername, foldernum=1):
     folder_path = os.path.join(abs_dir, foldername)
     if os.path.exists(folder_path):
         foldername = re.sub("_(\d+)$", f"_{str(foldernum + 1)}", foldername)
-        create_folder(abs_dir, foldername, foldernum + 1)
+        return create_folder(abs_dir, foldername, foldernum + 1)
     else:
         os.makedirs(folder_path)
         return foldername
@@ -18,8 +18,9 @@ def create_savename(abs_dir, filename, filenum=1, new_folder=True):
     """This function will create a proper filename for the output file"""
     if filenum == 1:
         filename = os.path.basename(filename).split(".")[0]
+        foldername = "output_1"
         if new_folder:
-            foldername = create_folder(abs_dir, "output_1")
+            foldername = create_folder(abs_dir, foldername)
         filename = os.path.join(abs_dir,
                                 foldername,
                                 f"{filename}_{filenum}.csv")

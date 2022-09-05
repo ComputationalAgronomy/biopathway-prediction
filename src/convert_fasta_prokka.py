@@ -2,7 +2,7 @@ import os
 import sys
 import re
 import glob
-import tqdm
+from tqdm import tqdm
 
 if __name__ == "__main__":
     from util import *

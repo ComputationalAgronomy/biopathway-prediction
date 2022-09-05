@@ -4,6 +4,9 @@
 .vscode/
 example/
 test_set/**/*
+input/
+output*/
+database/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
