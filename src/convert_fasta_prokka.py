@@ -9,12 +9,17 @@ if __name__ == "__main__":
 else:
     from .util import *
 
-# check argument
-assert len(sys.argv) == 2, \
-    "Invalid arguments. Only one file or directory is allowed."
+
 
 abs_dir = os.path.dirname(__file__)
-name = sys.argv[1] # orignal protein fasta
+if len(sys.argv) == 3:
+    enzyme_id = sys.argv[1] # add enyzme_id to the converted fasta 
+    name = sys.argv[2] # orignal protein fasta
+else:
+    assert len(sys.argv) == 2, "Invalid arguments"
+    name = sys.argv[1]
+    enzyme_id = None
+
 
 def parse_uniprot_fasta(line):
     element = line.split("|")
@@ -27,7 +32,7 @@ def parse_uniprot_fasta(line):
     if gene is not None:
         gene = gene.group(1)
     # >(id) (product)
-    return f">{id} {product}_{organism}_{existence}_{gene}"
+    return f">{id} {enzyme_id}_{product}_{organism}_{existence}_{gene}"
     
 def convert_fasta(filename):
     """This function converts uniprot fasta to prokka database format"""

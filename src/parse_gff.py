@@ -10,16 +10,22 @@ if __name__ == "__main__":
 else:
     from .util import *
 
-# check argument
-assert len(sys.argv) == 2, \
-    "Invalid arguments. Only one file or directory is allowed."
 
 # python file path
 abs_dir = os.path.dirname(__file__)
-name = sys.argv[1]
+
+# -n: drop hypothethical proteins and parse my own product name
+if sys.argv[1] == "-n":
+    assert len(sys.argv) == 3, "Invalid arguments"
+    drop_hypo = True
+    name = sys.argv[2]
+else:
+    assert len(sys.argv) == 2, "Invalid arguments"
+    drop_hypo = False
+    name = sys.argv[1]
 
 
-def parse_gff(filename):
+def parse_gff(filename, drop_hypo):
     # parse the gff file
     line = []
     try:
@@ -77,8 +83,16 @@ def parse_gff(filename):
             print(repr(content))
 
     data = pd.DataFrame(data)
+    if drop_hypo:
+        data = data.loc[data["product"] != "hypothetical protein"]
+    
     return data
 
+# {enzyme_id}_{product}_{organism}_{existence}_{gene}
+def parse_product(data):
+    data[["enzyme_id","product", "organism", "protein_existence", "gene"]] = \
+        data["product"].str.split("_", expand=True)
+    return data
 
 if os.path.isdir(name):
     # find gff files in the directory
@@ -86,12 +100,16 @@ if os.path.isdir(name):
     file_list.extend(glob.glob(os.path.join(name, "**/*.gff3"), recursive=True))
     file_list = [file.replace("\\", "/") for file in file_list]
     for filename in tqdm(file_list):
-        data = parse_gff(filename)
+        data = parse_gff(filename, drop_hypo)
+        if drop_hypo:
+            data = parse_product(data)
         # use the folder name as the final filename
         data.to_csv(create_savename(abs_dir, filename.split("/")[-2]),
                     index=False)
 elif os.path.isfile(name):
-    data = parse_gff(name)
+    data = parse_gff(name, drop_hypo)
+    if drop_hypo:
+        data = parse_product(data)
     data.to_csv(create_savename(abs_dir, name), index=False)
 else:
     print("Invalid file or directory name")
