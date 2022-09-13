@@ -90,7 +90,7 @@ def parse_gff(filename, drop_hypo):
 
 # {enzyme_id}_{product}_{organism}_{existence}_{gene}
 def parse_product(data):
-    data[["enzyme_id","product", "organism", "protein_existence", "gene"]] = \
+    data[["enzyme_id", "product", "organism", "protein_existence", "gene"]] = \
         data["product"].str.split("_", expand=True)
     return data
 
