@@ -37,9 +37,11 @@ def parse_blast(filename, output_filename):
                     product = element.group(1).replace(",", "")
                     organism = element.group(2)
                     existence = element.group(3)
-                    gene = re.search("GN=(.*) PE=", description).group(1)
+                    gene = re.search("GN=(.*) PE=", description)
                     if gene is None:
                         gene = "-"
+                    else:
+                        gene = gene.group(1)
                     alignment_info = f"{alignment_id},{product},{organism},{existence},{gene}"
                     for hsp in alignment.hsps:
                         # 0: alignment_id
@@ -60,7 +62,7 @@ def parse_blast(filename, output_filename):
 
 if os.path.isdir(name):
     # find fasta files in the directory
-    file_list = glob.glob(os.path.join(name, "**/*.txt"), recursive=True)
+    file_list = glob.glob(os.path.join(name, "**/*.xml"), recursive=True)
     file_list = [file.replace("\\", "/") for file in file_list]
     new_folder = True
     for filename in tqdm(file_list):
