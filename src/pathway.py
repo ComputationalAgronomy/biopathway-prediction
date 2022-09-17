@@ -24,32 +24,16 @@ class Enzyme():
         else:
             return None
 
-
-
-pathway_list = {1: PathwayNode("trp", [1, 2, 3], True),
-                2: PathwayNode("trp_1", [4], False),
-                3: PathwayNode("trp_2", [0], False),
-                4: PathwayNode("trp_3", [0], False),
-                5: PathwayNode("trp_1_1", [0], False)
+pathway_list = {1: PathwayNode("trp", [1, 3], True),
+                2: PathwayNode("iam_1", [2], False),
+                3: PathwayNode("indole-3-acetic-acid", [0], False),
+                4: PathwayNode("ipa_1", [4], False),
+                5: PathwayNode("ipa_2", [5], False)
                 }
 
 enzyme_list = {0: None,
-               1: Enzyme("trp_to_1", 2, False),
-               2: Enzyme("trp_to_2", 3, True),
-               3: Enzyme("trp_to_3", 4, True),
-               4: Enzyme("trp_1_to_1", 5, True)}
-
-# traverse from the starting material
-def enzyme_reaction(material, enzyme_list, pathway_list):
-    for enzyme in pathway_list[material].reaction:
-        if enzyme_list[enzyme] is not None and enzyme_list[enzyme].exist:
-            next_reaction = enzyme_list[enzyme].react(pathway_list)
-            if next_reaction is not None:
-                enzyme_reaction(next_reaction, enzyme_list, pathway_list)
-
-def print_pathway(pathway_list):
-    for pathwaynode in pathway_list.values():
-        print(f"{pathwaynode.name}: {pathwaynode.visited}")
-
-enzyme_reaction(1, enzyme_list, pathway_list)
-print_pathway(pathway_list)
+               1: Enzyme("trp_iam_1", 2),
+               2: Enzyme("iam_1_indole", 3),
+               3: Enzyme("trp_ipa_1", 4),
+               4: Enzyme("ipa_1_2", 5),
+               5: Enzyme("ipa_2_indole", 3)}

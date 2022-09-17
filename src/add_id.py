@@ -13,39 +13,37 @@ else:
 
 abs_dir = os.path.dirname(__file__)
 assert len(sys.argv) == 3, "Invalid arguments"
-enzyme_id = sys.argv[1] # add enyzme_id to the converted fasta 
-name = sys.argv[2] # orignal protein fasta
-
+name = sys.argv[1]
+enzyme_id = sys.argv[2]
 
 def add_id(line):
-    element = line.split("|")
-    id = element[1]
-    result = re.search(" (.*) OS=(.*) OX=.* PE=(\d)", element[2])
-    product = result.group(1)
-    organism = result.group(2)
-    existence = result.group(3)
-    gene = re.search("GN=(.*) PE=", element[2])
-    if gene is not None:
-        gene = gene.group(1)
-    # >(id) (product)
-    return f">{id} {enzyme_id}_{product}_{organism}_{existence}_{gene}"
+    element = line.split(" ", 1)
+    product_info = element[1]
+    return f"{element[0]} {enzyme_id}_{product_info}"
     
-def convert_fasta(filename):
-    """This function converts uniprot fasta to prokka database format"""
+def split_fasta(filename):
+    """This function will split different protein entries in database"""
     try:
         line = []
-        with open(filename, "w+") as f:
+        with open(filename, "r") as f:
             for read_line in f.readlines():
                 if read_line.startswith(">"):
                     read_line = read_line.strip("\n")
                     read_line = add_id(read_line)
-                    # newline
+                    # newline and check if the last entry exists
                     try:
                         line[-1][1] += "\n"
                     except:
                         pass
                     line.append([read_line])
                     line[-1].append("")
+                else:
+                    try:
+                        # merge fasta sequence
+                        line[-1][1] += read_line
+                    except IndexError:
+                        print("Error in input format")
+                        return
             return line
     except FileNotFoundError:
         print(f"Cannot find '{filename}'")
@@ -57,7 +55,7 @@ if os.path.isdir(name):
     file_list = [file.replace("\\", "/") for file in file_list]
     new_folder = True
     for filename in tqdm(file_list):
-        line = convert_fasta(filename)
+        line = split_fasta(filename)
         with open(create_savename(abs_dir, filename,
                                   new_folder=new_folder), "w") as f:
             # concatenate all the entries
@@ -65,7 +63,7 @@ if os.path.isdir(name):
             f.writelines(j)
         new_folder = False 
 elif os.path.isfile(name):
-    line= convert_fasta(name)
+    line = split_fasta(name)
     with open(create_savename(abs_dir, name), "w") as f:
             # concatenate all the entries
             j = ["\n".join(i) for i in line]

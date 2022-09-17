@@ -46,7 +46,6 @@ except FileNotFoundError:
     sys.exit()
 
 # parse files
-
 data_1 = {"ID": [],
           "sequence_no": [],
           "start": [],
