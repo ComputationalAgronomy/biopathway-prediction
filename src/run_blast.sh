@@ -2,7 +2,7 @@
 cpus=2
 filetype=".faa"
 db="./blast_test/uniprot_sprot.fasta"
-tmpfolder="./tmp/blastp"
+tmpfolder=${2-./tmp/blastp}
 mkdir -p $tmpfolder
 if [ -d "$1" ]; then
     filename=$(find "$1" -name "*$filetype")
