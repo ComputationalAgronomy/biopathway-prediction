@@ -47,9 +47,10 @@ def create_savename(abs_dir, filename, filenum=1, new_folder=True):
     else:
         return create_savename(abs_dir, filename, filenum + 1) """
 
+"""
 # [directory_name]/[filename]_[filenum].csv
 def create_savename(abs_dir, filename, filenum=1, new_folder=True):
-    """This function will create a proper filename for the output file"""   
+    # This function will create a proper filename for the output file 
     filename = os.path.basename(filename).split(".")[0]
     foldername = "output_1"
     if new_folder:
@@ -63,4 +64,18 @@ def create_savename(abs_dir, filename, filenum=1, new_folder=True):
         filenum += 1
         filename = re.sub("_(\d+)\.csv$", f"_{str(filenum)}.csv", filename)
     
+    return filename
+"""
+
+# [directory_name]/[filename].csv
+def create_savename(abs_dir, filename, filenum=1, new_folder=True):
+    """This function will create a proper filename for the output file"""   
+    filename = os.path.basename(filename).split(".")[0]
+    foldername = "output_1"
+    if new_folder:
+        foldername = create_folder(abs_dir, foldername)
+    filename = os.path.join(abs_dir,
+                            foldername,
+                            f"{filename}.csv")
+   
     return filename

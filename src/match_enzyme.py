@@ -1,10 +1,11 @@
-import os
-import sys
-import pandas as pd
-from pathway import PathwayNode, Enzyme, pathway_list, enzyme_list
+if __name__ == "__main__":
+    import sys
+    import pandas as pd
+    from pathway import PathwayNode, Enzyme, PATHWAY_LIST, ENZYME_LIST
+else:
+    import pandas as pd
+    from pathway import PathwayNode, Enzyme, PATHWAY_LIST, ENZYME_LIST
 
-assert len(sys.argv) == 2, "Invalid arguments"
-filename= sys.argv[1]
 
 # traverse from the starting material
 def enzyme_reaction(material, enzyme_list, pathway_list):
@@ -32,11 +33,13 @@ def match_enzyme_existence(filename, enzyme_list):
                 enzyme_list[enzyme_id].exist = True
                 enzyme_list[enzyme_id].count = count
 
-def run_match_enzyme():
+def run_match_enzyme(filename, enzyme_list=ENZYME_LIST, pathway_list=pathway_list):
     match_enzyme_existence(filename, enzyme_list)
     enzyme_reaction(1, enzyme_list, pathway_list)
     print_pathway(pathway_list)
     print_enzyme(enzyme_list)
 
 if __name__ == "__main__":
-    run_match_enzyme()
+    assert len(sys.argv) == 2, "Invalid arguments"
+    filename= sys.argv[1]
+    run_match_enzyme(filename)
