@@ -1,3 +1,9 @@
+"""
+This program parses the output from website kofamscan and converts it to .csv 
+file
+Usage:
+python parse_kofam.py [filename]
+"""
 import os
 import sys
 import re
@@ -6,7 +12,7 @@ import pandas as pd
 if __name__ == "__main__":
     from util import *
 else:
-    from .util import *
+    from ..util import *
  
 # check argument
 assert len(sys.argv) == 3, "Invalid arguments."

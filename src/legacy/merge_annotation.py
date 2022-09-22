@@ -1,3 +1,11 @@
+"""
+This program merge the parsed result from parse_kofam.py and parse_gff.py
+Usage:
+python merge_annotation.py --merge [NCBI_output] [prokka_output]
+python merge_annotation.py --kofam [kofam_output] [prokka or NCBI_output]
+output]
+"""
+
 import os
 import sys
 import pandas as pd
@@ -5,7 +13,7 @@ import pandas as pd
 if __name__ == "__main__":
     from util import *
 else:
-    from .util import *
+    from ..util import *
  
 # check argument
 assert len(sys.argv) == 4, "Invalid arguments"

@@ -1,3 +1,8 @@
+"""
+This program converts uniprot protein fasta to prokka database format
+Usage:
+python convert_fasta_prokka.py [tag_added_to_protein] [filename]
+"""
 import os
 import sys
 import re
@@ -7,8 +12,7 @@ from tqdm import tqdm
 if __name__ == "__main__":
     from util import *
 else:
-    from .util import *
-
+    from ..util import *
 
 
 abs_dir = os.path.dirname(__file__)

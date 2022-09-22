@@ -1,3 +1,9 @@
+"""
+This program parses the gff or gff3 files from NCBI refSeq annotation or
+prokka annotation to .csv files
+Usage:
+python parse_gff.py [-n: drop hypothetical proteins (optional)] [filename] 
+"""
 import os
 import sys
 import re
@@ -8,7 +14,7 @@ import pandas as pd
 if __name__ == "__main__":
     from util import *
 else:
-    from .util import *
+    from ..util import *
 
 
 # python file path
