@@ -15,11 +15,12 @@ abs_dir = os.path.dirname(__file__)
 assert len(sys.argv) == 3, "Invalid arguments"
 name = sys.argv[1]
 enzyme_id = sys.argv[2]
+enzyme_id = enzyme_id.replace("_", "~~~")
 
 def add_id(line):
     element = line.split(" ", 1)
     product_info = element[1]
-    return f"{element[0]} {enzyme_id}_{product_info}"
+    return f"{element[0]} {enzyme_id}~~~{product_info}"
     
 def split_fasta(filename):
     """This function will split different protein entries in database"""
@@ -57,14 +58,14 @@ if os.path.isdir(name):
     for filename in tqdm(file_list):
         line = split_fasta(filename)
         with open(create_savename(abs_dir, filename,
-                                  new_folder=new_folder), "w") as f:
+                                  new_folder=new_folder, no_create=True), "w") as f:
             # concatenate all the entries
             j = ["\n".join(i) for i in line]
             f.writelines(j)
         new_folder = False 
 elif os.path.isfile(name):
     line = split_fasta(name)
-    with open(create_savename(abs_dir, name), "w") as f:
+    with open(create_savename(abs_dir, name, no_create=True), "w") as f:
             # concatenate all the entries
             j = ["\n".join(i) for i in line]
             f.writelines(j)

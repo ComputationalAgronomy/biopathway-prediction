@@ -37,9 +37,9 @@ def parse_blast(filename, output_filename):
                     # PE: protein existence
                     existence = element.group(3)
                     product = element.group(1).replace(",", "")
-                    # if labeled: {enzyme_id}_{enzyme_code}_{product}
+                    # if labeled: {enzyme_id}~~~{enzyme_code}~~~{product}
                     # if not    : {product}
-                    product = product.split("_")
+                    product = product.split("~~~")
                     if len(product) == 1:
                         product = product[0]
                         enzyme_id = "-"

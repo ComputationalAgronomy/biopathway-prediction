@@ -13,13 +13,12 @@ if [ -d "$1" ]; then
         count=$((count+1))
         echo -ne "Progress: $count/$filecount\r"
         base_name=$(basename -s "$filetype" "$file")
-        cat "$file" | parallel --gnu --plain -j $cpus --block-size 10K --recstart '>' --pipe blastp -query - -db "$db" -num_threads 1 -evalue 1e-10 -num_alignments 3 -outfmt 5 -out "$tmpfolder/$base_name.xml"
+        cat "$file" | parallel --gnu --plain -j $cpus --bar --block-size 10K --recstart '>' --pipe blastp -query - -db "$db" -num_threads 1 -evalue 1e-10 -num_alignments 3 -outfmt 5 >> "$tmpfolder/$base_name.xml" 2> /dev/null
     done
-    echo "Finish blastp alignment"
 elif [ -f "$1" ]; then
     base_name=$(basename -s "$filetype" "$1")
-    cat "$1" | parallel --gnu --plain -j $cpus --block-size 10K --recstart '>' --pipe blastp -query - -db "$db" -num_threads 1 -evalue 1e-10 -num_alignments 3 -outfmt 5 -out "$tmpfolder/$base_name.xml"
-    echo "Finish blastp alignment"
+    cat "$1" | parallel --gnu --plain -j $cpus --bar --block-size 10K --recstart '>' --pipe blastp -query - -db "$db" -num_threads 1 -evalue 1e-10 -num_alignments 3 -outfmt 5 >> "$tmpfolder/$base_name.xml" 2> /dev/null
 else
     echo "Invalid input"
 fi
+echo "Finish blastp alignment"

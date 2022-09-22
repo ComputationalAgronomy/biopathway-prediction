@@ -14,10 +14,10 @@ def main():
     args = parser.parse_args()
     abs_dir = os.path.dirname(__file__)
     # shell scripts
-    prokka_folder = os.path.join(abs_dir, "tmp/prokka")
+    prodigal_folder = os.path.join(abs_dir, "tmp/prodigal")
     blast_folder = os.path.join(abs_dir, "tmp/blast")
-    run_prodigal(args.file, prokka_folder)
-    run_blast(prokka_folder, blast_folder)
+    run_prodigal(args.file, prodigal_folder)
+    run_blast(prodigal_folder, blast_folder)
     
     # python functions
     # parse_blast
@@ -27,7 +27,7 @@ def main():
     os.makedirs(parse_blast_folder)
     print("Parsing blastp result")
     for filename in tqdm(file_list):
-        basename = f"{os.path.basename(filename).split('.')[0]}.csv"
+        basename = f"{os.path.basename(filename).split('.')[0]}.xml"
         output_name = os.path.join(parse_blast_folder, basename)
         parse_blast(filename, output_name)
     print("Done!")
@@ -49,8 +49,6 @@ def main():
     # match_enzyme
     file_list = glob.glob(os.path.join(best_blast_folder, "*.csv"), recursive=True)
     file_list = [file.replace("\\", "/") for file in file_list]
-    best_blast_folder = os.path.join(abs_dir, "tmp/best_blast")
-    os.makedirs(best_blast_folder)
     print("Match the best blastp result to enzyme pathway")
     for filename in tqdm(file_list):
         basename = os.path.basename(filename).split('.')[0]

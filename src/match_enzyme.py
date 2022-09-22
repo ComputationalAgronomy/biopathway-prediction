@@ -33,7 +33,7 @@ def match_enzyme_existence(filename, enzyme_list):
                 enzyme_list[enzyme_id].exist = True
                 enzyme_list[enzyme_id].count = count
 
-def run_match_enzyme(filename, enzyme_list=ENZYME_LIST, pathway_list=pathway_list):
+def run_match_enzyme(filename, enzyme_list=ENZYME_LIST, pathway_list=PATHWAY_LIST):
     match_enzyme_existence(filename, enzyme_list)
     enzyme_reaction(1, enzyme_list, pathway_list)
     print_pathway(pathway_list)
