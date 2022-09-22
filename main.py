@@ -2,11 +2,13 @@ import os
 import sys
 import glob
 import subprocess
+import re
 import argparse
 from tqdm import tqdm
 from src.run_scripts import run_blast, run_prodigal
 from src.parse_ncbi_xml import parse_blast
 from src.best_blast import find_best_blast
+from src.match_enzyme import run_match_enzyme
 
 def main():
     parser = argparse.ArgumentParser()
@@ -25,9 +27,11 @@ def main():
     file_list = [file.replace("\\", "/") for file in file_list]
     parse_blast_folder = os.path.join(abs_dir, "tmp/parse_blast")
     os.makedirs(parse_blast_folder)
-    print("Parsing blastp result")
+    print("Parse blastp result")
     for filename in tqdm(file_list):
-        basename = f"{os.path.basename(filename).split('.')[0]}.xml"
+        basename = os.path.basename(filename)
+        basename = re.sub(".xml", ".csv", basename)
+        # basename = f"{os.path.basename(filename).split('.')[0]}.csv"
         output_name = os.path.join(parse_blast_folder, basename)
         parse_blast(filename, output_name)
     print("Done!")
@@ -41,7 +45,8 @@ def main():
     # default: find highest bit-score (column: score)
     # options: score, evalue, identity_percentage, query_coverage
     for filename in tqdm(file_list):
-        basename = f"{os.path.basename(filename).split('.')[0]}.csv"
+        basename = os.path.basename(filename)
+        # basename = f"{os.path.basename(filename).split('.')[0]}.csv"
         output_name = os.path.join(best_blast_folder, basename)
         find_best_blast(filename, output_name, criteria="score")
     print("Done!")
@@ -52,8 +57,10 @@ def main():
     print("Match the best blastp result to enzyme pathway")
     for filename in tqdm(file_list):
         basename = os.path.basename(filename).split('.')[0]
-        print(f"--------{basename}--------")
-        find_best_blast(filename)
         print()
+        print(f"--------{basename}--------")
+        run_match_enzyme(filename)
     print("Done!")
 
+if __name__ == "__main__":
+    main()

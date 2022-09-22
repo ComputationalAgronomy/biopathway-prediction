@@ -4,7 +4,7 @@ if __name__ == "__main__":
     from pathway import PathwayNode, Enzyme, PATHWAY_LIST, ENZYME_LIST
 else:
     import pandas as pd
-    from pathway import PathwayNode, Enzyme, PATHWAY_LIST, ENZYME_LIST
+    from .pathway import PathwayNode, Enzyme, PATHWAY_LIST, ENZYME_LIST
 
 
 # traverse from the starting material
@@ -16,12 +16,15 @@ def enzyme_reaction(material, enzyme_list, pathway_list):
                 enzyme_reaction(next_reaction, enzyme_list, pathway_list)
 
 def print_pathway(pathway_list):
+    print("Compound list:")
     for pathwaynode in pathway_list.values():
         print(f"{pathwaynode.name}: {pathwaynode.visited}")
 
 def print_enzyme(enzyme_list):
+    print("Enzyme list:")
     for enzyme in enzyme_list.values():
-        print(f"{enzyme.name}: {enzyme.count}")
+        if enzyme is not None:
+            print(f"{enzyme.name}: {enzyme.count}")
 
 def match_enzyme_existence(filename, enzyme_list):
     data = pd.read_csv(filename, usecols=["enzyme_id"])

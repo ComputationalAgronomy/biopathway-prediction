@@ -1,6 +1,7 @@
 #!/bin/bash
 tmpfolder=${2-./tmp/prodigal}
 mkdir -p $tmpfolder
+echo "Start prodigal gene prediction"
 if [ -d "$1" ]; then
     filename=$(find "$1" -name "*.fna")
     filecount=$(echo "$filename" | wc -w)

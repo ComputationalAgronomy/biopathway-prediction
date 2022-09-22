@@ -13,7 +13,7 @@ else:
 def find_best_blast(filename, output, criteria="score"):
     file = pd.read_csv(filename)
     data = file.loc[file.groupby(["id"])[criteria].idxmax()]
-    data.to_csv(output, criteria)
+    data.to_csv(output, index=False)
 
 if __name__ == "__main__":
     abs_dir = os.path.dirname(__file__)
