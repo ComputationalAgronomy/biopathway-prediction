@@ -28,7 +28,8 @@ def main():
 
     prodigal_list = glob.glob(os.path.join(prodigal_folder, "*.faa"), recursive=True)
     prodigal_list = [file.replace("\\", "/") for file in file_list]
-    for file in prodigal_list:
+    
+    for file in tqdm(prodigal_list):
         predicted_count = 0
         with open(file, "r") as f:
             for line in f.readlines():
@@ -38,12 +39,29 @@ def main():
         thread_blast.start()
         blast_output_basename = re.sub(".faa", ".xml", file)
         blast_output_name = os.path.join(blast_folder, blast_output_basename)
-        if os.path.exists(blast_output_name):
-            last_entry = re.search(".*<Iteration_query-def>([^ ]*)",
-                                   blast_output_name).group(1)
-        
+        def blast_progress(blast_output_name, thread_blast, predicted_count):
+            prev_entry = 0
+            with tqdm(total=predicted_count) as bar:
+                while thread_blast.isAlive():
+                    if os.path.exists(blast_output_name):
+                        with open(blast_output_name, "r") as f:
+                            blast_tmp = f.read()
+                        aft_entry = len(re.findall("<Iteration_query-def>",
+                                                    blast_tmp))
+                        bar.update(aft_entry - prev_entry)
+                        prev_entry = aft_entry
+                    threading.Condition().wait(10)
+                aft_entry = predicted_count
+                bar.update(aft_entry - prev_entry)            
 
-    thread_1.join()
+        thread_progress = threading.Thread(target=blast_progress,
+                                           args=[blast_output_name, thread_blast,
+                                                 predicted_count])
+        thread_progress.start()
+        thread_blast.join()
+        threading.Condition().notify()
+        thread_progress.join()              
+        
 
     # python functions
     # parse_blast
