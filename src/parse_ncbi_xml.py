@@ -55,7 +55,7 @@ def parse_blast(filename, output_filename):
                     if gene is None:
                         gene = "-"
                     else:
-                        gene = gene.group(1)
+                        gene = gene.group(1).replace(",", "")
                     alignment_info = f"{alignment_id},{enzyme_id},{enzyme_code}," \
                         f"{product},{organism},{existence},{gene}"
                     for hsp in alignment.hsps:

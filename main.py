@@ -1,9 +1,10 @@
+from ast import arg
 import os
 import glob
 import time
 import re
 import argparse
-import glob
+import threading
 from tqdm import tqdm
 from src.run_scripts import run_blast, run_prodigal
 from src.parse_ncbi_xml import parse_blast
@@ -24,7 +25,26 @@ def main():
     blast_folder = os.path.join(abs_dir, "tmp/blast")
     run_prodigal(args.file, prodigal_folder)
     run_blast(prodigal_folder, blast_folder)
-    
+
+    prodigal_list = glob.glob(os.path.join(prodigal_folder, "*.faa"), recursive=True)
+    prodigal_list = [file.replace("\\", "/") for file in file_list]
+    for file in prodigal_list:
+        predicted_count = 0
+        with open(file, "r") as f:
+            for line in f.readlines():
+                if line.startswith(">"):
+                    predicted_count += 1
+        thread_blast = threading.Thread(target=run_blast, args=[file, blast_folder])
+        thread_blast.start()
+        blast_output_basename = re.sub(".faa", ".xml", file)
+        blast_output_name = os.path.join(blast_folder, blast_output_basename)
+        if os.path.exists(blast_output_name):
+            last_entry = re.search(".*<Iteration_query-def>([^ ]*)",
+                                   blast_output_name).group(1)
+        
+
+    thread_1.join()
+
     # python functions
     # parse_blast
     file_list = glob.glob(os.path.join(blast_folder, "*.xml"), recursive=True)
@@ -62,9 +82,7 @@ def main():
     file_list = [file.replace("\\", "/") for file in file_list]
     print("Match the best blastp result to enzyme pathway")
     for filename in tqdm(file_list):
-        basename = os.path.basename(filename).split('.')
-        del basename[-1]
-        basename = ".".join(basename)
+        basename = re.search("(.*).csv", filename).group(1)
         print()
         print(f"--------{basename}--------")
         run_match_enzyme(filename)
