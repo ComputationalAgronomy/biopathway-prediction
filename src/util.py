@@ -1,18 +1,6 @@
 import os
 import re
-
-# deprecated: recursion style
-""" def create_folder(abs_dir, foldername, foldernum=1):
-    This function will create a folder if the folder name specified doesn't exist
-    if foldernum > 100:
-        print("too many folders")
-    folder_path = os.path.join(abs_dir, foldername)
-    if os.path.exists(folder_path):
-        foldername = re.sub("_(\d+)$", f"_{str(foldernum + 1)}", foldername)
-        return create_folder(abs_dir, foldername, foldernum + 1)
-    else:
-        os.makedirs(folder_path)
-        return foldername """
+import time
 
 def create_folder(abs_dir, foldername, foldernum=1):
     """This function will create a folder if the folder name specified
@@ -27,6 +15,48 @@ def create_folder(abs_dir, foldername, foldernum=1):
     os.makedirs(folder_path)  
     
     return foldername
+
+# [directory_name]/[filename].csv
+def create_savename(abs_dir, filename, filenum=1, new_folder=True, no_create=False):
+    """This function will create a proper filename for the output file"""   
+    filename = os.path.basename(filename).split(".")
+    del filename[-1]
+    filename = ".".join(filename)
+    if no_create:
+        foldername = "output"
+        if not os.path.exists(os.path.join(abs_dir, foldername)):
+            os.makedirs(foldername)
+    else:    
+        foldername = "output_1"
+        if new_folder:
+            foldername = create_folder(abs_dir, foldername)
+    filename = os.path.join(abs_dir,
+                            foldername,
+                            f"{filename}.csv")
+   
+    return filename
+
+def timer(func):
+    def inner_func(*args, **kwargs):
+        start = time.time()
+        func(*args, **kwargs)
+        end = time.time()
+        print(f"{func.__name__}: {round(end - start, 2)}sec")
+    return inner_func
+
+
+# deprecated: recursion style
+""" def create_folder(abs_dir, foldername, foldernum=1):
+    This function will create a folder if the folder name specified doesn't exist
+    if foldernum > 100:
+        print("too many folders")
+    folder_path = os.path.join(abs_dir, foldername)
+    if os.path.exists(folder_path):
+        foldername = re.sub("_(\d+)$", f"_{str(foldernum + 1)}", foldername)
+        return create_folder(abs_dir, foldername, foldernum + 1)
+    else:
+        os.makedirs(folder_path)
+        return foldername """
 
 # deprecated: recursion style
 """ # [directory_name]/[filename]_[filenum].csv
@@ -67,20 +97,4 @@ def create_savename(abs_dir, filename, filenum=1, new_folder=True):
     return filename
 """
 
-# [directory_name]/[filename].csv
-def create_savename(abs_dir, filename, filenum=1, new_folder=True, no_create=False):
-    """This function will create a proper filename for the output file"""   
-    filename = os.path.basename(filename).split(".")[0]
-    if no_create:
-        foldername = "output"
-        if not os.path.exists(os.path.join(abs_dir, foldername)):
-            os.makedirs(foldername)
-    else:    
-        foldername = "output_1"
-        if new_folder:
-            foldername = create_folder(abs_dir, foldername)
-    filename = os.path.join(abs_dir,
-                            foldername,
-                            f"{filename}.csv")
-   
-    return filename
+
