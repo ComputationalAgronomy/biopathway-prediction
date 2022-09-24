@@ -1,4 +1,3 @@
-from email.mime import base
 import os
 import glob
 import time
@@ -13,15 +12,16 @@ from src.match_enzyme import run_match_enzyme
 
 def main():
     time_start = time.time()
+    abs_dir = os.path.dirname(__file__)
     parser = argparse.ArgumentParser()
     parser.add_argument("file", type=str, help="input a file or directory path")
     parser.add_argument("--debug", action="store_true",
                         help="keep tmp folder if specified")
     parser.add_argument("--time", action="store_true", help="count time elapsed")
     args = parser.parse_args()
-    with open("./config.toml", "rb") as f:
+    with open(os.path.join(abs_dir, "config.toml"), "rb") as f:
         config = tomli.load(f)
-    abs_dir = os.path.dirname(__file__)
+
     # shell scripts
     prodigal_folder = os.path.join(abs_dir, "tmp/prodigal")
     blast_folder = os.path.join(abs_dir, "tmp/blast")
@@ -71,8 +71,9 @@ def main():
         os.makedirs(enzyme_mapping_folder)
     print("Match the best blastp result to enzyme pathway")
     for filename in tqdm(file_list):
-        basename = re.search("(.*).csv", filename).group(1)
-        output_name = os.path.join(enzyme_mapping_folder, basename)
+        basename = os.path.basename(filename)
+        basename = re.search("(.*).csv", basename).group(1)
+        output_name = os.path.join(enzyme_mapping_folder, f"{basename}.txt")
         print(f"\n--------{basename}--------")
         run_match_enzyme(filename, output_name)
     print("Done!")
