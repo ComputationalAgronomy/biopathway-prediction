@@ -1,10 +1,9 @@
 #!/bin/bash
 cpus=2
 filetype=".faa"
-db="./blast_test/IAA_database_v1.fasta"
-tmpfolder=${2-./tmp/blast}
+tmpfolder="$2"
+db="$3"
 mkdir -p $tmpfolder
-echo "Start blastp alignment"
 if [ -d "$1" ]; then
     filename=$(find "$1" -name "*$filetype")
     filecount=$(echo "$filename" | wc -w)
@@ -22,4 +21,3 @@ elif [ -f "$1" ]; then
 else
     echo "Invalid input"
 fi
-echo "Finish blastp alignment"

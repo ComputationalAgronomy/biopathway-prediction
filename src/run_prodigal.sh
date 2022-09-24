@@ -1,5 +1,5 @@
 #!/bin/bash
-tmpfolder=${2-./tmp/prodigal}
+tmpfolder="$2"
 mkdir -p $tmpfolder
 echo "Start prodigal gene prediction"
 if [ -d "$1" ]; then

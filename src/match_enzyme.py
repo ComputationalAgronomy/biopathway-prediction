@@ -16,15 +16,24 @@ def enzyme_reaction(material, enzyme_list, pathway_list):
                 enzyme_reaction(next_reaction, enzyme_list, pathway_list)
 
 def print_pathway(pathway_list):
+    message = []
     print("Compound list:")
+    message.append("Compound list:")
     for pathwaynode in pathway_list.values():
         print(f"{pathwaynode.name}: {pathwaynode.visited}")
+        message.append(f"{pathwaynode.name}: {pathwaynode.visited}")
+    print("\n")
+    return message.append("\n")
 
 def print_enzyme(enzyme_list):
+    message = []
     print("Enzyme list:")
+    message.append("Enzyme list:")
     for enzyme in enzyme_list.values():
         if enzyme is not None:
             print(f"{enzyme.name}: {enzyme.count}")
+            message.append(f"{enzyme.name}: {enzyme.count}")
+    return message
 
 def match_enzyme_existence(filename, enzyme_list):
     data = pd.read_csv(filename, usecols=["enzyme_id"])
@@ -36,11 +45,15 @@ def match_enzyme_existence(filename, enzyme_list):
                 enzyme_list[enzyme_id].exist = True
                 enzyme_list[enzyme_id].count = count
 
-def run_match_enzyme(filename, enzyme_list=ENZYME_LIST, pathway_list=PATHWAY_LIST):
+def run_match_enzyme(filename, output, enzyme_list=ENZYME_LIST,
+                     pathway_list=PATHWAY_LIST):
     match_enzyme_existence(filename, enzyme_list)
     enzyme_reaction(1, enzyme_list, pathway_list)
-    print_pathway(pathway_list)
-    print_enzyme(enzyme_list)
+    result = []
+    result.append(print_pathway(pathway_list))
+    result.append(print_enzyme(enzyme_list))
+    with open(output, "w") as f:
+        f.writelines(result)
 
 if __name__ == "__main__":
     assert len(sys.argv) == 2, "Invalid arguments"
