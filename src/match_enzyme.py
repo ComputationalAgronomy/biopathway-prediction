@@ -1,10 +1,5 @@
-if __name__ == "__main__":
-    import sys
-    import pandas as pd
-    from pathway import PathwayNode, Enzyme, PATHWAY_LIST, ENZYME_LIST
-else:
-    import pandas as pd
-    from .pathway import PathwayNode, Enzyme, PATHWAY_LIST, ENZYME_LIST
+import pandas as pd
+from .pathway import PathwayNode, Enzyme, PATHWAY_LIST, ENZYME_LIST
 
 
 # traverse from the starting material
@@ -55,8 +50,3 @@ def run_match_enzyme(filename, output, enzyme_list=ENZYME_LIST,
     result.extend(print_enzyme(enzyme_list))
     with open(output, "w") as f:
         f.writelines(result)
-
-if __name__ == "__main__":
-    assert len(sys.argv) == 2, "Invalid arguments"
-    filename= sys.argv[1]
-    run_match_enzyme(filename)

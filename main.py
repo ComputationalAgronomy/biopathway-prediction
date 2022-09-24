@@ -42,7 +42,6 @@ def main():
     for filename in tqdm(file_list):
         basename = os.path.basename(filename)
         basename = re.sub(".xml", ".csv", basename)
-        # basename = f"{os.path.basename(filename).split('.')[0]}.csv"
         output_name = os.path.join(parse_blast_folder, basename)
         parse_blast(filename, output_name)
     print("Done!")

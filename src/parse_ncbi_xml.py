@@ -1,18 +1,8 @@
-if __name__ == "__main__":
-    from util import *
-    import os
-    import re
-    import sys
-    import glob
-    from tqdm import tqdm
-    from Bio.Blast import NCBIXML
-else:
-    from .util import *
-    from Bio.Blast import NCBIXML
-    import re
-    import sys
+from .util import *
+from Bio.Blast import NCBIXML
+import re
+import sys
     
-
 def parse_blast(filename, output_filename):
     try:
         with open(filename, "r") as result, \
@@ -68,25 +58,3 @@ def parse_blast(filename, output_filename):
     except FileNotFoundError:
         print(f"Cannot find '{filename}'")
         sys.exit()
-
-if __name__ == "__main__":
-    abs_dir = os.path.dirname(__file__)
-    assert len(sys.argv) == 2, "Invalid arguments"
-    name = sys.argv[1]
-    if os.path.isdir(name):
-        # find fasta files in the directory
-        file_list = glob.glob(os.path.join(name, "**/*.xml"), recursive=True)
-        file_list = [file.replace("\\", "/") for file in file_list]
-        new_folder = True
-        for filename in tqdm(file_list):
-            output = create_savename(abs_dir, filename,
-                                    new_folder=new_folder)
-            parse_blast(filename, output)
-            new_folder = False
-    elif os.path.isfile(name):
-        output = create_savename(abs_dir, name)
-        parse_blast(name, output)
-    else:
-        print("Invalid file or directory name")
-        sys.exit()
-
