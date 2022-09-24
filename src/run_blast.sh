@@ -1,5 +1,5 @@
 #!/bin/bash
-cpus=2
+cpus=$4
 filetype=".faa"
 tmpfolder="$2"
 db="$3"

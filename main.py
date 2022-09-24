@@ -5,7 +5,7 @@ import re
 import argparse
 import tomli
 from tqdm import tqdm
-from src.run_scripts import run_blast, run_prodigal
+from src.run_scripts import run_blast, run_prodigal, cpu_num
 from src.parse_ncbi_xml import parse_blast
 from src.best_blast import find_best_blast
 from src.match_enzyme import run_match_enzyme
@@ -25,11 +25,12 @@ def main():
     # shell scripts
     prodigal_folder = os.path.join(abs_dir, "tmp/prodigal")
     blast_folder = os.path.join(abs_dir, "tmp/blast")
+    cpus = cpu_num()
     # run prodigal gene prediction
     run_prodigal(args.file, prodigal_folder)
     # run blastp protein alignment
     database_path = config["database"]["path"]
-    run_blast(prodigal_folder, blast_folder, database_path)
+    run_blast(prodigal_folder, blast_folder, database_path, cpus)
     
     # python functions
     # parse_blast
