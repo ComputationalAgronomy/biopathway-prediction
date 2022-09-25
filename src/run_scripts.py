@@ -25,4 +25,4 @@ def run_blast(input_path, output_path, database_path, cpus):
 def cpu_num():
     res = subprocess.run("grep -c ^processor /proc/cpuinfo", shell=True,
                           stdout=subprocess.PIPE)
-    return int(res.stdout)     
+    return res.stdout   

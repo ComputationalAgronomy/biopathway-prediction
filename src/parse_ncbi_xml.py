@@ -39,7 +39,7 @@ def parse_blast(filename, output_filename):
                         enzyme_code = product[1]
                         product = product[2]
                     else:
-                        print("product parsing error")
+                        print("Invalid database product format")
                         sys.exit()
                     gene = re.search("GN=(.*) PE=", description)
                     if gene is None:
