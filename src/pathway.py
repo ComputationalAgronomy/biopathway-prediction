@@ -1,4 +1,5 @@
 class PathwayNode():
+
     def __init__(self, name, enzyme_id, visited):
         # the name of the chemical compound
         self.name = name
@@ -8,21 +9,27 @@ class PathwayNode():
         # (or if it's a starting material)
         self.visited = visited
 
+
 class Enzyme():
+
     def __init__(self, name, product_id, exist=False, count=0):
         self.name = name
         self.product = product_id
         self.exist = exist
         self.count = count
-    
+
     def react(self, pathway_list):
         # once the product has been visited, there's no need to call the next
         # reaction again
         if not pathway_list[self.product].visited:
             pathway_list[self.product].visited = True
             return self.product
-        else:
-            return None
+        return None
+
+    def set_count(self, count):
+        self.exist = True
+        self.count = count
+
 
 PATHWAY_LIST = {1: PathwayNode("trp", [1, 3], True),
                 2: PathwayNode("iam_1", [2], False),
