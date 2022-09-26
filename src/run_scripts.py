@@ -9,7 +9,7 @@ def run_prodigal(input_path, output_path):
                                       input_path, output_path],
                                       capture_output=False)
     if prodigal_output.returncode != 0:
-        print("prodigal running error!")
+        print("prodigal runtime error!")
         sys.exit()
 
 def run_blast(input_path, output_path, database_path, cpus):
@@ -19,7 +19,7 @@ def run_blast(input_path, output_path, database_path, cpus):
                                    output_path, database_path, cpus],
                                    capture_output=False)
     if blast_output.returncode != 0:
-        print("blastp running error!")
+        print("blastp runtime error!")
         sys.exit()
 
 def cpu_num():
