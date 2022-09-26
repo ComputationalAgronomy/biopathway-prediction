@@ -22,6 +22,7 @@ def print_pathway(pathway_list):
     message.append("\n")
     return message
 
+
 def print_enzyme(enzyme_list):
     message = []
     print("Enzyme list:")
