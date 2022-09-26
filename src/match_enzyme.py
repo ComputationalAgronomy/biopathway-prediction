@@ -2,13 +2,14 @@ import pandas as pd
 from .pathway import PathwayNode, Enzyme, PATHWAY_LIST, ENZYME_LIST
 
 
-# traverse from the starting material
-def enzyme_reaction(material, enzyme_list, pathway_list):
+
+def traverse_enzyme_reaction(material, enzyme_list, pathway_list):
     for enzyme in pathway_list[material].reaction:
         if enzyme_list[enzyme] is not None and enzyme_list[enzyme].exist:
             next_reaction = enzyme_list[enzyme].react(pathway_list)
             if next_reaction is not None:
-                enzyme_reaction(next_reaction, enzyme_list, pathway_list)
+                traverse_enzyme_reaction(next_reaction, enzyme_list, pathway_list)
+
 
 def print_pathway(pathway_list):
     message = []
@@ -26,25 +27,31 @@ def print_enzyme(enzyme_list):
     print("Enzyme list:")
     message.append("Enzyme list:\n")
     for enzyme in enzyme_list.values():
-        if enzyme is not None:
+        try:
             print(f"{enzyme.name}: {enzyme.count}")
             message.append(f"{enzyme.name}: {enzyme.count}\n")
+        except AttributeError:
+            pass
     return message
+
 
 def match_enzyme_existence(filename, enzyme_list):
     data = pd.read_csv(filename, usecols=["enzyme_id"])
     data = data.groupby("enzyme_id").size().reset_index(name="count")
     for _, (enzyme_id, count) in data.iterrows():
-        if enzyme_id != "-":
+        try:
             enzyme_id = int(enzyme_id)
-            if enzyme_list[enzyme_id] is not None:
-                enzyme_list[enzyme_id].exist = True
-                enzyme_list[enzyme_id].count = count
+            enzyme_list[enzyme_id].set_count(count)
+        except ValueError:
+            pass
+        except AttributeError:
+            pass
+
 
 def run_match_enzyme(filename, output, enzyme_list=ENZYME_LIST,
                      pathway_list=PATHWAY_LIST):
     match_enzyme_existence(filename, enzyme_list)
-    enzyme_reaction(1, enzyme_list, pathway_list)
+    traverse_enzyme_reaction(1, enzyme_list, pathway_list)
     result = []
     result.extend(print_pathway(pathway_list))
     result.extend(print_enzyme(enzyme_list))
