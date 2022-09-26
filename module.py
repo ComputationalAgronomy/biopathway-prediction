@@ -1,14 +1,17 @@
-import os
-import sys
-import glob
 import argparse
+import glob
+import os
 import re
+import sys
+
 import tomli
-from src.run_scripts import run_blast, run_prodigal
+
 from src.best_blast import find_best_blast
-from src.parse_ncbi_xml import parse_blast
 from src.match_enzyme import run_match_enzyme
+from src.parse_ncbi_xml import parse_blast
+from src.run_scripts import run_blast, run_prodigal
 from src.util import make_dir
+
 
 def main():
     abs_dir = os.path.dirname(__file__)

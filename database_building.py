@@ -1,10 +1,12 @@
-from logging import Filterer
-import os
 import argparse
+import os
+from logging import Filterer
+
 from src.database_building.add_id import split_fasta
 from src.database_building.filter_database import filter_fasta
 from src.database_building.get_entry import get_entry
 from src.util import make_dir
+
 
 def main():
     abs_dir = os.path.dirname(__file__)
