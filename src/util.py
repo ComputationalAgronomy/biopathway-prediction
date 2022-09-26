@@ -35,6 +35,12 @@ def create_savename(abs_dir, filename, filenum=1, new_folder=True, no_create=Fal
    
     return filename
 
+def make_dir(path):
+    try:
+        os.makedirs(path)
+    except FileExistsError:
+        pass
+
 def timer(func):
     def inner_func(*args, **kwargs):
         start = time.time()

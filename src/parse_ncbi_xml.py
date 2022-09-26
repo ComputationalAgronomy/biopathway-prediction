@@ -8,6 +8,7 @@ def parse_blast(filename, output_filename):
         with open(filename, "r") as result, \
             open(output_filename, "w") as output:
             blast_records = NCBIXML.parse(result)
+            # csv column title
             output.write("id,start,end,alignment_id,enzyme_id,enzyme_code," +
                          "product,organism,existence,gene,score,evalue," +
                          "identity_percentage,query_coverage\n")

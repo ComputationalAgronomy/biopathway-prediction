@@ -9,6 +9,7 @@ from src.run_scripts import run_blast, run_prodigal, cpu_num
 from src.parse_ncbi_xml import parse_blast
 from src.best_blast import find_best_blast
 from src.match_enzyme import run_match_enzyme
+from src.util import make_dir
 
 def main():
     time_start = time.time()
@@ -47,10 +48,7 @@ def main():
     file_list = glob.glob(os.path.join(blast_folder, "*.xml"), recursive=True)
     file_list = [file.replace("\\", "/") for file in file_list]
     parse_blast_folder = os.path.join(abs_dir, "tmp/parse_blast")
-    try:
-        os.makedirs(parse_blast_folder)
-    except FileExistsError:
-        pass
+    make_dir(parse_blast_folder)
     print("Parse blastp result")
     for filename in tqdm(file_list):
         basename = os.path.basename(filename)
@@ -63,10 +61,7 @@ def main():
     file_list = glob.glob(os.path.join(parse_blast_folder, "*.csv"), recursive=True)
     file_list = [file.replace("\\", "/") for file in file_list]
     best_blast_folder = os.path.join(abs_dir, "tmp/best_blast")
-    try:
-        os.makedirs(best_blast_folder)
-    except FileExistsError:
-        pass
+    make_dir(best_blast_folder)
     print("Select the best blastp result based on the configuration")
     # default: find highest bit-score (column: score)
     # options: score, evalue, identity_percentage, query_coverage
@@ -81,10 +76,7 @@ def main():
     file_list = glob.glob(os.path.join(best_blast_folder, "*.csv"), recursive=True)
     file_list = [file.replace("\\", "/") for file in file_list]
     enzyme_mapping_folder = os.path.join(abs_dir, "result")
-    try:
-        os.makedirs(enzyme_mapping_folder)
-    except FileExistsError:
-        pass
+    make_dir(enzyme_mapping_folder)
     print("Match the best blastp result to enzyme pathway")
     for filename in tqdm(file_list):
         basename = os.path.basename(filename)

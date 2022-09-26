@@ -23,6 +23,7 @@ def filter_fasta(filter, filename):
                         except IndexError:
                             print("Error in input format")
                             return
+            line = ["".join(i) for i in line]
             return line
     except FileNotFoundError:
         print(f"Cannot find '{filename}'")
