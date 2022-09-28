@@ -1,0 +1,5 @@
+[database]
+path = "./database/IAA_database_v1.fasta"
+
+[criteria]
+column = "score"

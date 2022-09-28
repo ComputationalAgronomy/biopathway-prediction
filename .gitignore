@@ -7,6 +7,7 @@ test_set/**/*
 input/
 output*/
 database/
+src/database_building/database_output/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -1,10 +1,5 @@
-if __name__ == "__main__":
-    import sys
-    import pandas as pd
-    from pathway import PathwayNode, Enzyme, PATHWAY_LIST, ENZYME_LIST
-else:
-    import pandas as pd
-    from .pathway import PathwayNode, Enzyme, PATHWAY_LIST, ENZYME_LIST
+import pandas as pd
+from .pathway import PathwayNode, Enzyme, PATHWAY_LIST, ENZYME_LIST
 
 
 
@@ -17,18 +12,28 @@ def traverse_enzyme_reaction(material, enzyme_list, pathway_list):
 
 
 def print_pathway(pathway_list):
+    message = []
     print("Compound list:")
+    message.append("Compound list:\n")
     for pathwaynode in pathway_list.values():
         print(f"{pathwaynode.name}: {pathwaynode.visited}")
+        message.append(f"{pathwaynode.name}: {pathwaynode.visited}\n")
+    print()
+    message.append("\n")
+    return message
 
 
 def print_enzyme(enzyme_list):
+    message = []
     print("Enzyme list:")
+    message.append("Enzyme list:\n")
     for enzyme in enzyme_list.values():
         try:
             print(f"{enzyme.name}: {enzyme.count}")
+            message.append(f"{enzyme.name}: {enzyme.count}\n")
         except AttributeError:
             pass
+    return message
 
 
 def match_enzyme_existence(filename, enzyme_list):
@@ -39,19 +44,17 @@ def match_enzyme_existence(filename, enzyme_list):
             enzyme_id = int(enzyme_id)
             enzyme_list[enzyme_id].set_count(count)
         except ValueError:
-            pass  # Note This is for int(): Remove this comment later
+            pass
         except AttributeError:
-            pass  # Note: This is for None.set_count: Remove this comment later
+            pass
 
 
-def run_match_enzyme(filename, enzyme_list=ENZYME_LIST, pathway_list=PATHWAY_LIST):
+def run_match_enzyme(filename, output, enzyme_list=ENZYME_LIST,
+                     pathway_list=PATHWAY_LIST):
     match_enzyme_existence(filename, enzyme_list)
     traverse_enzyme_reaction(1, enzyme_list, pathway_list)
-    print_pathway(pathway_list)
-    print_enzyme(enzyme_list)
-
-
-if __name__ == "__main__":
-    assert len(sys.argv) == 2, "Invalid arguments"
-    filename = sys.argv[1]
-    run_match_enzyme(filename)
+    result = []
+    result.extend(print_pathway(pathway_list))
+    result.extend(print_enzyme(enzyme_list))
+    with open(output, "w") as f:
+        f.writelines(result)

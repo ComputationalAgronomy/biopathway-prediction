@@ -1,8 +1,8 @@
 #!/bin/bash
-cpus=2
+cpus=$4
 filetype=".faa"
-db="./blast_test/IAA_database_v1.fasta"
-tmpfolder=${2-./tmp/blast}
+tmpfolder="$2"
+db="$3"
 mkdir -p $tmpfolder
 echo "Start blastp alignment"
 if [ -d "$1" ]; then
