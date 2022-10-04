@@ -31,7 +31,7 @@ def main():
         config = tomli.load(f)
     
     if args.db is not None:
-        database_path = args.db
+        database_path = args.db[0]
     else:
         database_path = config["database"]["path"]
     
