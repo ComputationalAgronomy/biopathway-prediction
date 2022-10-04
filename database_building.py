@@ -26,7 +26,7 @@ def main():
         enzyme_id = args.add_id[1].replace("_", "~~~")
         line = split_fasta(args.add_id[0], enzyme_id)
         with open(os.path.join(add_id_folder, basename), "w") as f:
-            f.writelines(line)
+            f.writelines(["".join(entry) for entry in line])
     
     if args.get_entry is not None:
         get_entry_folder = os.path.join(output_path, "get_entry")
