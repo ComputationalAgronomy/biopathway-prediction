@@ -22,20 +22,27 @@ def main():
     # --debug not yet implemented
     parser.add_argument("--debug", action="store_true",
                         help="keep tmp folder if specified")
+    parser.add_argument("-db", "--database", type=str, dest="db", nargs=1,
+                        help="[database_path]")
     args = parser.parse_args()
-
-    # read config
+    
+    # load config
     with open(os.path.join(abs_dir, "config.toml"), "rb") as f:
         config = tomli.load(f)
     
+    if args.db is not None:
+        database_path = args.db
+    else:
+        database_path = config["database"]["path"]
+    
     # check blast database existence before running
-    database_path = config["database"]["path"]
     # if a relative path is given, the current folder equals that in terminal
     print("Check blast database existence")
     if os.path.isfile(database_path):
         print(f"Database: {os.path.basename(database_path)}")
     else:
-        print("Blast database does not exist. Check config.toml before running.")
+        print("Blast database does not exist. Check config.toml or your \
+              --database argument before running.")
 
     # shell scripts
     prodigal_folder = os.path.join(abs_dir, "tmp/prodigal")
