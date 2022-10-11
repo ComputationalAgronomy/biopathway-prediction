@@ -4,10 +4,10 @@
   <BlastOutput_program>blastp</BlastOutput_program>
   <BlastOutput_version>BLASTP 2.13.0+</BlastOutput_version>
   <BlastOutput_reference>Stephen F. Altschul, Thomas L. Madden, Alejandro A. Sch&amp;auml;ffer, Jinghui Zhang, Zheng Zhang, Webb Miller, and David J. Lipman (1997), &quot;Gapped BLAST and PSI-BLAST: a new generation of protein database search programs&quot;, Nucleic Acids Res. 25:3389-3402.</BlastOutput_reference>
-  <BlastOutput_db>./database/IAA_database_v2.fasta</BlastOutput_db>
+  <BlastOutput_db>./database/IAA_database_complete.fasta</BlastOutput_db>
   <BlastOutput_query-ID>Query_1</BlastOutput_query-ID>
-  <BlastOutput_query-def>NZ_CP012401.1_1044 # 1136048 # 1137547 # 1 # ID=1_1044;partial=00;start_type=ATG;rbs_motif=GGAG/GAGG;rbs_spacer=5-10bp;gc_cont=0.675</BlastOutput_query-def>
-  <BlastOutput_query-len>500</BlastOutput_query-len>
+  <BlastOutput_query-def>NZ_CP012401.1_62 # 71637 # 73313 # -1 # ID=1_62;partial=00;start_type=ATG;rbs_motif=GGAG/GAGG;rbs_spacer=5-10bp;gc_cont=0.654</BlastOutput_query-def>
+  <BlastOutput_query-len>559</BlastOutput_query-len>
   <BlastOutput_param>
     <Parameters>
       <Parameters_matrix>BLOSUM62</Parameters_matrix>
@@ -21,16 +21,16 @@
 <Iteration>
   <Iteration_iter-num>1</Iteration_iter-num>
   <Iteration_query-ID>Query_1</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1044 # 1136048 # 1137547 # 1 # ID=1_1044;partial=00;start_type=ATG;rbs_motif=GGAG/GAGG;rbs_spacer=5-10bp;gc_cont=0.675</Iteration_query-def>
-  <Iteration_query-len>500</Iteration_query-len>
+  <Iteration_query-def>NZ_CP012401.1_62 # 71637 # 73313 # -1 # ID=1_62;partial=00;start_type=ATG;rbs_motif=GGAG/GAGG;rbs_spacer=5-10bp;gc_cont=0.654</Iteration_query-def>
+  <Iteration_query-len>559</Iteration_query-len>
 <Iteration_hits>
 </Iteration_hits>
   <Iteration_stat>
     <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>62</Statistics_hsp-len>
-      <Statistics_eff-space>10176930</Statistics_eff-space>
+      <Statistics_db-num>420</Statistics_db-num>
+      <Statistics_db-len>189280</Statistics_db-len>
+      <Statistics_hsp-len>76</Statistics_hsp-len>
+      <Statistics_eff-space>76004880</Statistics_eff-space>
       <Statistics_kappa>0.041</Statistics_kappa>
       <Statistics_lambda>0.267</Statistics_lambda>
       <Statistics_entropy>0.14</Statistics_entropy>
@@ -41,16 +41,16 @@
 <Iteration>
   <Iteration_iter-num>2</Iteration_iter-num>
   <Iteration_query-ID>Query_2</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1045 # 1137604 # 1138554 # 1 # ID=1_1045;partial=00;start_type=GTG;rbs_motif=AGGA;rbs_spacer=5-10bp;gc_cont=0.726</Iteration_query-def>
-  <Iteration_query-len>317</Iteration_query-len>
+  <Iteration_query-def>NZ_CP012401.1_63 # 73462 # 73941 # 1 # ID=1_63;partial=00;start_type=TTG;rbs_motif=GGAGG;rbs_spacer=5-10bp;gc_cont=0.708</Iteration_query-def>
+  <Iteration_query-len>160</Iteration_query-len>
 <Iteration_hits>
 </Iteration_hits>
   <Iteration_stat>
     <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>58</Statistics_hsp-len>
-      <Statistics_eff-space>6078989</Statistics_eff-space>
+      <Statistics_db-num>420</Statistics_db-num>
+      <Statistics_db-len>189280</Statistics_db-len>
+      <Statistics_hsp-len>65</Statistics_hsp-len>
+      <Statistics_eff-space>15388100</Statistics_eff-space>
       <Statistics_kappa>0.041</Statistics_kappa>
       <Statistics_lambda>0.267</Statistics_lambda>
       <Statistics_entropy>0.14</Statistics_entropy>
@@ -61,16 +61,16 @@
 <Iteration>
   <Iteration_iter-num>3</Iteration_iter-num>
   <Iteration_query-ID>Query_3</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1046 # 1138551 # 1139378 # 1 # ID=1_1046;partial=00;start_type=GTG;rbs_motif=GGAGG;rbs_spacer=5-10bp;gc_cont=0.727</Iteration_query-def>
-  <Iteration_query-len>276</Iteration_query-len>
+  <Iteration_query-def>NZ_CP012401.1_64 # 74078 # 75481 # -1 # ID=1_64;partial=00;start_type=ATG;rbs_motif=GGAGG;rbs_spacer=5-10bp;gc_cont=0.682</Iteration_query-def>
+  <Iteration_query-len>468</Iteration_query-len>
 <Iteration_hits>
 </Iteration_hits>
   <Iteration_stat>
     <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>57</Statistics_hsp-len>
-      <Statistics_eff-space>5153070</Statistics_eff-space>
+      <Statistics_db-num>420</Statistics_db-num>
+      <Statistics_db-len>189280</Statistics_db-len>
+      <Statistics_hsp-len>74</Statistics_hsp-len>
+      <Statistics_eff-space>62330800</Statistics_eff-space>
       <Statistics_kappa>0.041</Statistics_kappa>
       <Statistics_lambda>0.267</Statistics_lambda>
       <Statistics_entropy>0.14</Statistics_entropy>
@@ -81,16 +81,16 @@
 <Iteration>
   <Iteration_iter-num>4</Iteration_iter-num>
   <Iteration_query-ID>Query_4</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1047 # 1139388 # 1141040 # -1 # ID=1_1047;partial=00;start_type=ATG;rbs_motif=None;rbs_spacer=None;gc_cont=0.684</Iteration_query-def>
-  <Iteration_query-len>551</Iteration_query-len>
+  <Iteration_query-def>NZ_CP012401.1_65 # 75835 # 76914 # 1 # ID=1_65;partial=00;start_type=TTG;rbs_motif=GGAGG;rbs_spacer=5-10bp;gc_cont=0.722</Iteration_query-def>
+  <Iteration_query-len>360</Iteration_query-len>
 <Iteration_hits>
 </Iteration_hits>
   <Iteration_stat>
     <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>62</Statistics_hsp-len>
-      <Statistics_eff-space>11361915</Statistics_eff-space>
+      <Statistics_db-num>420</Statistics_db-num>
+      <Statistics_db-len>189280</Statistics_db-len>
+      <Statistics_hsp-len>72</Statistics_hsp-len>
+      <Statistics_eff-space>45803520</Statistics_eff-space>
       <Statistics_kappa>0.041</Statistics_kappa>
       <Statistics_lambda>0.267</Statistics_lambda>
       <Statistics_entropy>0.14</Statistics_entropy>
@@ -101,16 +101,16 @@
 <Iteration>
   <Iteration_iter-num>5</Iteration_iter-num>
   <Iteration_query-ID>Query_5</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1048 # 1141230 # 1141724 # -1 # ID=1_1048;partial=00;start_type=GTG;rbs_motif=GGAG/GAGG;rbs_spacer=5-10bp;gc_cont=0.653</Iteration_query-def>
-  <Iteration_query-len>165</Iteration_query-len>
+  <Iteration_query-def>NZ_CP012401.1_66 # 76946 # 77929 # 1 # ID=1_66;partial=00;start_type=ATG;rbs_motif=GGAG/GAGG;rbs_spacer=5-10bp;gc_cont=0.688</Iteration_query-def>
+  <Iteration_query-len>328</Iteration_query-len>
 <Iteration_hits>
 </Iteration_hits>
   <Iteration_stat>
     <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>52</Statistics_hsp-len>
-      <Statistics_eff-space>2692225</Statistics_eff-space>
+      <Statistics_db-num>420</Statistics_db-num>
+      <Statistics_db-len>189280</Statistics_db-len>
+      <Statistics_hsp-len>71</Statistics_hsp-len>
+      <Statistics_eff-space>40981220</Statistics_eff-space>
       <Statistics_kappa>0.041</Statistics_kappa>
       <Statistics_lambda>0.267</Statistics_lambda>
       <Statistics_entropy>0.14</Statistics_entropy>
@@ -121,16 +121,16 @@
 <Iteration>
   <Iteration_iter-num>6</Iteration_iter-num>
   <Iteration_query-ID>Query_6</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1049 # 1142431 # 1142649 # -1 # ID=1_1049;partial=00;start_type=ATG;rbs_motif=AGGA;rbs_spacer=5-10bp;gc_cont=0.717</Iteration_query-def>
-  <Iteration_query-len>73</Iteration_query-len>
+  <Iteration_query-def>NZ_CP012401.1_67 # 77962 # 78996 # 1 # ID=1_67;partial=00;start_type=ATG;rbs_motif=GGAGG;rbs_spacer=5-10bp;gc_cont=0.682</Iteration_query-def>
+  <Iteration_query-len>345</Iteration_query-len>
 <Iteration_hits>
 </Iteration_hits>
   <Iteration_stat>
     <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>43</Statistics_hsp-len>
-      <Statistics_eff-space>730680</Statistics_eff-space>
+      <Statistics_db-num>420</Statistics_db-num>
+      <Statistics_db-len>189280</Statistics_db-len>
+      <Statistics_hsp-len>72</Statistics_hsp-len>
+      <Statistics_eff-space>43417920</Statistics_eff-space>
       <Statistics_kappa>0.041</Statistics_kappa>
       <Statistics_lambda>0.267</Statistics_lambda>
       <Statistics_entropy>0.14</Statistics_entropy>
@@ -141,16 +141,16 @@
 <Iteration>
   <Iteration_iter-num>7</Iteration_iter-num>
   <Iteration_query-ID>Query_7</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1050 # 1142863 # 1143711 # 1 # ID=1_1050;partial=00;start_type=ATG;rbs_motif=AGGA;rbs_spacer=5-10bp;gc_cont=0.674</Iteration_query-def>
-  <Iteration_query-len>283</Iteration_query-len>
+  <Iteration_query-def>NZ_CP012401.1_68 # 79165 # 80298 # 1 # ID=1_68;partial=00;start_type=ATG;rbs_motif=AGGAG;rbs_spacer=5-10bp;gc_cont=0.705</Iteration_query-def>
+  <Iteration_query-len>378</Iteration_query-len>
 <Iteration_hits>
 </Iteration_hits>
   <Iteration_stat>
     <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>57</Statistics_hsp-len>
-      <Statistics_eff-space>5317780</Statistics_eff-space>
+      <Statistics_db-num>420</Statistics_db-num>
+      <Statistics_db-len>189280</Statistics_db-len>
+      <Statistics_hsp-len>73</Statistics_hsp-len>
+      <Statistics_eff-space>48379100</Statistics_eff-space>
       <Statistics_kappa>0.041</Statistics_kappa>
       <Statistics_lambda>0.267</Statistics_lambda>
       <Statistics_entropy>0.14</Statistics_entropy>
@@ -161,16 +161,16 @@
 <Iteration>
   <Iteration_iter-num>8</Iteration_iter-num>
   <Iteration_query-ID>Query_8</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1051 # 1143687 # 1143992 # -1 # ID=1_1051;partial=00;start_type=ATG;rbs_motif=None;rbs_spacer=None;gc_cont=0.761</Iteration_query-def>
-  <Iteration_query-len>102</Iteration_query-len>
+  <Iteration_query-def>NZ_CP012401.1_69 # 80423 # 81208 # 1 # ID=1_69;partial=00;start_type=ATG;rbs_motif=AGGAG;rbs_spacer=5-10bp;gc_cont=0.697</Iteration_query-def>
+  <Iteration_query-len>262</Iteration_query-len>
 <Iteration_hits>
 </Iteration_hits>
   <Iteration_stat>
     <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>47</Statistics_hsp-len>
-      <Statistics_eff-space>1326600</Statistics_eff-space>
+      <Statistics_db-num>420</Statistics_db-num>
+      <Statistics_db-len>189280</Statistics_db-len>
+      <Statistics_hsp-len>69</Statistics_hsp-len>
+      <Statistics_eff-space>30937900</Statistics_eff-space>
       <Statistics_kappa>0.041</Statistics_kappa>
       <Statistics_lambda>0.267</Statistics_lambda>
       <Statistics_entropy>0.14</Statistics_entropy>
@@ -181,284 +181,72 @@
 <Iteration>
   <Iteration_iter-num>9</Iteration_iter-num>
   <Iteration_query-ID>Query_9</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1052 # 1144132 # 1144764 # -1 # ID=1_1052;partial=00;start_type=ATG;rbs_motif=GGA/GAG/AGG;rbs_spacer=11-12bp;gc_cont=0.657</Iteration_query-def>
-  <Iteration_query-len>211</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>54</Statistics_hsp-len>
-      <Statistics_eff-space>3721999</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>10</Iteration_iter-num>
-  <Iteration_query-ID>Query_10</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1053 # 1144935 # 1145351 # 1 # ID=1_1053;partial=00;start_type=ATG;rbs_motif=AGGAG;rbs_spacer=5-10bp;gc_cont=0.710</Iteration_query-def>
-  <Iteration_query-len>139</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>50</Statistics_hsp-len>
-      <Statistics_eff-space>2130927</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>11</Iteration_iter-num>
-  <Iteration_query-ID>Query_11</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1054 # 1145348 # 1145755 # 1 # ID=1_1054;partial=00;start_type=ATG;rbs_motif=AGxAGG/AGGxGG;rbs_spacer=5-10bp;gc_cont=0.730</Iteration_query-def>
-  <Iteration_query-len>136</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>50</Statistics_hsp-len>
-      <Statistics_eff-space>2059098</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>12</Iteration_iter-num>
-  <Iteration_query-ID>Query_12</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1055 # 1145770 # 1147338 # 1 # ID=1_1055;partial=00;start_type=ATG;rbs_motif=GGAG/GAGG;rbs_spacer=5-10bp;gc_cont=0.717</Iteration_query-def>
-  <Iteration_query-len>523</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>62</Statistics_hsp-len>
-      <Statistics_eff-space>10711335</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>13</Iteration_iter-num>
-  <Iteration_query-ID>Query_13</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1056 # 1147331 # 1147609 # 1 # ID=1_1056;partial=00;start_type=ATG;rbs_motif=GGAGG;rbs_spacer=5-10bp;gc_cont=0.742</Iteration_query-def>
-  <Iteration_query-len>93</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>46</Statistics_hsp-len>
-      <Statistics_eff-space>1136413</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>14</Iteration_iter-num>
-  <Iteration_query-ID>Query_14</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1057 # 1147654 # 1148448 # 1 # ID=1_1057;partial=00;start_type=ATG;rbs_motif=GGAG/GAGG;rbs_spacer=5-10bp;gc_cont=0.713</Iteration_query-def>
-  <Iteration_query-len>265</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>56</Statistics_hsp-len>
-      <Statistics_eff-space>4930101</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>15</Iteration_iter-num>
-  <Iteration_query-ID>Query_15</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1058 # 1148689 # 1151019 # 1 # ID=1_1058;partial=00;start_type=ATG;rbs_motif=3Base/5BMM;rbs_spacer=13-15bp;gc_cont=0.697</Iteration_query-def>
-  <Iteration_query-len>777</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>65</Statistics_hsp-len>
-      <Statistics_eff-space>16417296</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>16</Iteration_iter-num>
-  <Iteration_query-ID>Query_16</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1059 # 1151236 # 1152258 # 1 # ID=1_1059;partial=00;start_type=ATG;rbs_motif=GGA/GAG/AGG;rbs_spacer=5-10bp;gc_cont=0.622</Iteration_query-def>
-  <Iteration_query-len>341</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>59</Statistics_hsp-len>
-      <Statistics_eff-space>6602184</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>17</Iteration_iter-num>
-  <Iteration_query-ID>Query_17</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1060 # 1152413 # 1152649 # -1 # ID=1_1060;partial=00;start_type=ATG;rbs_motif=AGGA;rbs_spacer=5-10bp;gc_cont=0.641</Iteration_query-def>
-  <Iteration_query-len>79</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>44</Statistics_hsp-len>
-      <Statistics_eff-space>850395</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>18</Iteration_iter-num>
-  <Iteration_query-ID>Query_18</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1061 # 1152887 # 1153597 # 1 # ID=1_1061;partial=00;start_type=ATG;rbs_motif=GGAG/GAGG;rbs_spacer=5-10bp;gc_cont=0.665</Iteration_query-def>
-  <Iteration_query-len>237</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>55</Statistics_hsp-len>
-      <Statistics_eff-space>4303936</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>19</Iteration_iter-num>
-  <Iteration_query-ID>Query_19</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1062 # 1153818 # 1154918 # 1 # ID=1_1062;partial=00;start_type=ATG;rbs_motif=GGA/GAG/AGG;rbs_spacer=5-10bp;gc_cont=0.673</Iteration_query-def>
-  <Iteration_query-len>367</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>59</Statistics_hsp-len>
-      <Statistics_eff-space>7210896</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>20</Iteration_iter-num>
-  <Iteration_query-ID>Query_20</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1063 # 1154985 # 1155422 # -1 # ID=1_1063;partial=00;start_type=ATG;rbs_motif=GGA/GAG/AGG;rbs_spacer=5-10bp;gc_cont=0.680</Iteration_query-def>
-  <Iteration_query-len>146</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>51</Statistics_hsp-len>
-      <Statistics_eff-space>2268980</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>21</Iteration_iter-num>
-  <Iteration_query-ID>Query_21</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1064 # 1155812 # 1157017 # 1 # ID=1_1064;partial=00;start_type=ATG;rbs_motif=AGxAGG/AGGxGG;rbs_spacer=5-10bp;gc_cont=0.660</Iteration_query-def>
-  <Iteration_query-len>402</Iteration_query-len>
+  <Iteration_query-def>NZ_CP012401.1_70 # 81257 # 82396 # 1 # ID=1_70;partial=00;start_type=ATG;rbs_motif=GGAGG;rbs_spacer=5-10bp;gc_cont=0.679</Iteration_query-def>
+  <Iteration_query-len>380</Iteration_query-len>
 <Iteration_hits>
 <Hit>
   <Hit_num>1</Hit_num>
-  <Hit_id>gnl|BL_ORD_ID|19</Hit_id>
-  <Hit_def>sp|Q9C969|ISS1_ARATH 3~~~IPA1~~~Aromatic aminotransferase ISS1 OS=Arabidopsis thaliana OX=3702 GN=ISS1 PE=1 SV=1</Hit_def>
-  <Hit_accession>19</Hit_accession>
-  <Hit_len>394</Hit_len>
+  <Hit_id>gnl|BL_ORD_ID|235</Hit_id>
+  <Hit_def>sp|Q0KDL6|ADH_CUPNH 5~~~IPA3~~~Alcohol dehydrogenase OS=Cupriavidus necator (strain ATCC 17699 / DSM 428 / KCTC 22496 / NCIMB 10442 / H16 / Stanier 337) OX=381666 GN=adh PE=1 SV=1</Hit_def>
+  <Hit_accession>235</Hit_accession>
+  <Hit_len>366</Hit_len>
   <Hit_hsps>
     <Hsp>
       <Hsp_num>1</Hsp_num>
-      <Hsp_bit-score>108.227</Hsp_bit-score>
-      <Hsp_score>269</Hsp_score>
-      <Hsp_evalue>1.14884e-28</Hsp_evalue>
-      <Hsp_query-from>8</Hsp_query-from>
-      <Hsp_query-to>399</Hsp_query-to>
-      <Hsp_hit-from>7</Hsp_hit-from>
-      <Hsp_hit-to>387</Hsp_hit-to>
+      <Hsp_bit-score>118.627</Hsp_bit-score>
+      <Hsp_score>296</Hsp_score>
+      <Hsp_evalue>5.7216e-32</Hsp_evalue>
+      <Hsp_query-from>6</Hsp_query-from>
+      <Hsp_query-to>362</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>365</Hsp_hit-to>
       <Hsp_query-frame>0</Hsp_query-frame>
       <Hsp_hit-frame>0</Hsp_hit-frame>
-      <Hsp_identity>108</Hsp_identity>
-      <Hsp_positive>171</Hsp_positive>
-      <Hsp_gaps>43</Hsp_gaps>
-      <Hsp_align-len>408</Hsp_align-len>
-      <Hsp_qseq>LSRIKPSPTIAVTNKARELKAAGRDVIGLGAGEPDFDTP----DNIKAAAIKAIESGDTKYTAVDGTPALKKAICAKFERENGLTYTPDQITVGVGGKQVLYNALMATLNPGDEVIIPAPYWVSYPDMVELAEGTPVAVSCPAEQGFKLQPAD-LEKAIT---PKTKWLILNSPSNPSGAAYTRDEMKALTDVLVRHPHVWVMTDDMYEHLLYDGLEFVTPAQVEPSLYDRTLTVNGVSKSYAMTGWRIGYA-------GGPKDLIKAIGVIQSQSTSNPTSIAQAAAVEALNGPQDFIKERAEVFRQRRDLVVSMLNQAKGLHCPKPEGAFYVYPSCAGTIGKTTPDGKVIGTDEDFVTYLLESEGVAVVQGSAFGLAPHFRISYATSTEA-LEEACRRIQRACGNL</Hsp_qseq>
-      <Hsp_hseq>LSRRTLGTDMPVMAQIRSLMAELTNPMSLAQGVVHWQPPQKALEKVKELVWDPIIS---SYGPDEGLPELRQALLKKLREENKLTNS--QVMVTAGANQAFVNLVITLCDAGDSVVMFEPYYFNSYMAFQMTGVTNIIVG-PGQSDTLYPDADWLERTLSESKPTPKVVTVVNPGNPSGTYVPEPLLKRIAQI-CKDAGCWLIVDNTYEYFMYDGLKHCC---VEG---DHIVNVFSFSKTYGMMGWRLGYIAYSERLDGFATELVK----IQDNIPICAAIISQRLAVYALEEGSGWITERVKSLVKNRDIVKEALEPLGKENVKGGEGAIYLWAK--------LPEGH--RDDFKVVRWLAHRHGVVVIPGCASGSPGYLRVSFGGLQEVEMRAAAARLRKGIEEL</Hsp_hseq>
-      <Hsp_midline>LSR      + V  + R L A   + + L  G   +  P    + +K      I S    Y   +G P L++A+  K   EN LT +  Q+ V  G  Q   N ++   + GD V++  PY+ +     ++   T + V  P +       AD LE+ ++   P  K + + +P NPSG       +K +  +  +    W++ D+ YE+ +YDGL+      VE    D  + V   SK+Y M GWR+GY        G   +L+K    IQ         I+Q  AV AL     +I ER +   + RD+V   L      +    EGA Y++           P+G     D   V +L    GV V+ G A G   + R+S+    E  +  A  R+++    L</Hsp_midline>
+      <Hsp_identity>118</Hsp_identity>
+      <Hsp_positive>176</Hsp_positive>
+      <Hsp_gaps>52</Hsp_gaps>
+      <Hsp_align-len>387</Hsp_align-len>
+      <Hsp_qseq>MTANTTMKAAVWHGRKDIRVEDVPLPGAPPAGWVQIKVHWCGICGSDLH----EYVAGPVFIPVDKPHPLTGLKGQCILGHEFSGEIAALGDGVTGFTVGDRVAADACQHCGECYYCKHGM------------------YNICERLAFTGLMNNGAFASLVNVP--AELLYRLPDGFPTEAGALIEP--LAVGMHAVKKAGSIVGETVVVVGAGTIGLCTIMCAKAAGAGRIIVLEMSAARKAKAMEVGATVVLDPKECDAVAEVKALTGGYGADVSFECIGHRDTAKLAIDVIRKAGKAVLVGIFEEPSSFNFFEIVA--TEKQVIGSLAYNGE--FADVIRFIADGRIDVQPLITGRIALDDIVSGGFEELVAHKDRNVKIIVQP</Hsp_qseq>
+      <Hsp_hseq>MTA--MMKAAVFVEPGRIELADKPIPDIGPNDAL-VRITTTTICGTDVHILKGEY-------PVAK-----GLT----VGHEPVGIIEKLGSAVTGYREGQRVIAGAICPNFNSYAAQDGVASQDGSYLMASGQCGCHGYKATAGWRF-GNMIDGTQAEYVLVPDAQANLTPIPDGL-TDEQVLMCPDIMSTGFKGAENANIRIGDTVAVFAQGPIGLCATAGARLCGATTIIAIDGNDHRLEIARKMGADVVLNFRNCDVVDEVMKLTGGRGVDASIEALGTQATFEQSLRVLKPGGTLSSLGVYSSDLTIPLSAFAAGLGDHKINTALCPGGKERMRRLINVIESGRVDLGALVTHQYRLDDIVA-AYDLFANQRDGVLKIAIKP</Hsp_hseq>
+      <Hsp_midline>MTA   MKAAV+     I + D P+P   P   + +++    ICG+D+H    EY       PV K     GL     +GHE  G I  LG  VTG+  G RV A A       Y  + G+                  Y       F G M +G  A  V VP     L  +PDG  T+   L+ P  ++ G    + A   +G+TV V   G IGLC    A+  GA  II ++ +  R   A ++GA VVL+ + CD V EV  LTGG G D S E +G + T + ++ V++  G    +G++    +       A   + ++  +L   G+     +I  I  GR+D+  L+T +  LDDIV+  ++     +D  +KI ++P</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>2</Hit_num>
+  <Hit_id>gnl|BL_ORD_ID|281</Hit_id>
+  <Hit_def>sp|P14940|ADH_CUPNE 5~~~IPA3~~~Alcohol dehydrogenase OS=Cupriavidus necator OX=106590 GN=adh PE=3 SV=1</Hit_def>
+  <Hit_accession>281</Hit_accession>
+  <Hit_len>366</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>117.857</Hsp_bit-score>
+      <Hsp_score>294</Hsp_score>
+      <Hsp_evalue>1.05788e-31</Hsp_evalue>
+      <Hsp_query-from>6</Hsp_query-from>
+      <Hsp_query-to>362</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>365</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>118</Hsp_identity>
+      <Hsp_positive>175</Hsp_positive>
+      <Hsp_gaps>52</Hsp_gaps>
+      <Hsp_align-len>387</Hsp_align-len>
+      <Hsp_qseq>MTANTTMKAAVWHGRKDIRVEDVPLPGAPPAGWVQIKVHWCGICGSDLH----EYVAGPVFIPVDKPHPLTGLKGQCILGHEFSGEIAALGDGVTGFTVGDRVAADACQHCGECYYCKHGM------------------YNICERLAFTGLMNNGAFASLVNVP--AELLYRLPDGFPTEAGALIEP--LAVGMHAVKKAGSIVGETVVVVGAGTIGLCTIMCAKAAGAGRIIVLEMSAARKAKAMEVGATVVLDPKECDAVAEVKALTGGYGADVSFECIGHRDTAKLAIDVIRKAGKAVLVGIFEEPSSFNFFEIVA--TEKQVIGSLAYNGE--FADVIRFIADGRIDVQPLITGRIALDDIVSGGFEELVAHKDRNVKIIVQP</Hsp_qseq>
+      <Hsp_hseq>MTA--MMKAAVFVEPGRIELADKPIPDIGPNDAL-VRITTTTICGTDVHILKGEY-------PVAK-----GLT----VGHEPVGIIEKLGSAVTGYREGQRVIAGAICPNFNSYAAQDGVASQDGSYLMASGQCGCHGYKATAGWRF-GNMIDGTQAEYVLVPDAQANLTPIPDGL-TDEQVLMCPDIMSTGFKGAENANIRIGHTVAVFAQGPIGLCATAGARLCGATTIIAIDGNDHRLEIARKMGADVVLNFRNCDVVDEVMKLTGGRGVDASIEALGTQATFEQSLRVLKPGGTLSSLGVYSSDLTIPLSAFAAGLGDHKINTALCPGGKERMRRLINVIESGRVDLGALVTHQYRLDDIVA-AYDLFANQRDGVLKIAIKP</Hsp_hseq>
+      <Hsp_midline>MTA   MKAAV+     I + D P+P   P   + +++    ICG+D+H    EY       PV K     GL     +GHE  G I  LG  VTG+  G RV A A       Y  + G+                  Y       F G M +G  A  V VP     L  +PDG  T+   L+ P  ++ G    + A   +G TV V   G IGLC    A+  GA  II ++ +  R   A ++GA VVL+ + CD V EV  LTGG G D S E +G + T + ++ V++  G    +G++    +       A   + ++  +L   G+     +I  I  GR+D+  L+T +  LDDIV+  ++     +D  +KI ++P</Hsp_midline>
     </Hsp>
   </Hit_hsps>
 </Hit>
 </Iteration_hits>
   <Iteration_stat>
     <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>60</Statistics_hsp-len>
-      <Statistics_eff-space>7986726</Statistics_eff-space>
+      <Statistics_db-num>420</Statistics_db-num>
+      <Statistics_db-len>189280</Statistics_db-len>
+      <Statistics_hsp-len>73</Statistics_hsp-len>
+      <Statistics_eff-space>48696340</Statistics_eff-space>
       <Statistics_kappa>0.041</Statistics_kappa>
       <Statistics_lambda>0.267</Statistics_lambda>
       <Statistics_entropy>0.14</Statistics_entropy>
@@ -466,18 +254,18 @@
   </Iteration_stat>
 </Iteration>
 <Iteration>
-  <Iteration_iter-num>22</Iteration_iter-num>
-  <Iteration_query-ID>Query_22</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1065 # 1157104 # 1157310 # -1 # ID=1_1065;partial=00;start_type=ATG;rbs_motif=AGGA;rbs_spacer=5-10bp;gc_cont=0.633</Iteration_query-def>
-  <Iteration_query-len>69</Iteration_query-len>
+  <Iteration_iter-num>10</Iteration_iter-num>
+  <Iteration_query-ID>Query_10</Iteration_query-ID>
+  <Iteration_query-def>NZ_CP012401.1_71 # 82396 # 83313 # 1 # ID=1_71;partial=00;start_type=ATG;rbs_motif=AGGA/GGAG/GAGG;rbs_spacer=11-12bp;gc_cont=0.723</Iteration_query-def>
+  <Iteration_query-len>306</Iteration_query-len>
 <Iteration_hits>
 </Iteration_hits>
   <Iteration_stat>
     <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>42</Statistics_hsp-len>
-      <Statistics_eff-space>659205</Statistics_eff-space>
+      <Statistics_db-num>420</Statistics_db-num>
+      <Statistics_db-len>189280</Statistics_db-len>
+      <Statistics_hsp-len>71</Statistics_hsp-len>
+      <Statistics_eff-space>37473100</Statistics_eff-space>
       <Statistics_kappa>0.041</Statistics_kappa>
       <Statistics_lambda>0.267</Statistics_lambda>
       <Statistics_entropy>0.14</Statistics_entropy>
@@ -486,281 +274,18 @@
   <Iteration_message>No hits found</Iteration_message>
 </Iteration>
 <Iteration>
-  <Iteration_iter-num>23</Iteration_iter-num>
-  <Iteration_query-ID>Query_23</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1066 # 1157456 # 1159495 # -1 # ID=1_1066;partial=00;start_type=ATG;rbs_motif=GGAGG;rbs_spacer=5-10bp;gc_cont=0.697</Iteration_query-def>
-  <Iteration_query-len>680</Iteration_query-len>
+  <Iteration_iter-num>11</Iteration_iter-num>
+  <Iteration_query-ID>Query_11</Iteration_query-ID>
+  <Iteration_query-def>NZ_CP012401.1_72 # 83357 # 83821 # -1 # ID=1_72;partial=00;start_type=ATG;rbs_motif=GGxGG;rbs_spacer=5-10bp;gc_cont=0.589</Iteration_query-def>
+  <Iteration_query-len>155</Iteration_query-len>
 <Iteration_hits>
 </Iteration_hits>
   <Iteration_stat>
     <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
+      <Statistics_db-num>420</Statistics_db-num>
+      <Statistics_db-len>189280</Statistics_db-len>
       <Statistics_hsp-len>64</Statistics_hsp-len>
-      <Statistics_eff-space>14240072</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>24</Iteration_iter-num>
-  <Iteration_query-ID>Query_24</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1067 # 1160150 # 1160632 # 1 # ID=1_1067;partial=00;start_type=ATG;rbs_motif=GGA/GAG/AGG;rbs_spacer=5-10bp;gc_cont=0.654</Iteration_query-def>
-  <Iteration_query-len>161</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>52</Statistics_hsp-len>
-      <Statistics_eff-space>2596925</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-</BlastOutput_iterations>
-</BlastOutput>
-
-<?xml version="1.0"?>
-<!DOCTYPE BlastOutput PUBLIC "-//NCBI//NCBI BlastOutput/EN" "http://www.ncbi.nlm.nih.gov/dtd/NCBI_BlastOutput.dtd">
-<BlastOutput>
-  <BlastOutput_program>blastp</BlastOutput_program>
-  <BlastOutput_version>BLASTP 2.13.0+</BlastOutput_version>
-  <BlastOutput_reference>Stephen F. Altschul, Thomas L. Madden, Alejandro A. Sch&amp;auml;ffer, Jinghui Zhang, Zheng Zhang, Webb Miller, and David J. Lipman (1997), &quot;Gapped BLAST and PSI-BLAST: a new generation of protein database search programs&quot;, Nucleic Acids Res. 25:3389-3402.</BlastOutput_reference>
-  <BlastOutput_db>./database/IAA_database_v2.fasta</BlastOutput_db>
-  <BlastOutput_query-ID>Query_1</BlastOutput_query-ID>
-  <BlastOutput_query-def>NZ_CP012401.1_1116 # 1209471 # 1210376 # 1 # ID=1_1116;partial=00;start_type=ATG;rbs_motif=AGGAG;rbs_spacer=5-10bp;gc_cont=0.745</BlastOutput_query-def>
-  <BlastOutput_query-len>302</BlastOutput_query-len>
-  <BlastOutput_param>
-    <Parameters>
-      <Parameters_matrix>BLOSUM62</Parameters_matrix>
-      <Parameters_expect>1e-10</Parameters_expect>
-      <Parameters_gap-open>11</Parameters_gap-open>
-      <Parameters_gap-extend>1</Parameters_gap-extend>
-      <Parameters_filter>F</Parameters_filter>
-    </Parameters>
-  </BlastOutput_param>
-<BlastOutput_iterations>
-<Iteration>
-  <Iteration_iter-num>1</Iteration_iter-num>
-  <Iteration_query-ID>Query_1</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1116 # 1209471 # 1210376 # 1 # ID=1_1116;partial=00;start_type=ATG;rbs_motif=AGGAG;rbs_spacer=5-10bp;gc_cont=0.745</Iteration_query-def>
-  <Iteration_query-len>302</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>58</Statistics_hsp-len>
-      <Statistics_eff-space>5726924</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>2</Iteration_iter-num>
-  <Iteration_query-ID>Query_2</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1117 # 1210384 # 1210554 # -1 # ID=1_1117;partial=00;start_type=ATG;rbs_motif=AGGAG;rbs_spacer=5-10bp;gc_cont=0.731</Iteration_query-def>
-  <Iteration_query-len>57</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>30</Statistics_hsp-len>
-      <Statistics_eff-space>678321</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>3</Iteration_iter-num>
-  <Iteration_query-ID>Query_3</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1118 # 1210903 # 1211610 # 1 # ID=1_1118;partial=00;start_type=ATG;rbs_motif=4Base/6BMM;rbs_spacer=13-15bp;gc_cont=0.694</Iteration_query-def>
-  <Iteration_query-len>236</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>55</Statistics_hsp-len>
-      <Statistics_eff-space>4280288</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>4</Iteration_iter-num>
-  <Iteration_query-ID>Query_4</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1119 # 1211952 # 1212530 # 1 # ID=1_1119;partial=00;start_type=ATG;rbs_motif=GGA/GAG/AGG;rbs_spacer=5-10bp;gc_cont=0.686</Iteration_query-def>
-  <Iteration_query-len>193</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>54</Statistics_hsp-len>
-      <Statistics_eff-space>3295273</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>5</Iteration_iter-num>
-  <Iteration_query-ID>Query_5</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1120 # 1212557 # 1212736 # -1 # ID=1_1120;partial=00;start_type=ATG;rbs_motif=AGGAG;rbs_spacer=5-10bp;gc_cont=0.733</Iteration_query-def>
-  <Iteration_query-len>60</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>33</Statistics_hsp-len>
-      <Statistics_eff-space>673542</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>6</Iteration_iter-num>
-  <Iteration_query-ID>Query_6</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1121 # 1212842 # 1215358 # -1 # ID=1_1121;partial=00;start_type=ATG;rbs_motif=GGA/GAG/AGG;rbs_spacer=5-10bp;gc_cont=0.700</Iteration_query-def>
-  <Iteration_query-len>839</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>66</Statistics_hsp-len>
-      <Statistics_eff-space>17778227</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>7</Iteration_iter-num>
-  <Iteration_query-ID>Query_7</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1122 # 1215629 # 1217497 # 1 # ID=1_1122;partial=00;start_type=ATG;rbs_motif=GGA/GAG/AGG;rbs_spacer=3-4bp;gc_cont=0.676</Iteration_query-def>
-  <Iteration_query-len>623</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>63</Statistics_hsp-len>
-      <Statistics_eff-space>12978560</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>8</Iteration_iter-num>
-  <Iteration_query-ID>Query_8</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1123 # 1217519 # 1218139 # 1 # ID=1_1123;partial=00;start_type=ATG;rbs_motif=GGAGG;rbs_spacer=5-10bp;gc_cont=0.742</Iteration_query-def>
-  <Iteration_query-len>207</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>54</Statistics_hsp-len>
-      <Statistics_eff-space>3627171</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>9</Iteration_iter-num>
-  <Iteration_query-ID>Query_9</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1124 # 1218212 # 1218937 # 1 # ID=1_1124;partial=00;start_type=ATG;rbs_motif=AGGA/GGAG/GAGG;rbs_spacer=11-12bp;gc_cont=0.722</Iteration_query-def>
-  <Iteration_query-len>242</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>56</Statistics_hsp-len>
-      <Statistics_eff-space>4387554</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>10</Iteration_iter-num>
-  <Iteration_query-ID>Query_10</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1125 # 1218934 # 1219578 # 1 # ID=1_1125;partial=00;start_type=ATG;rbs_motif=AGxAGG/AGGxGG;rbs_spacer=5-10bp;gc_cont=0.726</Iteration_query-def>
-  <Iteration_query-len>215</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>55</Statistics_hsp-len>
-      <Statistics_eff-space>3783680</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>11</Iteration_iter-num>
-  <Iteration_query-ID>Query_11</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1126 # 1219684 # 1220592 # 1 # ID=1_1126;partial=00;start_type=ATG;rbs_motif=AGGA;rbs_spacer=5-10bp;gc_cont=0.697</Iteration_query-def>
-  <Iteration_query-len>303</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>58</Statistics_hsp-len>
-      <Statistics_eff-space>5750395</Statistics_eff-space>
+      <Statistics_eff-space>14778400</Statistics_eff-space>
       <Statistics_kappa>0.041</Statistics_kappa>
       <Statistics_lambda>0.267</Statistics_lambda>
       <Statistics_entropy>0.14</Statistics_entropy>
@@ -771,16 +296,16 @@
 <Iteration>
   <Iteration_iter-num>12</Iteration_iter-num>
   <Iteration_query-ID>Query_12</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1127 # 1220693 # 1221343 # 1 # ID=1_1127;partial=00;start_type=ATG;rbs_motif=GGA/GAG/AGG;rbs_spacer=3-4bp;gc_cont=0.665</Iteration_query-def>
-  <Iteration_query-len>217</Iteration_query-len>
+  <Iteration_query-def>NZ_CP012401.1_73 # 84021 # 85838 # -1 # ID=1_73;partial=00;start_type=TTG;rbs_motif=GGAG/GAGG;rbs_spacer=5-10bp;gc_cont=0.650</Iteration_query-def>
+  <Iteration_query-len>606</Iteration_query-len>
 <Iteration_hits>
 </Iteration_hits>
   <Iteration_stat>
     <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>55</Statistics_hsp-len>
-      <Statistics_eff-space>3830976</Statistics_eff-space>
+      <Statistics_db-num>420</Statistics_db-num>
+      <Statistics_db-len>189280</Statistics_db-len>
+      <Statistics_hsp-len>77</Statistics_hsp-len>
+      <Statistics_eff-space>83021260</Statistics_eff-space>
       <Statistics_kappa>0.041</Statistics_kappa>
       <Statistics_lambda>0.267</Statistics_lambda>
       <Statistics_entropy>0.14</Statistics_entropy>
@@ -791,16 +316,16 @@
 <Iteration>
   <Iteration_iter-num>13</Iteration_iter-num>
   <Iteration_query-ID>Query_13</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1128 # 1221404 # 1222177 # -1 # ID=1_1128;partial=00;start_type=GTG;rbs_motif=None;rbs_spacer=None;gc_cont=0.687</Iteration_query-def>
-  <Iteration_query-len>258</Iteration_query-len>
+  <Iteration_query-def>NZ_CP012401.1_74 # 86648 # 87820 # -1 # ID=1_74;partial=00;start_type=ATG;rbs_motif=3Base/5BMM;rbs_spacer=13-15bp;gc_cont=0.675</Iteration_query-def>
+  <Iteration_query-len>391</Iteration_query-len>
 <Iteration_hits>
 </Iteration_hits>
   <Iteration_stat>
     <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>56</Statistics_hsp-len>
-      <Statistics_eff-space>4764978</Statistics_eff-space>
+      <Statistics_db-num>420</Statistics_db-num>
+      <Statistics_db-len>189280</Statistics_db-len>
+      <Statistics_hsp-len>73</Statistics_hsp-len>
+      <Statistics_eff-space>50441160</Statistics_eff-space>
       <Statistics_kappa>0.041</Statistics_kappa>
       <Statistics_lambda>0.267</Statistics_lambda>
       <Statistics_entropy>0.14</Statistics_entropy>
@@ -811,16 +336,16 @@
 <Iteration>
   <Iteration_iter-num>14</Iteration_iter-num>
   <Iteration_query-ID>Query_14</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1129 # 1222371 # 1222529 # -1 # ID=1_1129;partial=00;start_type=ATG;rbs_motif=AGxAGG/AGGxGG;rbs_spacer=5-10bp;gc_cont=0.604</Iteration_query-def>
-  <Iteration_query-len>53</Iteration_query-len>
+  <Iteration_query-def>NZ_CP012401.1_75 # 88062 # 90311 # 1 # ID=1_75;partial=00;start_type=ATG;rbs_motif=4Base/6BMM;rbs_spacer=13-15bp;gc_cont=0.693</Iteration_query-def>
+  <Iteration_query-len>750</Iteration_query-len>
 <Iteration_hits>
 </Iteration_hits>
   <Iteration_stat>
     <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>27</Statistics_hsp-len>
-      <Statistics_eff-space>657800</Statistics_eff-space>
+      <Statistics_db-num>420</Statistics_db-num>
+      <Statistics_db-len>189280</Statistics_db-len>
+      <Statistics_hsp-len>78</Statistics_hsp-len>
+      <Statistics_eff-space>105181440</Statistics_eff-space>
       <Statistics_kappa>0.041</Statistics_kappa>
       <Statistics_lambda>0.267</Statistics_lambda>
       <Statistics_entropy>0.14</Statistics_entropy>
@@ -831,16 +356,16 @@
 <Iteration>
   <Iteration_iter-num>15</Iteration_iter-num>
   <Iteration_query-ID>Query_15</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1130 # 1223009 # 1224223 # 1 # ID=1_1130;partial=00;start_type=ATG;rbs_motif=GGA/GAG/AGG;rbs_spacer=5-10bp;gc_cont=0.663</Iteration_query-def>
-  <Iteration_query-len>405</Iteration_query-len>
+  <Iteration_query-def>NZ_CP012401.1_76 # 90354 # 91220 # -1 # ID=1_76;partial=00;start_type=ATG;rbs_motif=4Base/6BMM;rbs_spacer=13-15bp;gc_cont=0.685</Iteration_query-def>
+  <Iteration_query-len>289</Iteration_query-len>
 <Iteration_hits>
 </Iteration_hits>
   <Iteration_stat>
     <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>60</Statistics_hsp-len>
-      <Statistics_eff-space>8056785</Statistics_eff-space>
+      <Statistics_db-num>420</Statistics_db-num>
+      <Statistics_db-len>189280</Statistics_db-len>
+      <Statistics_hsp-len>70</Statistics_hsp-len>
+      <Statistics_eff-space>35013720</Statistics_eff-space>
       <Statistics_kappa>0.041</Statistics_kappa>
       <Statistics_lambda>0.267</Statistics_lambda>
       <Statistics_entropy>0.14</Statistics_entropy>
@@ -851,16 +376,16 @@
 <Iteration>
   <Iteration_iter-num>16</Iteration_iter-num>
   <Iteration_query-ID>Query_16</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1131 # 1224402 # 1224947 # 1 # ID=1_1131;partial=00;start_type=ATG;rbs_motif=AGxAGG/AGGxGG;rbs_spacer=5-10bp;gc_cont=0.676</Iteration_query-def>
-  <Iteration_query-len>182</Iteration_query-len>
+  <Iteration_query-def>NZ_CP012401.1_77 # 91447 # 92316 # 1 # ID=1_77;partial=00;start_type=ATG;rbs_motif=GGA/GAG/AGG;rbs_spacer=5-10bp;gc_cont=0.724</Iteration_query-def>
+  <Iteration_query-len>290</Iteration_query-len>
 <Iteration_hits>
 </Iteration_hits>
   <Iteration_stat>
     <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>53</Statistics_hsp-len>
-      <Statistics_eff-space>3065814</Statistics_eff-space>
+      <Statistics_db-num>420</Statistics_db-num>
+      <Statistics_db-len>189280</Statistics_db-len>
+      <Statistics_hsp-len>70</Statistics_hsp-len>
+      <Statistics_eff-space>35173600</Statistics_eff-space>
       <Statistics_kappa>0.041</Statistics_kappa>
       <Statistics_lambda>0.267</Statistics_lambda>
       <Statistics_entropy>0.14</Statistics_entropy>
@@ -871,16 +396,16 @@
 <Iteration>
   <Iteration_iter-num>17</Iteration_iter-num>
   <Iteration_query-ID>Query_17</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1132 # 1225075 # 1225851 # 1 # ID=1_1132;partial=00;start_type=ATG;rbs_motif=GGA/GAG/AGG;rbs_spacer=5-10bp;gc_cont=0.650</Iteration_query-def>
-  <Iteration_query-len>259</Iteration_query-len>
+  <Iteration_query-def>NZ_CP012401.1_78 # 92330 # 93616 # -1 # ID=1_78;partial=00;start_type=ATG;rbs_motif=GGxGG;rbs_spacer=5-10bp;gc_cont=0.657</Iteration_query-def>
+  <Iteration_query-len>429</Iteration_query-len>
 <Iteration_hits>
 </Iteration_hits>
   <Iteration_stat>
     <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>56</Statistics_hsp-len>
-      <Statistics_eff-space>4788567</Statistics_eff-space>
+      <Statistics_db-num>420</Statistics_db-num>
+      <Statistics_db-len>189280</Statistics_db-len>
+      <Statistics_hsp-len>74</Statistics_hsp-len>
+      <Statistics_eff-space>56161000</Statistics_eff-space>
       <Statistics_kappa>0.041</Statistics_kappa>
       <Statistics_lambda>0.267</Statistics_lambda>
       <Statistics_entropy>0.14</Statistics_entropy>
@@ -891,519 +416,16 @@
 <Iteration>
   <Iteration_iter-num>18</Iteration_iter-num>
   <Iteration_query-ID>Query_18</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1133 # 1225982 # 1226866 # 1 # ID=1_1133;partial=00;start_type=ATG;rbs_motif=GGAG/GAGG;rbs_spacer=5-10bp;gc_cont=0.654</Iteration_query-def>
-  <Iteration_query-len>295</Iteration_query-len>
+  <Iteration_query-def>NZ_CP012401.1_79 # 93808 # 94206 # -1 # ID=1_79;partial=00;start_type=ATG;rbs_motif=AGxAGG/AGGxGG;rbs_spacer=5-10bp;gc_cont=0.644</Iteration_query-def>
+  <Iteration_query-len>133</Iteration_query-len>
 <Iteration_hits>
 </Iteration_hits>
   <Iteration_stat>
     <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>57</Statistics_hsp-len>
-      <Statistics_eff-space>5600140</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>19</Iteration_iter-num>
-  <Iteration_query-ID>Query_19</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1134 # 1226877 # 1227704 # 1 # ID=1_1134;partial=00;start_type=ATG;rbs_motif=GGA/GAG/AGG;rbs_spacer=5-10bp;gc_cont=0.676</Iteration_query-def>
-  <Iteration_query-len>276</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>57</Statistics_hsp-len>
-      <Statistics_eff-space>5153070</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>20</Iteration_iter-num>
-  <Iteration_query-ID>Query_20</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1135 # 1227707 # 1227952 # -1 # ID=1_1135;partial=00;start_type=ATG;rbs_motif=GGA/GAG/AGG;rbs_spacer=5-10bp;gc_cont=0.650</Iteration_query-def>
-  <Iteration_query-len>82</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>44</Statistics_hsp-len>
-      <Statistics_eff-space>923286</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>21</Iteration_iter-num>
-  <Iteration_query-ID>Query_21</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1136 # 1228133 # 1228555 # 1 # ID=1_1136;partial=00;start_type=ATG;rbs_motif=AGGA;rbs_spacer=5-10bp;gc_cont=0.645</Iteration_query-def>
-  <Iteration_query-len>141</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>51</Statistics_hsp-len>
-      <Statistics_eff-space>2149560</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>22</Iteration_iter-num>
-  <Iteration_query-ID>Query_22</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1137 # 1228592 # 1229947 # 1 # ID=1_1137;partial=00;start_type=ATG;rbs_motif=GGA/GAG/AGG;rbs_spacer=5-10bp;gc_cont=0.704</Iteration_query-def>
-  <Iteration_query-len>452</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>61</Statistics_hsp-len>
-      <Statistics_eff-space>9107954</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>23</Iteration_iter-num>
-  <Iteration_query-ID>Query_23</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1138 # 1229976 # 1231187 # -1 # ID=1_1138;partial=00;start_type=ATG;rbs_motif=AGGA;rbs_spacer=5-10bp;gc_cont=0.703</Iteration_query-def>
-  <Iteration_query-len>404</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>60</Statistics_hsp-len>
-      <Statistics_eff-space>8033432</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>24</Iteration_iter-num>
-  <Iteration_query-ID>Query_24</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1139 # 1231247 # 1231630 # -1 # ID=1_1139;partial=00;start_type=GTG;rbs_motif=AGxAGG/AGGxGG;rbs_spacer=5-10bp;gc_cont=0.677</Iteration_query-def>
-  <Iteration_query-len>128</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>50</Statistics_hsp-len>
-      <Statistics_eff-space>1867554</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-</BlastOutput_iterations>
-</BlastOutput>
-
-<?xml version="1.0"?>
-<!DOCTYPE BlastOutput PUBLIC "-//NCBI//NCBI BlastOutput/EN" "http://www.ncbi.nlm.nih.gov/dtd/NCBI_BlastOutput.dtd">
-<BlastOutput>
-  <BlastOutput_program>blastp</BlastOutput_program>
-  <BlastOutput_version>BLASTP 2.13.0+</BlastOutput_version>
-  <BlastOutput_reference>Stephen F. Altschul, Thomas L. Madden, Alejandro A. Sch&amp;auml;ffer, Jinghui Zhang, Zheng Zhang, Webb Miller, and David J. Lipman (1997), &quot;Gapped BLAST and PSI-BLAST: a new generation of protein database search programs&quot;, Nucleic Acids Res. 25:3389-3402.</BlastOutput_reference>
-  <BlastOutput_db>./database/IAA_database_v2.fasta</BlastOutput_db>
-  <BlastOutput_query-ID>Query_1</BlastOutput_query-ID>
-  <BlastOutput_query-def>NZ_CP012401.1_1068 # 1160712 # 1162424 # 1 # ID=1_1068;partial=00;start_type=ATG;rbs_motif=AGxAGG/AGGxGG;rbs_spacer=5-10bp;gc_cont=0.711</BlastOutput_query-def>
-  <BlastOutput_query-len>571</BlastOutput_query-len>
-  <BlastOutput_param>
-    <Parameters>
-      <Parameters_matrix>BLOSUM62</Parameters_matrix>
-      <Parameters_expect>1e-10</Parameters_expect>
-      <Parameters_gap-open>11</Parameters_gap-open>
-      <Parameters_gap-extend>1</Parameters_gap-extend>
-      <Parameters_filter>F</Parameters_filter>
-    </Parameters>
-  </BlastOutput_param>
-<BlastOutput_iterations>
-<Iteration>
-  <Iteration_iter-num>1</Iteration_iter-num>
-  <Iteration_query-ID>Query_1</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1068 # 1160712 # 1162424 # 1 # ID=1_1068;partial=00;start_type=ATG;rbs_motif=AGxAGG/AGGxGG;rbs_spacer=5-10bp;gc_cont=0.711</Iteration_query-def>
-  <Iteration_query-len>571</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>63</Statistics_hsp-len>
-      <Statistics_eff-space>11773408</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>2</Iteration_iter-num>
-  <Iteration_query-ID>Query_2</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1069 # 1162600 # 1163067 # 1 # ID=1_1069;partial=00;start_type=ATG;rbs_motif=AGGA;rbs_spacer=5-10bp;gc_cont=0.624</Iteration_query-def>
-  <Iteration_query-len>156</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>52</Statistics_hsp-len>
-      <Statistics_eff-space>2477800</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>3</Iteration_iter-num>
-  <Iteration_query-ID>Query_3</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1070 # 1163161 # 1164819 # -1 # ID=1_1070;partial=00;start_type=ATG;rbs_motif=None;rbs_spacer=None;gc_cont=0.717</Iteration_query-def>
-  <Iteration_query-len>553</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
+      <Statistics_db-num>420</Statistics_db-num>
+      <Statistics_db-len>189280</Statistics_db-len>
       <Statistics_hsp-len>62</Statistics_hsp-len>
-      <Statistics_eff-space>11408385</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>4</Iteration_iter-num>
-  <Iteration_query-ID>Query_4</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1071 # 1164980 # 1166071 # 1 # ID=1_1071;partial=00;start_type=ATG;rbs_motif=GGAGG;rbs_spacer=5-10bp;gc_cont=0.694</Iteration_query-def>
-  <Iteration_query-len>364</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>59</Statistics_hsp-len>
-      <Statistics_eff-space>7140660</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>5</Iteration_iter-num>
-  <Iteration_query-ID>Query_5</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1072 # 1166088 # 1166294 # -1 # ID=1_1072;partial=00;start_type=ATG;rbs_motif=None;rbs_spacer=None;gc_cont=0.618</Iteration_query-def>
-  <Iteration_query-len>69</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>42</Statistics_hsp-len>
-      <Statistics_eff-space>659205</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>6</Iteration_iter-num>
-  <Iteration_query-ID>Query_6</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1073 # 1166433 # 1166723 # -1 # ID=1_1073;partial=00;start_type=ATG;rbs_motif=GGAG/GAGG;rbs_spacer=5-10bp;gc_cont=0.622</Iteration_query-def>
-  <Iteration_query-len>97</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>46</Statistics_hsp-len>
-      <Statistics_eff-space>1233129</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>7</Iteration_iter-num>
-  <Iteration_query-ID>Query_7</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1074 # 1167065 # 1167298 # 1 # ID=1_1074;partial=00;start_type=ATG;rbs_motif=GGAGG;rbs_spacer=5-10bp;gc_cont=0.658</Iteration_query-def>
-  <Iteration_query-len>78</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>44</Statistics_hsp-len>
-      <Statistics_eff-space>826098</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>8</Iteration_iter-num>
-  <Iteration_query-ID>Query_8</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1075 # 1167472 # 1167723 # 1 # ID=1_1075;partial=00;start_type=ATG;rbs_motif=AGGA;rbs_spacer=5-10bp;gc_cont=0.698</Iteration_query-def>
-  <Iteration_query-len>84</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>45</Statistics_hsp-len>
-      <Statistics_eff-space>945282</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>9</Iteration_iter-num>
-  <Iteration_query-ID>Query_9</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1076 # 1167742 # 1168503 # -1 # ID=1_1076;partial=00;start_type=ATG;rbs_motif=4Base/6BMM;rbs_spacer=13-15bp;gc_cont=0.726</Iteration_query-def>
-  <Iteration_query-len>254</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>56</Statistics_hsp-len>
-      <Statistics_eff-space>4670622</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>10</Iteration_iter-num>
-  <Iteration_query-ID>Query_10</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1077 # 1168565 # 1169683 # -1 # ID=1_1077;partial=00;start_type=ATG;rbs_motif=AGGA;rbs_spacer=5-10bp;gc_cont=0.710</Iteration_query-def>
-  <Iteration_query-len>373</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>59</Statistics_hsp-len>
-      <Statistics_eff-space>7351368</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>11</Iteration_iter-num>
-  <Iteration_query-ID>Query_11</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1078 # 1169941 # 1170942 # 1 # ID=1_1078;partial=00;start_type=ATG;rbs_motif=None;rbs_spacer=None;gc_cont=0.684</Iteration_query-def>
-  <Iteration_query-len>334</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>58</Statistics_hsp-len>
-      <Statistics_eff-space>6477996</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>12</Iteration_iter-num>
-  <Iteration_query-ID>Query_12</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1079 # 1170909 # 1172177 # 1 # ID=1_1079;partial=00;start_type=ATG;rbs_motif=None;rbs_spacer=None;gc_cont=0.722</Iteration_query-def>
-  <Iteration_query-len>423</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>60</Statistics_hsp-len>
-      <Statistics_eff-space>8477139</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>13</Iteration_iter-num>
-  <Iteration_query-ID>Query_13</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1080 # 1172466 # 1172747 # 1 # ID=1_1080;partial=00;start_type=ATG;rbs_motif=GGA/GAG/AGG;rbs_spacer=11-12bp;gc_cont=0.617</Iteration_query-def>
-  <Iteration_query-len>94</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>46</Statistics_hsp-len>
-      <Statistics_eff-space>1160592</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>14</Iteration_iter-num>
-  <Iteration_query-ID>Query_14</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1081 # 1172818 # 1173213 # 1 # ID=1_1081;partial=00;start_type=TTG;rbs_motif=GGAG/GAGG;rbs_spacer=5-10bp;gc_cont=0.702</Iteration_query-def>
-  <Iteration_query-len>132</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>50</Statistics_hsp-len>
-      <Statistics_eff-space>1963326</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>15</Iteration_iter-num>
-  <Iteration_query-ID>Query_15</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1082 # 1173269 # 1174228 # 1 # ID=1_1082;partial=00;start_type=ATG;rbs_motif=GGAG/GAGG;rbs_spacer=5-10bp;gc_cont=0.699</Iteration_query-def>
-  <Iteration_query-len>320</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>58</Statistics_hsp-len>
-      <Statistics_eff-space>6149402</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>16</Iteration_iter-num>
-  <Iteration_query-ID>Query_16</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1083 # 1174399 # 1176180 # 1 # ID=1_1083;partial=00;start_type=ATG;rbs_motif=AGGA/GGAG/GAGG;rbs_spacer=11-12bp;gc_cont=0.684</Iteration_query-def>
-  <Iteration_query-len>594</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>63</Statistics_hsp-len>
-      <Statistics_eff-space>12306456</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>17</Iteration_iter-num>
-  <Iteration_query-ID>Query_17</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1084 # 1176348 # 1177301 # 1 # ID=1_1084;partial=00;start_type=GTG;rbs_motif=GGA/GAG/AGG;rbs_spacer=5-10bp;gc_cont=0.693</Iteration_query-def>
-  <Iteration_query-len>318</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>58</Statistics_hsp-len>
-      <Statistics_eff-space>6102460</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>18</Iteration_iter-num>
-  <Iteration_query-ID>Query_18</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1085 # 1177298 # 1177744 # -1 # ID=1_1085;partial=00;start_type=ATG;rbs_motif=GGA/GAG/AGG;rbs_spacer=5-10bp;gc_cont=0.702</Iteration_query-def>
-  <Iteration_query-len>149</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>51</Statistics_hsp-len>
-      <Statistics_eff-space>2340632</Statistics_eff-space>
+      <Statistics_eff-space>11590040</Statistics_eff-space>
       <Statistics_kappa>0.041</Statistics_kappa>
       <Statistics_lambda>0.267</Statistics_lambda>
       <Statistics_entropy>0.14</Statistics_entropy>
@@ -1414,16 +436,16 @@
 <Iteration>
   <Iteration_iter-num>19</Iteration_iter-num>
   <Iteration_query-ID>Query_19</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1086 # 1177940 # 1178701 # 1 # ID=1_1086;partial=00;start_type=ATG;rbs_motif=AGGAG;rbs_spacer=5-10bp;gc_cont=0.694</Iteration_query-def>
-  <Iteration_query-len>254</Iteration_query-len>
+  <Iteration_query-def>NZ_CP012401.1_80 # 94949 # 95242 # 1 # ID=1_80;partial=00;start_type=ATG;rbs_motif=GGAGG;rbs_spacer=5-10bp;gc_cont=0.670</Iteration_query-def>
+  <Iteration_query-len>98</Iteration_query-len>
 <Iteration_hits>
 </Iteration_hits>
   <Iteration_stat>
     <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>56</Statistics_hsp-len>
-      <Statistics_eff-space>4670622</Statistics_eff-space>
+      <Statistics_db-num>420</Statistics_db-num>
+      <Statistics_db-len>189280</Statistics_db-len>
+      <Statistics_hsp-len>58</Statistics_hsp-len>
+      <Statistics_eff-space>6596800</Statistics_eff-space>
       <Statistics_kappa>0.041</Statistics_kappa>
       <Statistics_lambda>0.267</Statistics_lambda>
       <Statistics_entropy>0.14</Statistics_entropy>
@@ -1434,16 +456,16 @@
 <Iteration>
   <Iteration_iter-num>20</Iteration_iter-num>
   <Iteration_query-ID>Query_20</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1087 # 1178773 # 1178970 # -1 # ID=1_1087;partial=00;start_type=ATG;rbs_motif=AGGAG;rbs_spacer=5-10bp;gc_cont=0.667</Iteration_query-def>
-  <Iteration_query-len>66</Iteration_query-len>
+  <Iteration_query-def>NZ_CP012401.1_81 # 95323 # 96438 # -1 # ID=1_81;partial=00;start_type=ATG;rbs_motif=GGAG/GAGG;rbs_spacer=5-10bp;gc_cont=0.674</Iteration_query-def>
+  <Iteration_query-len>372</Iteration_query-len>
 <Iteration_hits>
 </Iteration_hits>
   <Iteration_stat>
     <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>39</Statistics_hsp-len>
-      <Statistics_eff-space>663984</Statistics_eff-space>
+      <Statistics_db-num>420</Statistics_db-num>
+      <Statistics_db-len>189280</Statistics_db-len>
+      <Statistics_hsp-len>73</Statistics_hsp-len>
+      <Statistics_eff-space>47427380</Statistics_eff-space>
       <Statistics_kappa>0.041</Statistics_kappa>
       <Statistics_lambda>0.267</Statistics_lambda>
       <Statistics_entropy>0.14</Statistics_entropy>
@@ -1454,96 +476,16 @@
 <Iteration>
   <Iteration_iter-num>21</Iteration_iter-num>
   <Iteration_query-ID>Query_21</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1088 # 1179269 # 1179823 # 1 # ID=1_1088;partial=00;start_type=ATG;rbs_motif=AGGA;rbs_spacer=5-10bp;gc_cont=0.663</Iteration_query-def>
-  <Iteration_query-len>185</Iteration_query-len>
+  <Iteration_query-def>NZ_CP012401.1_82 # 96509 # 97120 # -1 # ID=1_82;partial=00;start_type=ATG;rbs_motif=AGGA;rbs_spacer=5-10bp;gc_cont=0.634</Iteration_query-def>
+  <Iteration_query-len>204</Iteration_query-len>
 <Iteration_hits>
 </Iteration_hits>
   <Iteration_stat>
     <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>53</Statistics_hsp-len>
-      <Statistics_eff-space>3137112</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>22</Iteration_iter-num>
-  <Iteration_query-ID>Query_22</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1089 # 1179905 # 1181140 # -1 # ID=1_1089;partial=00;start_type=ATG;rbs_motif=GGA/GAG/AGG;rbs_spacer=5-10bp;gc_cont=0.648</Iteration_query-def>
-  <Iteration_query-len>412</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>60</Statistics_hsp-len>
-      <Statistics_eff-space>8220256</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>23</Iteration_iter-num>
-  <Iteration_query-ID>Query_23</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1090 # 1181235 # 1181762 # -1 # ID=1_1090;partial=00;start_type=ATG;rbs_motif=None;rbs_spacer=None;gc_cont=0.705</Iteration_query-def>
-  <Iteration_query-len>176</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>53</Statistics_hsp-len>
-      <Statistics_eff-space>2923218</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>24</Iteration_iter-num>
-  <Iteration_query-ID>Query_24</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1091 # 1182014 # 1183003 # 1 # ID=1_1091;partial=00;start_type=ATG;rbs_motif=GGAGG;rbs_spacer=5-10bp;gc_cont=0.685</Iteration_query-def>
-  <Iteration_query-len>330</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>58</Statistics_hsp-len>
-      <Statistics_eff-space>6384112</Statistics_eff-space>
-      <Statistics_kappa>0.041</Statistics_kappa>
-      <Statistics_lambda>0.267</Statistics_lambda>
-      <Statistics_entropy>0.14</Statistics_entropy>
-    </Statistics>
-  </Iteration_stat>
-  <Iteration_message>No hits found</Iteration_message>
-</Iteration>
-<Iteration>
-  <Iteration_iter-num>25</Iteration_iter-num>
-  <Iteration_query-ID>Query_25</Iteration_query-ID>
-  <Iteration_query-def>NZ_CP012401.1_1092 # 1183073 # 1183558 # -1 # ID=1_1092;partial=00;start_type=ATG;rbs_motif=GGxGG;rbs_spacer=5-10bp;gc_cont=0.691</Iteration_query-def>
-  <Iteration_query-len>162</Iteration_query-len>
-<Iteration_hits>
-</Iteration_hits>
-  <Iteration_stat>
-    <Statistics>
-      <Statistics_db-num>59</Statistics_db-num>
-      <Statistics_db-len>26893</Statistics_db-len>
-      <Statistics_hsp-len>52</Statistics_hsp-len>
-      <Statistics_eff-space>2620750</Statistics_eff-space>
+      <Statistics_db-num>420</Statistics_db-num>
+      <Statistics_db-len>189280</Statistics_db-len>
+      <Statistics_hsp-len>67</Statistics_hsp-len>
+      <Statistics_eff-space>22076180</Statistics_eff-space>
       <Statistics_kappa>0.041</Statistics_kappa>
       <Statistics_lambda>0.267</Statistics_lambda>
       <Statistics_entropy>0.14</Statistics_entropy>

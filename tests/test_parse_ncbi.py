@@ -1,5 +1,5 @@
+import os
 import pytest
-from src import parse_ncbi_xml
 from src.parse_ncbi_xml import (parse_alignment_title, parse_blast,
                                 parse_product_regex, parse_product_split)
 
@@ -45,6 +45,15 @@ def test_parse_alignment_title():
     assert alignment_info == expected
 
 def test_parse_ncbi():
-    # TODO
     filename = "tests/test_data/GCF_example.xml"
-    # parse_blast(filename)
+    tmpfile = "tmp_parse_ncbi.csv"
+    parse_blast(filename, "tmp_parse_ncbi.csv")
+    with open(tmpfile, "r") as f:
+        results = f.read()
+    expected = (
+    "id,start,end,alignment_id,enzyme_id,enzyme_code,product,organism,existence,gene,score,evalue,identity_percentage,query_coverage\n"
+    "NZ_CP012401.1_70,81257,82396,Q0KDL6,5,IPA3,Alcohol dehydrogenase,Cupriavidus necator (strain ATCC 17699 / DSM 428 / KCTC 22496 / NCIMB 10442 / H16 / Stanier 337),1,adh,118.627,5.7216e-32,30.491,88.158\n"
+    "NZ_CP012401.1_70,81257,82396,P14940,5,IPA3,Alcohol dehydrogenase,Cupriavidus necator,3,adh,117.857,1.05788e-31,30.491,88.158\n"
+    )
+    os.remove(tmpfile)
+    assert results == expected

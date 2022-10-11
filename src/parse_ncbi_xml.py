@@ -5,14 +5,11 @@ from Bio.Blast import NCBIXML
 
 from .util import *
 
-HEADER = ("id,start,end,alignment_id,enzyme_id,enzyme_code,product,"
-"organism,existence,gene,score,evalue,identity_percentage,query_coverage\n")
-
 # csv column title
 HEADER_ELEMENT = ["id", "start", "end", "alignment_id", "enzyme_id",
     "enzyme_code",  "product", "organism", "existence", "gene", "score",
     "evalue", "identity_percentage", "query_coverage"]
-HEADER = ",".join(HEADER_ELEMENT)
+HEADER = ",".join(HEADER_ELEMENT) + "\n"
 
 
 REGEX_ELEMENTS = re.compile("(.*) OS=(.*) OX=.* PE=(\\d)")
@@ -28,7 +25,7 @@ def parse_product_split(labels):
     # if not    : {product}
     labels_split = labels.replace(",", "").split("~~~")
     try:
-        enzyme_id, enzyme_code, product_name = labels_split[0:4]
+        enzyme_id, enzyme_code, product_name = labels_split[0:3]
     except ValueError:
         enzyme_id, enzyme_code, product_name = None, None, labels_split[0]
         # Assuming only 3 parts or others
@@ -47,8 +44,12 @@ def parse_product_regex(labels):
     return enzyme_id, enzyme_code, product_name
 
 def parse_gene(desc):
-    # TODO:
-    pass
+    gene = REGEX_GENE.search(desc)
+    if gene is not None:
+        gene = gene.group(1).replace(",", " ")
+    else: 
+        gene = "-"
+    return gene
 
 
 def parse_alignment_title(alignment_title):
@@ -61,10 +62,7 @@ def parse_alignment_title(alignment_title):
     enzyme_id, enzyme_code, product_name = parse_product_split(labels)
     enzyme_id, enzyme_code, product_name = parse_product_regex(labels)
 
-    # gene = parse_gene(description)
-    gene = REGEX_GENE.search(description)
-    if gene:
-        gene = gene.group(1).replace(",", "")
+    gene = parse_gene(description)
 
     output_list = [alignment_id, enzyme_id, enzyme_code, product_name, 
                    organism, existence, gene]
