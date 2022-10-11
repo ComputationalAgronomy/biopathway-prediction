@@ -43,18 +43,18 @@ def match_enzyme_existence(filename, enzyme_list):
         try:
             enzyme_id = int(enzyme_id)
             enzyme_list[enzyme_id].set_count(count)
-        except ValueError:
-            pass
-        except AttributeError:
+        except (ValueError, AttributeError):
             pass
 
 
 def run_match_enzyme(filename, output, enzyme_list=ENZYME_LIST,
                      pathway_list=PATHWAY_LIST):
+    # make a copy of PATHWAY_LIST
+    _pathway_list = pathway_list
     match_enzyme_existence(filename, enzyme_list)
-    traverse_enzyme_reaction(1, enzyme_list, pathway_list)
+    traverse_enzyme_reaction(1, enzyme_list, _pathway_list)
     result = []
-    result.extend(print_pathway(pathway_list))
+    result.extend(print_pathway(_pathway_list))
     result.extend(print_enzyme(enzyme_list))
     with open(output, "w") as f:
         f.writelines(result)
