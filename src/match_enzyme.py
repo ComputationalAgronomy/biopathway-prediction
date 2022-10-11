@@ -1,5 +1,5 @@
 import pandas as pd
-from .pathway import PathwayNode, Enzyme, PATHWAY_LIST, ENZYME_LIST
+from .pathway import PathwayNode, Enzyme, pathway_list, enzyme_list
 
 
 
@@ -43,14 +43,21 @@ def match_enzyme_existence(filename, enzyme_list):
         try:
             enzyme_id = int(enzyme_id)
             enzyme_list[enzyme_id].set_count(count)
-        except ValueError:
+        except (ValueError, AttributeError):
             pass
+
+def reset_enzyme_and_pathway(enzyme_list, pathway_list):
+    for enzyme in enzyme_list.values():
+        try:
+            enzyme.reset()
         except AttributeError:
             pass
+    for pathway in pathway_list.values():
+        pathway.reset()
 
-
-def run_match_enzyme(filename, output, enzyme_list=ENZYME_LIST,
-                     pathway_list=PATHWAY_LIST):
+def run_match_enzyme(filename, output, enzyme_list=enzyme_list,
+                     pathway_list=pathway_list):
+    reset_enzyme_and_pathway(enzyme_list, pathway_list)
     match_enzyme_existence(filename, enzyme_list)
     traverse_enzyme_reaction(1, enzyme_list, pathway_list)
     result = []
@@ -58,3 +65,4 @@ def run_match_enzyme(filename, output, enzyme_list=ENZYME_LIST,
     result.extend(print_enzyme(enzyme_list))
     with open(output, "w") as f:
         f.writelines(result)
+    
