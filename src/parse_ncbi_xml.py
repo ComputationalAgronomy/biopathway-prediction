@@ -41,6 +41,7 @@ def parse_product_regex(labels):
             enzyme_id, enzyme_code, product_name = None, None, labels
         else:
             raise ValueError("Invalid database product format")
+    product_name = product_name.replace(",", " ")
     return enzyme_id, enzyme_code, product_name
 
 def parse_gene(desc):
