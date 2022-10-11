@@ -1,13 +1,17 @@
 class PathwayNode():
 
-    def __init__(self, name, enzyme_id, visited):
+    def __init__(self, name, enzyme_id, default_visited):
         # the name of the chemical compound
         self.name = name
         # the enzymes that can catalyze this compound to another one
         self.reaction = enzyme_id
         # has this compound been made from an enzyme?
         # (or if it's a starting material)
-        self.visited = visited
+        self.default_visited = default_visited
+        self.visited = self.default_visited
+    
+    def reset(self):
+        self.visited = self.default_visited
 
 
 class Enzyme():
@@ -30,15 +34,19 @@ class Enzyme():
         self.exist = True
         self.count = count
 
+    def reset(self):
+        self.exist = False
+        self.count = 0
 
-PATHWAY_LIST = {1: PathwayNode("trp", [1, 3], True),
+
+pathway_list = {1: PathwayNode("trp", [1, 3], True),
                 2: PathwayNode("iam_1", [2], False),
                 3: PathwayNode("indole-3-acetic-acid", [0], False),
                 4: PathwayNode("ipa_1", [4], False),
                 5: PathwayNode("ipa_2", [5], False)
                 }
 
-ENZYME_LIST = {0: None,
+enzyme_list = {0: None,
                1: Enzyme("trp_iam_1", 2),
                2: Enzyme("iam_1_indole", 3),
                3: Enzyme("trp_ipa_1", 4),
