@@ -80,8 +80,18 @@ trp_ipa_1: 1
 *Note:*  
 *To use this package, installation of **prodigal**, **blast** and some of the python modules is required (See the software requirement section). Also, this package has only been tested locally. Dependency issues may occur if only this repository is copied to a brand new environment.*
 
+### Testing
+```
+pytest
+# With coverage
+pytest --cov=src
+```
+
+
 ### Set up blast database path
 After the database has been made through `makeblastdb` command in `blast`, modify the `path` value in `config.toml` to tell the program which database is used for blastp alignment. (An absolute path is recommended)
+
+
 
 ### Software requirement
 prodigal: <https://github.com/hyattpd/Prodigal>  

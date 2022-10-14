@@ -8,6 +8,7 @@ input/
 output*/
 database/
 src/database_building/database_output/
+temp/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
