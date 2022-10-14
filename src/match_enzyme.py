@@ -49,7 +49,7 @@ def match_enzyme_existence(filename, enzyme_list):
             pass
 
 
-def run_match_enzyme(filename, output, enzyme_list=ENZYME_LIST,
+def _run_match_enzyme(filename, output, enzyme_list=ENZYME_LIST,
                      pathway_list=PATHWAY_LIST):
     match_enzyme_existence(filename, enzyme_list)
     traverse_enzyme_reaction(1, enzyme_list, pathway_list)
