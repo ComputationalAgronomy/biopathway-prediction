@@ -44,10 +44,15 @@ def test_parse_alignment_title():
     expected = "Q9C969,3,IPA1,Aromatic aminotransferase ISS1,Arabidopsis thaliana,1,ISS1"
     assert alignment_info == expected
 
+    title = "gnl|BL_ORD_ID|19 sp|Q9C969|ISS1_ARATH 3~~~IPA1~~~Aromatic aminotransferase ISS1 OS=Arabidopsis thaliana OX=3702 PE=1 SV=1"
+    alignment_info = parse_alignment_title(title)
+    expected = "Q9C969,3,IPA1,Aromatic aminotransferase ISS1,Arabidopsis thaliana,1,-"
+    assert alignment_info == expected
+
 def test_parse_ncbi():
     filename = "tests/test_data/GCF_example.xml"
     tmpfile = "tmp_parse_ncbi.csv"
-    parse_blast(filename, "tmp_parse_ncbi.csv")
+    parse_blast(filename, tmpfile)
     with open(tmpfile, "r") as f:
         results = f.read()
     expected = (
@@ -57,3 +62,9 @@ def test_parse_ncbi():
     )
     os.remove(tmpfile)
     assert results == expected
+
+    filename = "tests/test_data/no_this_file.xml"
+    tmpfile = "tmp_parse_ncbi.csv"
+    with pytest.raises(SystemExit) as excinfo:
+        parse_blast(filename, tmpfile)
+    assert True

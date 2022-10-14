@@ -12,9 +12,9 @@ HEADER_ELEMENT = ["id", "start", "end", "alignment_id", "enzyme_id",
 HEADER = ",".join(HEADER_ELEMENT) + "\n"
 
 
-REGEX_ELEMENTS = re.compile("(.*) OS=(.*) OX=.* PE=(\\d)")
 # OS: organism
 # PE: protein existence
+REGEX_ELEMENTS = re.compile("(.*) OS=(.*) OX=.* PE=(\\d)")
 
 REGEX_PRODUCT = re.compile("^(.+)~{3}(.+)~{3}(.+)$")
 REGEX_GENE = re.compile("GN=(.*) PE=")
@@ -25,7 +25,7 @@ def parse_product_split(labels):
     # if not    : {product}
     labels_split = labels.replace(",", "").split("~~~")
     try:
-        enzyme_id, enzyme_code, product_name = labels_split[0:3]
+        enzyme_id, enzyme_code, product_name = labels_split[0:4]
     except ValueError:
         enzyme_id, enzyme_code, product_name = None, None, labels_split[0]
         # Assuming only 3 parts or others
@@ -33,6 +33,8 @@ def parse_product_split(labels):
 
 
 def parse_product_regex(labels):
+    # if labeled: {enzyme_id}~~~{enzyme_code}~~~{product}
+    # if not    : {product}
     match = REGEX_PRODUCT.search(labels)
     try:
         enzyme_id, enzyme_code, product_name = match.groups()
@@ -60,7 +62,7 @@ def parse_alignment_title(alignment_title):
     element = REGEX_ELEMENTS.search(description)
     labels, organism, existence = element.groups()
 
-    enzyme_id, enzyme_code, product_name = parse_product_split(labels)
+    # enzyme_id, enzyme_code, product_name = parse_product_split(labels)
     enzyme_id, enzyme_code, product_name = parse_product_regex(labels)
 
     gene = parse_gene(description)
