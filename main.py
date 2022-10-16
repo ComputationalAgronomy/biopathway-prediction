@@ -1,9 +1,5 @@
 import argparse
-from genericpath import isfile
-import glob
 import os
-import re
-from tabnanny import check
 import time
 
 import tomli
@@ -42,7 +38,10 @@ def run_and_save(func, output_path, file_list, file_save_format, **kwargs):
         basename = basename_old_extension.rsplit(".", 1)[0]
         basename_new_extension = f"{basename}.{file_save_format}"
         output_name = os.path.join(output_path, basename_new_extension)
-        func(filename, output_name, kwargs)        
+        if kwargs is not None:
+            func(filename, output_name, **kwargs)        
+        else:
+            func(filename, output_name)
 
 # run individual modules
 def run_parse_blast(input_path, output_path):
@@ -75,7 +74,7 @@ def run_match_enzyme(input_path, output_path):
     make_dir(output_path)
     print("Match the best blastp result to enzyme pathway")
     run_and_save(func=_run_match_enzyme, output_path=output_path,
-                 file_list=file_list, file_save_formet="txt")
+                 file_list=file_list, file_save_format="txt")
     print("Done!")
 
 # handle subparser arguments before running individule modules
@@ -123,7 +122,7 @@ def parse_arguments():
     parser = argparse.ArgumentParser()
     # without subcommand:
     # a positional argument to the path of the data
-    parser.add_argument("datapath", type=str, help="input a file or directory path")
+    parser.add_argument("--data", type=str, help="input a file or directory path")
     # --debug not yet implemented
     parser.add_argument("--debug", action="store_true",
                         help="keep tmp folder if specified")
@@ -136,7 +135,7 @@ def parse_arguments():
     prodigal_parser.set_defaults(func=run_prodigal_module)
 
     blast_parser = subparser.add_parser("blastp")
-    blast_parser.add_argument("input", nargs="*",
+    blast_parser.add_argument("input", nargs="+",
                               help="[input_path] [optional:database_path]")
     blast_parser.set_defaults(func=run_blast_module)
 
@@ -145,7 +144,7 @@ def parse_arguments():
     xml_parser.set_defaults(func=parse_blast_module)
 
     best_blast_parser = subparser.add_parser("best_blast")
-    best_blast_parser.add_argument("input", nargs="*",
+    best_blast_parser.add_argument("input", nargs="+",
                                    help="[input_path] [optional:criteria]")
     best_blast_parser.set_defaults(func=find_best_blast_module)
 
@@ -157,7 +156,11 @@ def parse_arguments():
     
     return args
 
-def main():
+def main(args):
+    # check if data is given
+    if args.data is None:
+        return
+
     # count total execution time
     time_start = time.time()
 
@@ -172,7 +175,7 @@ def main():
     # check available threads
     cpus = cpu_num()
     # run prodigal gene prediction
-    run_prodigal(input_path=args.file, output_path=PRODIGAL_FOLDER)
+    run_prodigal(input_path=args.data, output_path=PRODIGAL_FOLDER)
     # run blastp protein alignment
     run_blast(input_path=PRODIGAL_FOLDER, output_path=BLAST_FOLDER,
               database_path=database_path, cpus=cpus)

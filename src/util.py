@@ -1,3 +1,4 @@
+import glob
 import os
 import re
 import time
@@ -40,6 +41,11 @@ def make_dir(path):
         os.makedirs(path)
     except FileExistsError:
         pass
+
+def find_file(input_path, pattern):
+    file_list = glob.glob(os.path.join(input_path, pattern), recursive=True)
+    file_list = [file.replace("\\", "/") for file in file_list]
+    return file_list
 
 def timer(func):
     def inner_func(*args, **kwargs):
