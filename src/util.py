@@ -58,7 +58,7 @@ def check_files_in_path(input_path, pattern):
     if os.path.isdir(input_path):
         file_list = find_file(input_path, pattern)
     elif os.path.isfile(input_path):
-        file_list = input_path
+        file_list = [input_path]
     return file_list
 
 def timer(func):
