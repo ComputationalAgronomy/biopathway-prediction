@@ -9,7 +9,7 @@ from src.best_blast import find_best_blast
 from src.match_enzyme import _run_match_enzyme
 from src.parse_ncbi_xml import parse_blast
 from src.run_scripts import cpu_num, run_blast, run_prodigal
-from src.util import make_dir, find_file
+from src.util import make_dir, check_files_in_path, create_savename
 
 
 ROOT_DIR = os.path.dirname(__file__)
@@ -32,49 +32,37 @@ def check_blast_database(database_path):
     else:
         raise Exception("Blast database does not exist. Check config.toml before running.")
 
-def run_and_save(func, output_path, file_list, file_save_format, **kwargs):
-    for filename in tqdm(file_list):
-        basename_old_extension = os.path.basename(filename)
-        basename = basename_old_extension.rsplit(".", 1)[0]
-        basename_new_extension = f"{basename}.{file_save_format}"
-        output_name = os.path.join(output_path, basename_new_extension)
-        if kwargs is not None:
-            func(filename, output_name, **kwargs)        
-        else:
-            func(filename, output_name)
 
 # run individual modules
 def run_parse_blast(input_path, output_path):
-    if os.path.isdir(input_path):
-        file_list = find_file(input_path, "*.xml")
-    elif os.path.isfile(input_path):
-        file_list = input_path
+    file_list = check_files_in_path(input_path, "*.xml")
     make_dir(output_path)
     print("Parse blastp result")
-    run_and_save(func=parse_blast, output_path=output_path,
-                 file_list=file_list, file_save_format="csv")
+    for filename in tqdm(file_list):
+        savename = create_savename(output_path=output_path, filename=filename,
+                                   save_format="csv")
+        parse_blast(filename=filename, output_filename=savename)
     print("Done!")
 
 def run_find_best_blast(input_path, output_path, criteria):
-    if os.path.isdir(input_path):
-        file_list = find_file(input_path, "*.csv")
-    elif os.path.isfile(input_path):
-        file_list = input_path
+    file_list = check_files_in_path(input_path, "*.csv")
     make_dir(output_path)
     print("Select the best blastp result based on the configuration")
-    run_and_save(func=find_best_blast, output_path=output_path,
-                 file_list=file_list, file_save_format="csv", criteria=criteria)
+    for filename in tqdm(file_list):
+        savename = create_savename(output_path=output_path, filename=filename,
+                                   save_format="csv")
+        find_best_blast(filename=filename, output_filename=savename,
+                        criteria=criteria)
     print("Done!")
 
 def run_match_enzyme(input_path, output_path):
-    if os.path.isdir(input_path):
-        file_list = find_file(input_path, "*.csv")
-    elif os.path.isfile(input_path):
-        file_list = input_path
+    file_list = check_files_in_path(input_path, "*.csv")
     make_dir(output_path)
     print("Match the best blastp result to enzyme pathway")
-    run_and_save(func=_run_match_enzyme, output_path=output_path,
-                 file_list=file_list, file_save_format="txt")
+    for filename in tqdm(file_list):
+        savename = create_savename(output_path=output_path, filename=filename,
+                                   save_format="txt")
+        _run_match_enzyme(filename=filename, output_filename=savename)
     print("Done!")
 
 # handle subparser arguments before running individule modules
