@@ -34,34 +34,37 @@ def check_blast_database(database_path):
 
 
 # run individual modules
-def run_parse_blast(input_path, output_path):
-    file_list = check_files_in_path(input_path, "*.xml")
-    make_dir(output_path)
+def run_parse_blast(config):
+    config.check_io(type="xml")
+    # def check_io(): will have the following two lines
+    # file_list = check_files_in_path(input_path, "*.xml")
+    # make_dir(output_path)
     print("Parse blastp result")
-    for filename in tqdm(file_list):
-        savename = create_savename(output_path=output_path, filename=filename,
-                                   save_format="csv")
+    for filename in config.file_list:
+        savename = config.create_savename(save_format="csv")
         parse_blast(filename=filename, output_filename=savename)
     print("Done!")
 
-def run_find_best_blast(input_path, output_path, criteria):
-    file_list = check_files_in_path(input_path, "*.csv")
-    make_dir(output_path)
+def run_find_best_blast(config):
+    config.check_io(type="csv")
+    # def check_io(): will have the following two lines
+    # file_list = check_files_in_path(input_path, "*.csv")
+    # make_dir(output_path)
     print("Select the best blastp result based on the configuration")
-    for filename in tqdm(file_list):
-        savename = create_savename(output_path=output_path, filename=filename,
-                                   save_format="csv")
+    for filename in config.file_list:
+        savename = config.create_savename(save_format="csv")
         find_best_blast(filename=filename, output_filename=savename,
-                        criteria=criteria)
+                        criteria=config.criteria)
     print("Done!")
 
-def run_match_enzyme(input_path, output_path):
-    file_list = check_files_in_path(input_path, "*.csv")
-    make_dir(output_path)
+def run_match_enzyme(config):
+    config.check_io(type="xml")
+    # def check_io(): will have the following two lines
+    # file_list = check_files_in_path(input_path, "*.csv")
+    # make_dir(output_path)
     print("Match the best blastp result to enzyme pathway")
-    for filename in tqdm(file_list):
-        savename = create_savename(output_path=output_path, filename=filename,
-                                   save_format="txt")
+    for filename in config.file_list:
+        savename = config.create_savename(save_format="csv")
         _run_match_enzyme(filename=filename, output_filename=savename)
     print("Done!")
 
@@ -72,39 +75,44 @@ def run_prodigal_module(args):
 
 def run_blast_module(args):
     input_path = args.input[0]
-    try:
-        database_path = args.input[1]
-    except IndexError:
-        # load config
-        config = load_config()
-        database_path = config["database"]["path"]
+    # output_path = os.path.join(ROOT_DIR, "module_output/blast")
+    config = Configuration(args, type="blast") 
+    config.parse_config_file() # Contain the folloing codes
+    # try:
+    #     database_path = args.input[1]
+    # except IndexError:
+    #     # load config
+    #     config = load_config()
+    #     database_path = config["database"]["path"]
     check_blast_database(database_path)
-
-    output_path = os.path.join(ROOT_DIR, "module_output/blast")
     run_blast(input_path=input_path, output_path=output_path,
               database_path=database_path, cpus=cpu_num())
 
 def parse_blast_module(args):
-    input_path = args.input
-    output_path = os.path.join(ROOT_DIR, "module_output/parse_blast")
-    run_parse_blast(input_path=input_path, output_path=output_path)
+    # input_path = args.input
+    # output_path = os.path.join(ROOT_DIR, "module_output/parse_blast")
+    config = Configuration(args, type="parse_blast")
+    run_parse_blast(config)
 
 def find_best_blast_module(args):
-    input_path = args.input[0]
-    output_path = os.path.join(ROOT_DIR, "module_output/best_blast")
-    try:
-        criteria = args.input[1]
-    except IndexError:
-        # load config
-        config = load_config()
-        criteria = config["criteria"]["column"]
-    run_find_best_blast(input_path=input_path, output_path=output_path,
-                        criteria=criteria)
+    # input_path = args.input[0]
+    # output_path = os.path.join(ROOT_DIR, "module_output/best_blast")
+    config = Configuration(args, type="best_blast")
+    config.parse_config_file()
+    # def parse_config_file(): # will the following codes
+    # try:
+    #     criteria = args.input[1]
+    # except IndexError:
+    #     # load config
+    #     config = load_config()
+    #     criteria = config["criteria"]["column"]
+    run_find_best_blast(config)
 
 def match_enzyme_module(args):
-    input_path = args.input
-    output_path = os.path.join(ROOT_DIR, "module_output/match_enzyme")
-    run_match_enzyme(input_path=input_path, output_path=output_path)
+    # input_path = args.input
+    # output_path = os.path.join(ROOT_DIR, "module_output/match_enzyme")
+    config = Configuration(args, type="match_enzyme")
+    run_match_enzyme(config)
 
 def parse_arguments():
     parser = argparse.ArgumentParser()
