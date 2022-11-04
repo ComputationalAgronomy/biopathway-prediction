@@ -19,30 +19,35 @@ class Configuration():
     def __init__(self, args):
         self.args = args
         self.type = args.type
+        self.__module = False if self.type == "main" else True
+        self.filetype_dict = {"parse_blast": {"input": "xml", "output": "csv"},
+                              "best_blast": {"input": "csv", "output": "csv"},
+                              "match_enzyme": {"input": "csv", "output": "txt"}}
         self.load_default_config()
         
-    def check_io(self, type, filetype=None):
+    def check_io(self, type):
         # This means we pipeline the results from the previous step, so self.type
         # has not yet been changed.
-        if type != self.type:
+        if type != self.type and self.type != "main":
             try:
                 self.base_path
-            except NameError:
-                self.base_path = Configuration.check_output_path(self.args)
+            except AttributeError:
+                self.get_base_path()
             self.input_path = self.output_path
-            self.output_path = os.path.join(self.base_path, type)
-            self.type = type
         else:
-            # When this line is executed, we must be running a single module.
-            # So set up for everything.
             self.input_path = self.args.input
-            self.base_path = Configuration.check_output_path(self.args, module=True)
-            self.output_path = os.path.join(self.base_path, type)
+            self.get_base_path()
+        self.output_path = os.path.join(self.base_path, type)
+        self.type = type
         
         # prodigal and blast scripts will handle this part
-        if filetype is not None:
-            self.file_list = Configuration.check_files_in_path(self.input_path, filetype)
-            Configuration.make_dir(self.output_path)
+        # check input filetype
+        try:
+            self.filetype_dict[type]
+            self.file_list = self.check_files_in_path()
+            os.makedirs(self.output_path, exist_ok=True)
+        except KeyError:
+            pass
 
         # check extra param
         self.check_param()
@@ -53,54 +58,47 @@ class Configuration():
 
     def check_param(self):
         if self.type == "blast":
-            try:
-                self.database = self.args.database
-            except AttributeError:
+            self.database = self.args.database
+            if self.database is None:
                 self.database = self.default["database"]["path"]
             Configuration.check_blast_database(self.database)
             self.thread_num = Configuration.thread_num()
         elif self.type == "best_blast":
-            try:
-                self.criteria = self.args.criteria
-            except AttributeError:
+            self.criteria = self.args.criteria
+            if self.criteria is None:
                 self.criteria = self.default["criteria"]["column"]
 
-    @staticmethod
-    def create_savename(filename, filetype):
-        filename_no_extension = filename.rsplit(".", 1)[0]
-        filename_new_extension = f"{filename_no_extension}.{filetype}"
-        return filename_new_extension
-   
-    @staticmethod
-    def check_output_path(args, module=False):
+    def get_base_path(self):
         try:
-            return os.path.abspath(args.output)
-        except AttributeError:
-            if module:
-                return os.path.join(ROOT_DIR, "module_output")
+            self.base_path = os.path.abspath(self.args.output)
+        except TypeError:
+            if self.__module:
+                self.base_path = os.path.join(ROOT_DIR, "module_output")
             else:
-                return os.path.join(ROOT_DIR, "tmp")
-    
-    @staticmethod
-    def make_dir(path):
-        try:
-            os.makedirs(path)
-        except FileExistsError:
-            pass
-    
-    @staticmethod
-    def find_file(input_path, pattern):
-        file_list = glob.glob(os.path.join(input_path, pattern), recursive=True)
-        file_list = [file.replace("\\", "/") for file in file_list]
-        return file_list
+                self.base_path = os.path.join(ROOT_DIR, "tmp")
 
-    @staticmethod
-    def check_files_in_path(input_path, filetype):
+    def create_savename(self, filename):
+        filetype = self.filetype_dict[self.type]["output"]
+        basename = os.path.basename(filename)
+        basename_no_extension = basename.rsplit(".", 1)[0]
+        savename_no_extension = os.path.join(self.output_path, basename_no_extension)
+        savename_new_extension = f"{savename_no_extension}.{filetype}"
+        return savename_new_extension
+    
+    def check_files_in_path(self):
+        input_path = self.input_path
         if os.path.isdir(input_path):
+            filetype = self.filetype_dict[self.type]["input"]
             pattern = f"*.{filetype}"
             file_list = Configuration.find_file(input_path, pattern)
         elif os.path.isfile(input_path):
             file_list = [input_path]
+        return file_list
+
+    @staticmethod
+    def find_file(input_path, pattern):
+        file_list = glob.glob(os.path.join(input_path, pattern), recursive=True)
+        file_list = [file.replace("\\", "/") for file in file_list]
         return file_list
 
     @staticmethod
@@ -113,34 +111,32 @@ class Configuration():
     
     @staticmethod
     def thread_num():
-        res = subprocess.run("grep -c ^processor /proc/cpuinfo", shell=True,
-                             stdout=subprocess.PIPE)
-        return res.stdout  
+        return str(os.cpu_count())  
 
 
 # run individual modules
 def run_parse_blast(config):
-    config.check_io(type="parse_blast", filetype="xml")
+    config.check_io(type="parse_blast")
     print("Parse blastp result")
     for filename in config.file_list:
-        savename = Configuration.create_savename(filename, filetype="csv")
+        savename = config.create_savename(filename)
         parse_blast(filename=filename, output_filename=savename)
     print("Done!")
 
 def run_find_best_blast(config):
-    config.check_io(type="best_blast", filetype="csv")
+    config.check_io(type="best_blast")
     print("Select the best blastp result based on the configuration")
     for filename in config.file_list:
-        savename = Configuration.create_savename(filename, filetype="csv")
+        savename = config.create_savename(filename)
         find_best_blast(filename=filename, output_filename=savename,
                         criteria=config.criteria)
     print("Done!")
 
 def run_match_enzyme(config):
-    config.check_io(type="match_enzyme", filetype="csv")
+    config.check_io(type="match_enzyme")
     print("Match the best blastp result to enzyme pathway")
     for filename in config.file_list:
-        savename = config.create_savename(filetype="txt")
+        savename = config.create_savename(filename)
         _run_match_enzyme(filename=filename, output_filename=savename)
     print("Done!")
 
@@ -152,6 +148,7 @@ def parse_arguments():
     parser.add_argument("-i", "--input", type=str, help="input a file or directory path")
     parser.add_argument("-o", "--output", type=str, help="output path")
     parser.add_argument("-db", "--database", type=str, help="database path")
+    parser.add_argument("-c", "--criteria", type=str, help="selection criteria")
     # --debug not yet implemented
     parser.add_argument("--debug", action="store_true",
                         help="keep tmp folder if specified")
@@ -162,29 +159,29 @@ def parse_arguments():
     prodigal_parser = subparser.add_parser("prodigal")
     prodigal_parser.add_argument("input", type=str, help="input path")
     prodigal_parser.add_argument("-o", "--output", type=str, help="output path")
-    prodigal_parser.set_defaults(func=run_prodigal_module, type="prodigal")
+    prodigal_parser.set_defaults(func=run_prodigal, type="prodigal")
 
     blast_parser = subparser.add_parser("blastp")
     blast_parser.add_argument("input", type=str, help="input path")
     blast_parser.add_argument("-o", "--output", type=str, help="output path")
-    blast_parser.add_argument("-db", "--database", type=str, help="database path")                             
-    blast_parser.set_defaults(func=run_blast_module, type="blast")
+    blast_parser.add_argument("-db", "--database", type=str, help="database path")
+    blast_parser.set_defaults(func=run_blast, type="blast")
 
     xml_parser = subparser.add_parser("parse_xml")
     xml_parser.add_argument("input", type=str, help="input path")
     xml_parser.add_argument("-o", "--output", type=str, help="output path")
-    xml_parser.set_defaults(func=parse_blast_module, type="parse_blast")
+    xml_parser.set_defaults(func=run_parse_blast, type="parse_blast")
 
     best_blast_parser = subparser.add_parser("best_blast")
     best_blast_parser.add_argument("input", type=str, help="input path")
     best_blast_parser.add_argument("-o", "--output", type=str, help="output path")
     best_blast_parser.add_argument("-c", "--criteria", type=str, help="selection criteria")
-    best_blast_parser.set_defaults(func=find_best_blast_module, type="best_blast")
+    best_blast_parser.set_defaults(func=run_find_best_blast, type="best_blast")
 
     match_enzyme_parser = subparser.add_parser("match_enzyme")
     match_enzyme_parser.add_argument("input", type=str, help="input path")
     match_enzyme_parser.add_argument("-o", "--output", type=str, help="output path")
-    match_enzyme_parser.set_defaults(func=match_enzyme_module, type="match_enzyme")
+    match_enzyme_parser.set_defaults(func=run_match_enzyme, type="match_enzyme")
 
     args = parser.parse_args()
     
