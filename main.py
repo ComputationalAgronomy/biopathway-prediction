@@ -157,29 +157,39 @@ def parse_arguments():
     # with subcommand: run individual module
     subparser = parser.add_subparsers(help="module name")
     prodigal_parser = subparser.add_parser("prodigal")
-    prodigal_parser.add_argument("input", type=str, help="input path")
+    prodigal_parser.add_argument("-i", "--input", type=str,
+                                 help="input a file or directory path",
+                                 required=True)
     prodigal_parser.add_argument("-o", "--output", type=str, help="output path")
     prodigal_parser.set_defaults(func=run_prodigal, type="prodigal")
 
     blast_parser = subparser.add_parser("blastp")
-    blast_parser.add_argument("input", type=str, help="input path")
+    blast_parser.add_argument("-i", "--input", type=str,
+                              help="input a file or directory path",
+                              required=True)
     blast_parser.add_argument("-o", "--output", type=str, help="output path")
     blast_parser.add_argument("-db", "--database", type=str, help="database path")
     blast_parser.set_defaults(func=run_blast, type="blast")
 
     xml_parser = subparser.add_parser("parse_xml")
-    xml_parser.add_argument("input", type=str, help="input path")
+    xml_parser.add_argument("-i", "--input", type=str,
+                            help="input a file or directory path",
+                            required=True)
     xml_parser.add_argument("-o", "--output", type=str, help="output path")
     xml_parser.set_defaults(func=run_parse_blast, type="parse_blast")
 
     best_blast_parser = subparser.add_parser("best_blast")
-    best_blast_parser.add_argument("input", type=str, help="input path")
+    best_blast_parser.add_argument("-i", "--input", type=str,
+                                   help="input a file or directory path",
+                                   required=True)
     best_blast_parser.add_argument("-o", "--output", type=str, help="output path")
     best_blast_parser.add_argument("-c", "--criteria", type=str, help="selection criteria")
     best_blast_parser.set_defaults(func=run_find_best_blast, type="best_blast")
 
     match_enzyme_parser = subparser.add_parser("match_enzyme")
-    match_enzyme_parser.add_argument("input", type=str, help="input path")
+    match_enzyme_parser.add_argument("-i", "--input", type=str,
+                                     help="input a file or directory path",
+                                     required=True)
     match_enzyme_parser.add_argument("-o", "--output", type=str, help="output path")
     match_enzyme_parser.set_defaults(func=run_match_enzyme, type="match_enzyme")
 
