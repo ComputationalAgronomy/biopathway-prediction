@@ -142,25 +142,29 @@ def run_match_enzyme(config):
 
 
 def parse_arguments():
-    parser = argparse.ArgumentParser()
-    # without subcommand:
+    
+    parent_parser = argparse.ArgumentParser(description="Parent parser.", 
+                                            add_help=False)
+    parent_parser.add_argument("-i", "--input", type=str, 
+                               help="input a file or directory path")
+    parent_parser.add_argument("-o", "--output", type=str, help="output path")
+    # --debug not yet implemented
+    parent_parser.add_argument("--debug", action="store_true",
+                               help="keep tmp folder if specified")
+
     # a positional argument to the path of the data
-    parser.add_argument("-i", "--input", type=str, help="input a file or directory path")
-    parser.add_argument("-o", "--output", type=str, help="output path")
+    parser = argparse.ArgumentParser(parents=[parent_parser])
     parser.add_argument("-db", "--database", type=str, help="database path")
     parser.add_argument("-c", "--criteria", type=str, help="selection criteria")
-    # --debug not yet implemented
-    parser.add_argument("--debug", action="store_true",
-                        help="keep tmp folder if specified")
     parser.set_defaults(func=main, type="main")
     
     # with subcommand: run individual module
     subparser = parser.add_subparsers(help="module name")
-    prodigal_parser = subparser.add_parser("prodigal")
-    prodigal_parser.add_argument("-i", "--input", type=str,
-                                 help="input a file or directory path",
-                                 required=True)
-    prodigal_parser.add_argument("-o", "--output", type=str, help="output path")
+    prodigal_parser = subparser.add_parser("prodigal", parents=[parent_parser], conflict_handler='resolve')
+    # prodigal_parser.add_argument("-i", "--input", type=str,
+    #                              help="input a file or directory path",
+    #                              required=True)
+    # prodigal_parser.add_argument("-o", "--output", type=str, help="output path")
     prodigal_parser.set_defaults(func=run_prodigal, type="prodigal")
 
     blast_parser = subparser.add_parser("blastp")
@@ -171,11 +175,11 @@ def parse_arguments():
     blast_parser.add_argument("-db", "--database", type=str, help="database path")
     blast_parser.set_defaults(func=run_blast, type="blast")
 
-    xml_parser = subparser.add_parser("parse_xml")
-    xml_parser.add_argument("-i", "--input", type=str,
-                            help="input a file or directory path",
-                            required=True)
-    xml_parser.add_argument("-o", "--output", type=str, help="output path")
+    xml_parser = subparser.add_parser("parse_xml", parents=[parent_parser], conflict_handler='resolve')
+    # xml_parser.add_argument("-i", "--input", type=str,
+    #                         help="input a file or directory path",
+    #                         required=True)
+    # xml_parser.add_argument("-o", "--output", type=str, help="output path")
     xml_parser.set_defaults(func=run_parse_blast, type="parse_blast")
 
     best_blast_parser = subparser.add_parser("best_blast")
