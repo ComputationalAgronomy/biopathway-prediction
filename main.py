@@ -1,4 +1,5 @@
 import argparse
+import glob
 import os
 import time
 
@@ -12,8 +13,6 @@ from src.run_scripts import run_blast, run_prodigal
 
 ROOT_DIR = os.path.dirname(__file__)
 
-import glob
-import subprocess
 
 class Configuration():
     def __init__(self, args):
@@ -140,61 +139,71 @@ def run_match_enzyme(config):
         _run_match_enzyme(filename=filename, output_filename=savename)
     print("Done!")
 
-
-def parse_arguments():
-    
+def parent_arguments():
     parent_parser = argparse.ArgumentParser(description="Parent parser.", 
                                             add_help=False)
-    parent_parser.add_argument("-i", "--input", type=str, 
+    parent_parser.add_argument("-i", "--input", type=str, required=True,
                                help="input a file or directory path")
     parent_parser.add_argument("-o", "--output", type=str, help="output path")
-    # --debug not yet implemented
-    parent_parser.add_argument("--debug", action="store_true",
-                               help="keep tmp folder if specified")
+    
+    return parent_parser
 
-    # a positional argument to the path of the data
-    parser = argparse.ArgumentParser(parents=[parent_parser])
-    parser.add_argument("-db", "--database", type=str, help="database path")
-    parser.add_argument("-c", "--criteria", type=str, help="selection criteria")
+def optional_arguments(case="main"):
+    optional_parser = argparse.ArgumentParser(description="Optional parser.", 
+                                              add_help=False)
+    if case == "main":
+        optional_parser.add_argument("-i", "--input", type=str, required=False,
+                                     help="input a file or directory path")
+        optional_parser.add_argument("-db", "--database", type=str, help="database path")
+        optional_parser.add_argument("-c", "--criteria", type=str, help="selection criteria")
+        # --debug not yet implemented
+        optional_parser.add_argument("--debug", action="store_true",
+                                     help="keep tmp folder if specified")
+    elif case == "blast":
+        optional_parser.add_argument("-db", "--database", type=str, help="database path")
+    elif case == "best_blast":
+        optional_parser.add_argument("-c", "--criteria", type=str, help="selection criteria")
+    else:
+        pass
+
+    return optional_parser
+
+def parse_arguments():
+    parser = argparse.ArgumentParser(parents=[parent_arguments(),
+                                              optional_arguments()],
+                                     conflict_handler='resolve')
     parser.set_defaults(func=main, type="main")
     
     # with subcommand: run individual module
     subparser = parser.add_subparsers(help="module name")
-    prodigal_parser = subparser.add_parser("prodigal", parents=[parent_parser], conflict_handler='resolve')
-    # prodigal_parser.add_argument("-i", "--input", type=str,
-    #                              help="input a file or directory path",
-    #                              required=True)
-    # prodigal_parser.add_argument("-o", "--output", type=str, help="output path")
+    prodigal_parser = subparser.add_parser(
+        "prodigal",
+        parents=[parent_arguments(), optional_arguments(case="prodigal")],
+        conflict_handler='resolve')
     prodigal_parser.set_defaults(func=run_prodigal, type="prodigal")
 
-    blast_parser = subparser.add_parser("blastp")
-    blast_parser.add_argument("-i", "--input", type=str,
-                              help="input a file or directory path",
-                              required=True)
-    blast_parser.add_argument("-o", "--output", type=str, help="output path")
-    blast_parser.add_argument("-db", "--database", type=str, help="database path")
+    blast_parser = subparser.add_parser(
+        "blastp",
+        parents=[parent_arguments(), optional_arguments(case="blast")],
+        conflict_handler='resolve')
     blast_parser.set_defaults(func=run_blast, type="blast")
 
-    xml_parser = subparser.add_parser("parse_xml", parents=[parent_parser], conflict_handler='resolve')
-    # xml_parser.add_argument("-i", "--input", type=str,
-    #                         help="input a file or directory path",
-    #                         required=True)
-    # xml_parser.add_argument("-o", "--output", type=str, help="output path")
+    xml_parser = subparser.add_parser(
+        "parse_xml",
+        parents=[parent_arguments(), optional_arguments(case="parse_xml")],
+        conflict_handler='resolve')
     xml_parser.set_defaults(func=run_parse_blast, type="parse_blast")
 
-    best_blast_parser = subparser.add_parser("best_blast")
-    best_blast_parser.add_argument("-i", "--input", type=str,
-                                   help="input a file or directory path",
-                                   required=True)
-    best_blast_parser.add_argument("-o", "--output", type=str, help="output path")
-    best_blast_parser.add_argument("-c", "--criteria", type=str, help="selection criteria")
+    best_blast_parser = subparser.add_parser(
+        "best_blast",
+        parents=[parent_arguments(), optional_arguments(case="best_blast")],
+        conflict_handler='resolve')
     best_blast_parser.set_defaults(func=run_find_best_blast, type="best_blast")
 
-    match_enzyme_parser = subparser.add_parser("match_enzyme")
-    match_enzyme_parser.add_argument("-i", "--input", type=str,
-                                     help="input a file or directory path",
-                                     required=True)
-    match_enzyme_parser.add_argument("-o", "--output", type=str, help="output path")
+    match_enzyme_parser = subparser.add_parser(
+        "match_enzyme",
+        parents=[parent_arguments(), optional_arguments(case="match_enzyme")],
+        conflict_handler='resolve')
     match_enzyme_parser.set_defaults(func=run_match_enzyme, type="match_enzyme")
 
     args = parser.parse_args()
