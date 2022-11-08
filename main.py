@@ -49,7 +49,7 @@ def main():
     blast_folder = os.path.join(abs_dir, "tmp/blast")
     cpus = cpu_num()
     # run prodigal gene prediction
-    run_prodigal(args.file, prodigal_folder)
+    run_prodigal(args.file, prodigal_folder, cpus)
     # run blastp protein alignment
     run_blast(prodigal_folder, blast_folder, database_path, cpus)
     

@@ -2,11 +2,11 @@ import os
 import sys
 import subprocess
 
-def run_prodigal(input_path, output_path):
+def run_prodigal(input_path, output_path, cpus):
     abs_path = os.path.dirname(__file__)
     prodigal_script = os.path.join(abs_path, "run_prodigal.sh")
     prodigal_output = subprocess.run(["bash", prodigal_script,
-                                      input_path, output_path],
+                                      input_path, output_path, cpus],
                                       capture_output=False)
     if prodigal_output.returncode != 0:
         print("prodigal runtime error!")
