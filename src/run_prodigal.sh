@@ -1,10 +1,10 @@
 #!/bin/bash
 tmpfolder="$2"
-cpus=$4
+cpus=$3
 mkdir -p $tmpfolder
 function check_prodigal_input () {
     base_name=$(basename -s .fna "$1")
-    prodigal -i "$1" -o "$tmpfolder/$base_name.genes" -a "$tmpfolder/$base_name.faa"
+    prodigal -i "$1" -o "$tmpfolder/$base_name.genes" -a "$tmpfolder/$base_name.faa" 2> /dev/null
 }
 export -f check_prodigal_input
 export tmpfolder
