@@ -55,14 +55,13 @@ def reset_enzyme_and_pathway(enzyme_list, pathway_list):
     for pathway in pathway_list.values():
         pathway.reset()
 
-def run_match_enzyme(filename, output, enzyme_list=enzyme_list,
+def _run_match_enzyme(filename, output_filename, enzyme_list=enzyme_list,
                      pathway_list=pathway_list):
-    reset_enzyme_and_pathway(enzyme_list, pathway_list)
     match_enzyme_existence(filename, enzyme_list)
     traverse_enzyme_reaction(1, enzyme_list, pathway_list)
     result = []
     result.extend(print_pathway(pathway_list))
     result.extend(print_enzyme(enzyme_list))
-    with open(output, "w") as f:
+    with open(output_filename, "w") as f:
         f.writelines(result)
     

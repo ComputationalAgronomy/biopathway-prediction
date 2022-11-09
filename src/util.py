@@ -1,3 +1,4 @@
+import glob
 import os
 import re
 import time
@@ -17,7 +18,7 @@ def create_folder(abs_dir, foldername, foldernum=1):
     return foldername
 
 # [directory_name]/[filename].csv
-def create_savename(abs_dir, filename, filenum=1, new_folder=True, no_create=False):
+def create_savename_serial(abs_dir, filename, filenum=1, new_folder=True, no_create=False):
     """This function will create a proper filename for the output file"""   
     filename = os.path.basename(filename)
     filename = re.search("(.*)\.", filename).group(1)
@@ -34,12 +35,6 @@ def create_savename(abs_dir, filename, filenum=1, new_folder=True, no_create=Fal
                             f"{filename}.csv")
    
     return filename
-
-def make_dir(path):
-    try:
-        os.makedirs(path)
-    except FileExistsError:
-        pass
 
 def timer(func):
     def inner_func(*args, **kwargs):
