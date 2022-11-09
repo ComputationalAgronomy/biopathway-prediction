@@ -36,31 +36,6 @@ def create_savename_serial(abs_dir, filename, filenum=1, new_folder=True, no_cre
    
     return filename
 
-def create_savename(output_path, filename, save_format):
-    basename_old_extension = os.path.basename(filename)
-    basename = basename_old_extension.rsplit(".", 1)[0]
-    basename_new_extension = f"{basename}.{save_format}"
-    output_name = os.path.join(output_path, basename_new_extension)
-    return output_name
-
-def make_dir(path):
-    try:
-        os.makedirs(path)
-    except FileExistsError:
-        pass
-
-def find_file(input_path, pattern):
-    file_list = glob.glob(os.path.join(input_path, pattern), recursive=True)
-    file_list = [file.replace("\\", "/") for file in file_list]
-    return file_list
-
-def check_files_in_path(input_path, pattern):
-    if os.path.isdir(input_path):
-        file_list = find_file(input_path, pattern)
-    elif os.path.isfile(input_path):
-        file_list = [input_path]
-    return file_list
-
 def timer(func):
     def inner_func(*args, **kwargs):
         start = time.time()
