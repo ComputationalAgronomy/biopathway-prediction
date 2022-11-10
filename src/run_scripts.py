@@ -7,7 +7,8 @@ def run_prodigal(config):
     abs_path = os.path.dirname(__file__)
     prodigal_script = os.path.join(abs_path, "run_prodigal.sh")
     prodigal_output = subprocess.run(["bash", prodigal_script,
-                                      config.input_path, config.output_path],
+                                      config.input_path, config.output_path,
+                                      int(config.thread_num)],
                                       capture_output=False)
     if prodigal_output.returncode != 0:
         print("prodigal runtime error!")

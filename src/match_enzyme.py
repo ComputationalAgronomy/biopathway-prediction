@@ -64,4 +64,5 @@ def _run_match_enzyme(filename, output_filename, enzyme_list=enzyme_list,
     result.extend(print_enzyme(enzyme_list))
     with open(output_filename, "w") as f:
         f.writelines(result)
+    reset_enzyme_and_pathway(enzyme_list, pathway_list)
     
