@@ -55,7 +55,7 @@ class Configuration():
     def load_default_config(self):
         with open(os.path.join(ROOT_DIR, "config.toml"), "rb") as f:
             self.default = tomli.load(f)
-
+    
     def check_param(self):
         if self.type == "blast":
             self.database = self.args.database
@@ -66,6 +66,9 @@ class Configuration():
             self.criteria = self.args.criteria
             if self.criteria is None:
                 self.criteria = self.default["criteria"]["column"]
+            self.filter = self.args.filter
+            if self.filter is None:
+                self.filter = self.default["criteria"]["filter"]
 
     def get_base_path(self):
         try:
@@ -128,7 +131,7 @@ def run_find_best_blast(config):
     for filename in config.file_list:
         savename = config.create_savename(filename)
         find_best_blast(filename=filename, output_filename=savename,
-                        criteria=config.criteria)
+                        criteria=config.criteria, filter=config.filter)
     print("Done!")
 
 def run_match_enzyme(config):
@@ -163,6 +166,7 @@ def optional_arguments(case="main"):
         optional_parser.add_argument("-db", "--database", type=str, help="database path")
     elif case == "best_blast":
         optional_parser.add_argument("-c", "--criteria", type=str, help="selection criteria")
+        optional_parser.add_argument("-f", "--filter", nargs="*", type=str, help="filter options")
     else:
         pass
 

@@ -8,7 +8,7 @@ from .util import *
 # csv column title
 HEADER_ELEMENT = ["id", "start", "end", "alignment_id", "enzyme_id",
     "enzyme_code",  "product", "organism", "existence", "gene", "score",
-    "evalue", "identity_percentage", "query_coverage"]
+    "evalue", "identity", "coverage"]
 HEADER = ",".join(HEADER_ELEMENT) + "\n"
 
 

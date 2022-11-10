@@ -3,3 +3,4 @@ path = "./database/IAA_database_complete.fasta"
 
 [criteria]
 column = "score"
+filter = []
