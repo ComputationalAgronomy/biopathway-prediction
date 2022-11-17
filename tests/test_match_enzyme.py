@@ -13,10 +13,10 @@ def test_match_enzyme_existence():
     assert all(assert_list)
 
 def test_traverse_enzyme_reaction():
-    enzyme_num = [0, 1, 2, 3, 4, 0, 0, 0, 0, 0, 5, 6]
+    enzyme_num = [0, 1, 2, 3, 4, 0, 0, 0, 0, 1, 5, 6]
     for i in range(1, 13):
         enzyme_list[i].set_count(enzyme_num[i-1])
-    traverse_enzyme_reaction(1, enzyme_list, pathway_list)
-    expected = [True, False, True, True, True, False, False, False]
+    traverse_enzyme_reaction(pathway_list[1], enzyme_list, pathway_list)
+    expected = [True, False, True, True, True, True, False, False]
     assert_list = [pathway_list[i].visited == expected[i-1] for i in range(1, 9)]
 

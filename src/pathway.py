@@ -1,3 +1,5 @@
+import numpy as np
+
 class PathwayNode():
 
     def __init__(self, name, pre_enzyme, next_enzyme, default_visited):
@@ -8,18 +10,30 @@ class PathwayNode():
         self.pre_enzyme = pre_enzyme
         self.next_enzyme = next_enzyme
         self.reacted = 0
-        self.react_total = len(pre_enzyme)
+        self.indegree = len(pre_enzyme)
         # has this compound been made from an enzyme?
         # (or if it's a starting material)
-        default_visited = int(default_visited)
         self.default_visited = default_visited
         self.visited = self.default_visited
-        self.existence_prob = self.default_visited
+        self.existence_prob = int(self.default_visited)
+        self.existence_prob_list = []
 
+    def react(self, enzyme, reactant):
+        # once the product has been visited, there's no need to call the next
+        # reaction again
+        self.reacted += 1
+        if not self.visited:
+            self.visited = enzyme.exist and reactant.visited
+        self.existence_prob_list.append(enzyme.prob * reactant.existence_prob)
+        if self.reacted == self.indegree:
+            self.existence_prob = 1 - np.prod(1 - np.array(self.existence_prob_list))
+            return self
+        return None
 
     def reset(self):
         self.visited = self.default_visited
         self.existence_prob = self.default_visited
+        self.existence_prob_list = []
         self.reacted = 0
 
 
@@ -32,20 +46,6 @@ class Enzyme():
         self.exist = exist
         self.count = count
         self.prob = 0
-
-    def react(self, pathway_list):
-        # once the product has been visited, there's no need to call the next
-        # reaction again
-        reaction_node = pathway_list[self.product]
-        if not reaction_node.visited:
-            pre_reaction_node = pathway_list[self.reactant]
-            reaction_node.reacted += 1
-            reaction_node.existence_prob += \
-                self.prob * pre_reaction_node.existence_prob
-            if reaction_node.reacted == reaction_node.react_total:
-                reaction_node.visited = True
-                return self.product
-        return None
 
     def set_count(self, count):
         self.exist = True

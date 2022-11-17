@@ -5,12 +5,16 @@ from .pathway import PathwayNode, Enzyme, pathway_list, enzyme_list
 
 
 def traverse_enzyme_reaction(material, enzyme_list, pathway_list):
-    for enzyme in pathway_list[material].next_enzyme:
-        if enzyme_list[enzyme] is not None and enzyme_list[enzyme].exist:
-            next_reaction = enzyme_list[enzyme].react(pathway_list)
-            if next_reaction is not None:
-                traverse_enzyme_reaction(next_reaction, enzyme_list, pathway_list)
-
+    for enzyme in material.next_enzyme:
+        try:
+            product = pathway_list[enzyme_list[enzyme].product]
+            reactant = pathway_list[enzyme_list[enzyme].reactant]
+            next_material = product.react(enzyme_list[enzyme], reactant)
+        except AttributeError:
+            next_material = None
+        if next_material is not None:
+            traverse_enzyme_reaction(next_material, enzyme_list, pathway_list)
+    
 
 def get_pathway_result(pathway_list, model, quiet):
     message = []
@@ -22,7 +26,7 @@ def get_pathway_result(pathway_list, model, quiet):
         if model == "prob":
             existence = np.round(pathwaynode.existence_prob, 3)
         elif model == "binary":
-            existence = pathwaynode.reacted
+            existence = pathwaynode.visited
         else:
             raise NameError("Model name error")
         if not quiet:
@@ -57,7 +61,7 @@ def get_enzyme_result(enzyme_list, model, quiet):
 
 def existence_score_model(x):
     x = x[x > 40]
-    y = 0.2 * np.log(0.15 * (x - 40) + 1) + 0.6
+    y = 0.18 * np.log(0.15 * (x - 40) + 1) + 0.6
     y = np.minimum(y, 1)
     return y
 
@@ -88,7 +92,7 @@ def reset_enzyme_and_pathway(enzyme_list, pathway_list):
 def _run_match_enzyme(filename, output_filename, model, quiet,
                       enzyme_list=enzyme_list, pathway_list=pathway_list):
     match_enzyme_existence(filename, enzyme_list)
-    traverse_enzyme_reaction(1, enzyme_list, pathway_list)
+    traverse_enzyme_reaction(pathway_list[1], enzyme_list, pathway_list)
     result = []
     result.extend(get_pathway_result(pathway_list, model, quiet))
     result.extend(get_enzyme_result(enzyme_list, model, quiet))
