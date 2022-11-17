@@ -26,8 +26,8 @@ class Configuration():
         self.thread_num = Configuration.get_thread_num()
         
     def check_io(self, type):
-        # This means we pipeline the results from the previous step, so self.type
-        # has not yet been changed.
+        # If "True" means we pipeline the results from the previous step, so
+        # self.type has not yet been changed.
         if type != self.type and self.type != "main":
             try:
                 self.base_path
@@ -139,7 +139,8 @@ def run_match_enzyme(config):
     print("Match the best blastp result to enzyme pathway")
     for filename in config.file_list:
         savename = config.create_savename(filename)
-        _run_match_enzyme(filename=filename, output_filename=savename)
+        _run_match_enzyme(filename=filename, output_filename=savename,
+                          quiet=config.args.quiet)
     print("Done!")
 
 def parent_arguments():
@@ -167,6 +168,9 @@ def optional_arguments(case="main"):
     elif case == "best_blast":
         optional_parser.add_argument("-c", "--criteria", type=str, help="selection criteria")
         optional_parser.add_argument("-f", "--filter", nargs="*", type=str, help="filter options")
+    elif case == "match_enzyme":
+        optional_parser.add_argument("--quiet", action="store_true",
+                                     help="do not print result to screen")
     else:
         pass
 
