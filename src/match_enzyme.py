@@ -12,24 +12,29 @@ def traverse_enzyme_reaction(material, enzyme_list, pathway_list):
                 traverse_enzyme_reaction(next_reaction, enzyme_list, pathway_list)
 
 
-def get_pathway_result(pathway_list, quiet):
+def get_pathway_result(pathway_list, model, quiet):
     message = []
     if not quiet:
         print("Compound list:")
     message.append("Compound list:\n")
     for pathwaynode in pathway_list.values():
         compound = pathwaynode.name
-        existence_prob = np.round(pathwaynode.existence_prob, 3)
+        if model == "prob":
+            existence = np.round(pathwaynode.existence_prob, 3)
+        elif model == "binary":
+            existence = pathwaynode.reacted
+        else:
+            raise NameError("Model name error")
         if not quiet:
-            print(f"{compound}: {existence_prob}")
-        message.append(f"{compound}: {existence_prob}\n")
+            print(f"{compound}: {existence}")
+        message.append(f"{compound}: {existence}\n")
     if not quiet:
         print()
     message.append("\n")
     return message
 
 
-def get_enzyme_result(enzyme_list, quiet):
+def get_enzyme_result(enzyme_list, model, quiet):
     message = []
     if not quiet:
         print("Enzyme list:")
@@ -37,10 +42,15 @@ def get_enzyme_result(enzyme_list, quiet):
     for enzyme in enzyme_list.values():
         try:
             enzyme_name = enzyme.name
-            enzyme_prob = np.round(enzyme.prob, 3)
+            if model == "prob":
+                enzyme_existence = np.round(enzyme.prob, 3)
+            elif model == "binary":
+                enzyme_existence = enzyme.exist
+            else:
+                raise NameError("Model name error")
             if not quiet:
-                print(f"{enzyme_name}: {enzyme_prob}")
-            message.append(f"{enzyme_name}: {enzyme_prob}\n")
+                print(f"{enzyme_name}: {enzyme_existence}")
+            message.append(f"{enzyme_name}: {enzyme_existence}\n")
         except AttributeError:
             pass
     return message
@@ -55,10 +65,9 @@ def match_enzyme_existence(filename, enzyme_list):
     data = pd.read_csv(filename, usecols=["enzyme_id", "identity_percentage"])
     data = data[data["enzyme_id"] != "-"]
     data["existence_score"] = existence_score_model(data["identity_percentage"])
-    data = data.dropna()
     data = data.groupby("enzyme_id").agg(
-        existence_score=("existence_score", "count"),
-        prob=("existence_score", lambda x: 1 - np.prod(1 - x))).reset_index()
+        count=("enzyme_id", "count"),
+        prob=("existence_score", lambda x: 1 - np.nanprod(1 - x))).reset_index()
     for _, (enzyme_id, count, prob) in data.iterrows():
         try:
             enzyme_id = int(enzyme_id)
@@ -76,13 +85,13 @@ def reset_enzyme_and_pathway(enzyme_list, pathway_list):
     for pathway in pathway_list.values():
         pathway.reset()
 
-def _run_match_enzyme(filename, output_filename, quiet, enzyme_list=enzyme_list,
-                     pathway_list=pathway_list):
+def _run_match_enzyme(filename, output_filename, model, quiet,
+                      enzyme_list=enzyme_list, pathway_list=pathway_list):
     match_enzyme_existence(filename, enzyme_list)
     traverse_enzyme_reaction(1, enzyme_list, pathway_list)
     result = []
-    result.extend(get_pathway_result(pathway_list, quiet))
-    result.extend(get_enzyme_result(enzyme_list, quiet))
+    result.extend(get_pathway_result(pathway_list, model, quiet))
+    result.extend(get_enzyme_result(enzyme_list, model, quiet))
     with open(output_filename, "w") as f:
         f.writelines(result)
     reset_enzyme_and_pathway(enzyme_list, pathway_list)

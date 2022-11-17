@@ -56,7 +56,7 @@ def test_parse_ncbi():
     with open(tmpfile, "r") as f:
         results = f.read()
     expected = (
-    "id,start,end,alignment_id,enzyme_id,enzyme_code,product,organism,existence,gene,score,evalue,identity_percentage,query_coverage\n"
+    "id,start,end,alignment_id,enzyme_id,enzyme_code,product,organism,existence,gene,score,evalue,identity,coverage\n"
     "NZ_CP012401.1_70,81257,82396,Q0KDL6,5,IPA3,Alcohol dehydrogenase,Cupriavidus necator (strain ATCC 17699 / DSM 428 / KCTC 22496 / NCIMB 10442 / H16 / Stanier 337),1,adh,118.627,5.7216e-32,30.491,88.158\n"
     "NZ_CP012401.1_70,81257,82396,P14940,5,IPA3,Alcohol dehydrogenase,Cupriavidus necator,3,adh,117.857,1.05788e-31,30.491,88.158\n"
     )

@@ -69,6 +69,10 @@ class Configuration():
             self.filter = self.args.filter
             if self.filter is None:
                 self.filter = self.default["criteria"]["filter"]
+        elif self.type == "match_enzyme":
+            self.model = self.args.model
+            if self.model is None:
+                self.model = self.default["match_enzyme"]["model"]
 
     def get_base_path(self):
         try:
@@ -140,7 +144,7 @@ def run_match_enzyme(config):
     for filename in config.file_list:
         savename = config.create_savename(filename)
         _run_match_enzyme(filename=filename, output_filename=savename,
-                          quiet=config.args.quiet)
+                          model=config.model, quiet=config.args.quiet)
     print("Done!")
 
 def parent_arguments():
@@ -169,6 +173,7 @@ def optional_arguments(case="main"):
         optional_parser.add_argument("-c", "--criteria", type=str, help="selection criteria")
         optional_parser.add_argument("-f", "--filter", nargs="*", type=str, help="filter options")
     elif case == "match_enzyme":
+        optional_parser.add_argument("-m", "--model", type=str, help="model name")
         optional_parser.add_argument("--quiet", action="store_true",
                                      help="do not print result to screen")
     else:
