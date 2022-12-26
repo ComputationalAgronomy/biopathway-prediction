@@ -66,9 +66,9 @@ def existence_score_model(x):
     return y
 
 def match_enzyme_existence(filename, enzyme_list):
-    data = pd.read_csv(filename, usecols=["enzyme_id", "identity_percentage"])
+    data = pd.read_csv(filename, usecols=["enzyme_id", "identity"])
     data = data[data["enzyme_id"] != "-"]
-    data["existence_score"] = existence_score_model(data["identity_percentage"])
+    data["existence_score"] = existence_score_model(data["identity"])
     data = data.groupby("enzyme_id").agg(
         count=("enzyme_id", "count"),
         prob=("existence_score", lambda x: 1 - np.nanprod(1 - x))).reset_index()

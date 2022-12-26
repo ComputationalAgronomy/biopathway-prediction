@@ -78,7 +78,7 @@ def parse_alignment_title(alignment_title):
 def parse_blast(filename, output_filename):
     try:
         with open(filename, "r") as result, \
-            open(output_filename, "w") as output:
+             open(output_filename, "w") as output:
             blast_records = NCBIXML.parse(result)
             output.write(HEADER)
             for blast_record in blast_records:

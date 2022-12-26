@@ -15,7 +15,7 @@ class PathwayNode():
         # (or if it's a starting material)
         self.default_visited = default_visited
         self.visited = self.default_visited
-        self.existence_prob = int(self.default_visited)
+        self.existence_prob = float(self.default_visited)
         self.existence_prob_list = []
 
     def react(self, enzyme, reactant):
@@ -32,7 +32,7 @@ class PathwayNode():
 
     def reset(self):
         self.visited = self.default_visited
-        self.existence_prob = self.default_visited
+        self.existence_prob = float(self.default_visited)
         self.existence_prob_list = []
         self.reacted = 0
 
@@ -59,7 +59,7 @@ class Enzyme():
         self.count = 0
         self.prob = 0
 
-pathway_list = {1: PathwayNode("trp", [], [1, 3, 7, 9], True),
+pathway_list = {1: PathwayNode("trp", [0], [1, 3, 7, 9], True),
                 2: PathwayNode("iam_1", [1, 12], [2], False),
                 3: PathwayNode("iaa", [2, 5, 6, 11], [0], False),
                 4: PathwayNode("ipa_1", [3], [4, 6], False),
