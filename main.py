@@ -165,6 +165,8 @@ def optional_arguments(case="main"):
         optional_parser.add_argument("-db", "--database", type=str, help="database path")
         optional_parser.add_argument("-c", "--criteria", type=str, help="selection criteria")
         # --debug not yet implemented
+        optional_parser.add_argument("-f", "--filter", nargs="*", type=str, help="filter options")
+        optional_parser.add_argument("-m", "--model", type=str, help="model name")
         optional_parser.add_argument("--debug", action="store_true",
                                      help="keep tmp folder if specified")
     elif case == "blast":
