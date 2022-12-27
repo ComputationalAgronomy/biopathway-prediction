@@ -1,8 +1,8 @@
 #!/bin/bash
-cpus=$4
 filetype=".faa"
 tmpfolder="$2"
 db="$3"
+cpus=$4
 mkdir -p $tmpfolder
 echo "Start blastp alignment"
 if [ -d "$1" ]; then

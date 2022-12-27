@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
-from .pathway import PathwayNode, Enzyme, pathway_list, enzyme_list
 
+from .pathway import Enzyme, PathwayNode, enzyme_list, pathway_list
 
 
 def traverse_enzyme_reaction(material, enzyme_list, pathway_list):
@@ -14,7 +14,7 @@ def traverse_enzyme_reaction(material, enzyme_list, pathway_list):
             next_material = None
         if next_material is not None:
             traverse_enzyme_reaction(next_material, enzyme_list, pathway_list)
-    
+
 
 def get_pathway_result(pathway_list, model, quiet):
     message = []
@@ -59,11 +59,13 @@ def get_enzyme_result(enzyme_list, model, quiet):
             pass
     return message
 
+
 def existence_score_model(x):
     x = x[x > 40]
     y = 0.18 * np.log(0.15 * (x - 40) + 1) + 0.6
     y = np.minimum(y, 1)
     return y
+
 
 def match_enzyme_existence(filename, enzyme_list):
     data = pd.read_csv(filename, usecols=["enzyme_id", "identity"])
@@ -80,6 +82,7 @@ def match_enzyme_existence(filename, enzyme_list):
         except (ValueError, AttributeError):
             pass
 
+
 def reset_enzyme_and_pathway(enzyme_list, pathway_list):
     for enzyme in enzyme_list.values():
         try:
@@ -88,6 +91,7 @@ def reset_enzyme_and_pathway(enzyme_list, pathway_list):
             pass
     for pathway in pathway_list.values():
         pathway.reset()
+
 
 def _run_match_enzyme(filename, output_filename, model, quiet,
                       enzyme_list=enzyme_list, pathway_list=pathway_list):
@@ -99,5 +103,3 @@ def _run_match_enzyme(filename, output_filename, model, quiet,
     with open(output_filename, "w") as f:
         f.writelines(result)
     reset_enzyme_and_pathway(enzyme_list, pathway_list)
-
-    

@@ -1,6 +1,7 @@
 import os
-import sys
 import subprocess
+import sys
+
 
 def run_prodigal(config):
     config.check_io(type="prodigal")
@@ -9,10 +10,11 @@ def run_prodigal(config):
     prodigal_output = subprocess.run(["bash", prodigal_script,
                                       config.input_path, config.output_path,
                                       str(config.thread_num)],
-                                      capture_output=False)
+                                     capture_output=False)
     if prodigal_output.returncode != 0:
         print("prodigal runtime error!")
         sys.exit()
+
 
 def run_blast(config):
     config.check_io(type="blast")
@@ -24,5 +26,3 @@ def run_blast(config):
     if blast_output.returncode != 0:
         print("blastp runtime error!")
         sys.exit()
-
- 

@@ -1,7 +1,7 @@
-import glob
 import os
 import re
 import time
+
 
 def create_folder(abs_dir, foldername, foldernum=1):
     """This function will create a folder if the folder name specified

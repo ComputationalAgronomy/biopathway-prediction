@@ -1,5 +1,6 @@
 import numpy as np
 
+
 class PathwayNode():
 
     def __init__(self, name, pre_enzyme, next_enzyme, default_visited):
@@ -26,7 +27,8 @@ class PathwayNode():
             self.visited = enzyme.exist and reactant.visited
         self.existence_prob_list.append(enzyme.prob * reactant.existence_prob)
         if self.reacted == self.indegree:
-            self.existence_prob = 1 - np.prod(1 - np.array(self.existence_prob_list))
+            self.existence_prob = 1 - \
+                np.prod(1 - np.array(self.existence_prob_list))
             return self
         return None
 
@@ -50,7 +52,7 @@ class Enzyme():
     def set_count(self, count):
         self.exist = True
         self.count = count
-    
+
     def set_prob(self, prob):
         self.prob = prob
 
@@ -58,6 +60,7 @@ class Enzyme():
         self.exist = False
         self.count = 0
         self.prob = 0
+
 
 pathway_list = {1: PathwayNode("trp", [0], [1, 3, 7, 9], True),
                 2: PathwayNode("iam_1", [1, 12], [2], False),

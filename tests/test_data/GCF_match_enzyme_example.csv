@@ -1,4 +1,4 @@
-id,start,end,alignment_id,enzyme_id,enzyme_code,product,organism,existence,gene,score,evalue,identity_percentage,query_coverage
+id,start,end,alignment_id,enzyme_id,enzyme_code,product,organism,existence,gene,score,evalue,identity,query
 NZ_CP022253.1_1000,1082349,1084448,Q2W3X1,-,-,Glycine--tRNA ligase beta subunit,Magnetospirillum magneticum (strain AMB-1 / ATCC 700264),3,glyS,841.647,0,63.885,98.286
 NZ_CP022253.1_1001,1084663,1086369,Q2RT17,-,-,2-isopropylmalate synthase,Rhodospirillum rubrum (strain ATCC 11170 / ATH 1.1.1 / DSM 467 / LMG 4362 / NCIMB 8255 / S1),3,leuA,711.835,0,60.364,96.485
 NZ_CP022253.1_1008,1090249,1091424,Q0KDL6,5,IPA3,Alcohol dehydrogenase,Cupriavidus necator (strain ATCC 17699 / DSM 428 / KCTC 22496 / NCIMB 10442 / H16 / Stanier 337),1,adh,165.622,2.53E-49,30.203,85.714
