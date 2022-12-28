@@ -4,7 +4,7 @@
 .vscode/
 example/
 input/
-output*/
+module_output/
 database/
 src/database_building/database_output/
 temp/
