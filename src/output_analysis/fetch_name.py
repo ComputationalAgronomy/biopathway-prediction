@@ -1,5 +1,5 @@
 """
-This program will substitute the original downloaded sequence filename to
+This program will substitute the original downloaded sequence filename for
 species name. 
 """
 import glob
