@@ -7,10 +7,6 @@ import numpy as np
 
 from src.pathway import pathway_list, enzyme_list
 
-# python file path
-abs_dir = os.path.dirname(__file__)
-
-name = sys.argv[1]
 
 compound_dict = {}
 compound_name = {}
@@ -73,26 +69,28 @@ def get_name(filename):
                         name = line.split(":")[0]
                         enzyme_name[enzyme_id] = f"{enzyme_id}_{name}"
 
-if os.path.isdir(name):
-    # find gff files in the directory
-    file_list = glob.glob(os.path.join(name, "**/*.txt"), recursive=True)
-    file_list = [file.replace("\\", "/") for file in file_list]
-    get_name(file_list[0])
-    for filename in tqdm(file_list):
-        parse_result(filename)
-    with open(os.path.join(abs_dir, "network_edge.csv"), "w") as f:
-        f.writelines("Reactant,Product,Enzyme,Enzyme_score\n")
-        for key, node in pathway_list.items():
-            for enzyme_num in node.next_enzyme:
-                enzyme = enzyme_list[enzyme_num]
-                try:
-                    f.writelines(f"{compound_name[key]},{compound_name[enzyme.product]},{enzyme.name},{enzyme_dict[enzyme_num]}\n")
-                except AttributeError:
-                    pass
-    with open(os.path.join(abs_dir, "network_node.csv"), "w") as f:
-        f.writelines("Node,Existence_score\n")
-        for key in pathway_list.keys():
-            f.writelines(f"{compound_name[key]},{compound_dict[key]}\n")
-else:
-    print("Invalid directory name")
-    sys.exit()
+
+def cytoscape_format_conversion(path, output_path):
+    if os.path.isdir(path):
+        # find gff files in the directory
+        file_list = glob.glob(os.path.join(path, "**/*.txt"), recursive=True)
+        file_list = [file.replace("\\", "/") for file in file_list]
+        get_name(file_list[0])
+        for filename in tqdm(file_list):
+            parse_result(filename)
+        with open(os.path.join(output_path, "network_edge.csv"), "w") as f:
+            f.writelines("Reactant,Product,Enzyme,Enzyme_score\n")
+            for key, node in pathway_list.items():
+                for enzyme_num in node.next_enzyme:
+                    enzyme = enzyme_list[enzyme_num]
+                    try:
+                        f.writelines(f"{compound_name[key]},{compound_name[enzyme.product]},{enzyme.name},{enzyme_dict[enzyme_num]}\n")
+                    except AttributeError:
+                        pass
+        with open(os.path.join(output_path, "network_node.csv"), "w") as f:
+            f.writelines("Node,Existence_score\n")
+            for key in pathway_list.keys():
+                f.writelines(f"{compound_name[key]},{compound_dict[key]}\n")
+    else:
+        print("Invalid directory name")
+        sys.exit()
