@@ -8,10 +8,11 @@ def generate_testset(enzyme_id, identity_param, copy_number_param):
             with open(f"./test_model/copy_{copy_number}_identity_{identity}.csv", "w") as f:
                 title = f"enzyme_id,identity\n"
                 f.writelines(title)
-                for id in range(1, 13):
+                for id in range(3, 6):
                     to_write = f"{id},{identity}\n"
                     for iter in range(0, copy_number):
                         f.writelines(to_write)
+
 
 
 generate_testset(1, 80, 3)

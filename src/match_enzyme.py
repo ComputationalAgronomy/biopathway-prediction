@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-from .pathway import Enzyme, PathwayNode, enzyme_list, pathway_list
+from .pathway import enzyme_list, pathway_list
 
 
 def traverse_enzyme_reaction(material, enzyme_list, pathway_list):
@@ -61,7 +61,7 @@ def get_enzyme_result(enzyme_list, model, quiet):
 
 
 def existence_score_model(x):
-    x = x[x > 40]
+    x = x[x >= 40]
     y = 0.18 * np.log(0.15 * (x - 40) + 1) + 0.6
     y = np.minimum(y, 1)
     return y
@@ -103,3 +103,4 @@ def _run_match_enzyme(filename, output_filename, model, quiet,
     with open(output_filename, "w") as f:
         f.writelines(result)
     reset_enzyme_and_pathway(enzyme_list, pathway_list)
+
