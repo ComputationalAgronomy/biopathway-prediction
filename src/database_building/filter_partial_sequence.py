@@ -6,6 +6,13 @@ REGEX_FRAGMENT = re.compile(r"\(Fragment\)")
 
 
 def filter_partial_sequence(file):
+    """
+    Filter amino acid sequences labelled PARTIAL in collected entries
+
+    See also
+    --------
+    database_building.py for usage
+    """
     entries = split_fasta(file)
     entry_title = [entry[0] for entry in entries]
     entry_sequence = [entry[1] for entry in entries]

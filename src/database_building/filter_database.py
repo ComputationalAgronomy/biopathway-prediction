@@ -1,5 +1,12 @@
-def filter_fasta(filter, filename):
-    """This function will filter out the custom-curated protein entries in database"""
+def filter_database(filter, filename):
+    """
+    Filter the custom-curated protein entries in the original UniProt
+    database to eliminate duplication
+
+    See also
+    --------
+    database_building.py
+    """
     try:
         line = []
         with open(filter, "r") as f:
@@ -9,7 +16,7 @@ def filter_fasta(filter, filename):
                 if read_line.startswith(">"):
                     find_new_entry = False
                     entry, _ = read_line.split(" ", 1)
-                    _, entry_id, _ = entry.split("|")
+                    _, entry_id, _ = entry.split("|")[1]
                     if entry_id in filter_list:
                         find_new_entry = True
                         continue
