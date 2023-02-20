@@ -80,6 +80,9 @@ def parse_alignment_title(alignment_title):
 
 
 def parse_blast(filename, output_filename):
+    """
+    Parse the results from diamond blastp that are in xml formats
+    """
     try:
         with open(filename, "r") as result, \
                 open(output_filename, "w") as output:
