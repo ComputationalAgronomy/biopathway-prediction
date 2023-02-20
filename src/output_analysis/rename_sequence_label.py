@@ -1,6 +1,21 @@
 """
 This program will substitute the original downloaded sequence filename for
-species name. 
+the species name. A file "filename_mapping.csv" will be saved to the current
+path to tell what the filenames are changed to.
+
+Usage
+-----
+$ python rename_sequence_label.py [input_dir] [file_extension_in_input_dir] 
+  [optional: [rename_dir] [file_extension_in_rename_dir]]
+
+Examples
+--------
+1. Rename the files in a folder containing downloaded sequences
+$ python rename_sequence_label.py folder_with_sequences fna
+
+2. Use the information in the downloaded sequences to rename other files
+$ python rename_sequence_label.py folder_with_sequences fna  
+
 """
 import glob
 import os
@@ -21,6 +36,7 @@ input_type = sys.argv[2]
 try:
     rename_dir = sys.argv[3]
     rename_other_files = True
+    rename_type = sys.argv[4]
 except Exception:
     pass
 
@@ -33,7 +49,6 @@ def handle_weird_filename(str):
 
 def get_files(dir, type):
     file_list = glob.glob(os.path.join(dir, f"**/*.{type}"), recursive=True)
-    file_list = [file.replace("\\", "/") for file in file_list]
     return file_list
 
 
@@ -68,9 +83,8 @@ if os.path.isdir(input_dir):
         for input_basename, species_name in mapping_dict.items():
             f.writelines(f"{input_basename},{species_name}\n")
     
-    filetype = "txt"
     if rename_other_files:
-        for file in get_files(rename_dir, filetype):
+        for file in get_files(rename_dir, rename_type):
             file_dir = os.path.dirname(file)
             basename, ext = os.path.basename(file).rsplit(".", 1)
             basename = handle_weird_filename(basename)

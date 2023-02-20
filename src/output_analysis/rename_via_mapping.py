@@ -1,6 +1,6 @@
 """
-This program will substitute the original downloaded sequence filename by using
-filename_mapping.csv generated from rename_sequence_label. 
+This program will substitute filenames for the species name by using 
+filename_mapping.csv generated from rename_sequence_label.py
 """
 import glob
 import os
