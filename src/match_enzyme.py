@@ -67,7 +67,7 @@ def get_pathway_result(pathway_list, model, quiet):
     for pathwaynode in pathway_list.values():
         compound = pathwaynode.name
         if model == "prob":
-            existence = np.round(pathwaynode.existence_prob, 3)
+            existence = np.round(pathwaynode.existence_prob, 6)
         elif model == "binary":
             existence = pathwaynode.visited
         else:
@@ -94,7 +94,7 @@ def get_enzyme_result(enzyme_list, model, quiet):
         try:
             enzyme_name = enzyme.name
             if model == "prob":
-                enzyme_existence = np.round(enzyme.prob, 3)
+                enzyme_existence = np.round(enzyme.prob, 6)
             elif model == "binary":
                 enzyme_existence = enzyme.exist
             else:
