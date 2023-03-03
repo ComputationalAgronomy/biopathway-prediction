@@ -88,24 +88,28 @@ def parse_blast(filename, output_filename):
                 open(output_filename, "w") as output:
             blast_records = NCBIXML.parse(result)
             output.write(HEADER)
-            for blast_record in blast_records:
-                # the output from prodigal is delimited by '#'
-                query_list = [element.strip(
-                    " ") for element in blast_record.query.split("#")]
-                id, start, end, strand, _ = query_list
-                write_list = []
-                for alignment in blast_record.alignments:
-                    alignment_info = parse_alignment_title(alignment.title)
-                    for hsp in alignment.hsps:
-                        evalue = hsp.bits
-                        alignment_score = hsp.expect
-                        identity = round(hsp.identities / hsp.align_length * 100, 3)
-                        coverage = round(100 * (hsp.align_length - hsp.gaps) / blast_record.query_length, 3)
-                        to_write = f"{id},{start},{end}," \
-                            f"{alignment_info},{evalue},{alignment_score}," \
-                            f"{identity},{coverage}\n"
-                        write_list.append(to_write)
-                output.writelines(write_list)
+            try:
+                for blast_record in blast_records:
+                    # the output from prodigal is delimited by '#'
+                    query_list = [element.strip(
+                        " ") for element in blast_record.query.split("#")]
+                    id, start, end, strand, _ = query_list
+                    write_list = []
+                    for alignment in blast_record.alignments:
+                        alignment_info = parse_alignment_title(alignment.title)
+                        for hsp in alignment.hsps:
+                            evalue = hsp.bits
+                            alignment_score = hsp.expect
+                            identity = round(hsp.identities / hsp.align_length * 100, 3)
+                            coverage = round(100 * (hsp.align_length - hsp.gaps) / blast_record.query_length, 3)
+                            to_write = f"{id},{start},{end}," \
+                                f"{alignment_info},{evalue},{alignment_score}," \
+                                f"{identity},{coverage}\n"
+                            write_list.append(to_write)
+                    output.writelines(write_list)
+            except ValueError:
+                print(f"find empty XML file: {os.path.basename(filename)}")
+                pass
     except FileNotFoundError:
         print(f"Cannot find '{filename}'")
         sys.exit()
