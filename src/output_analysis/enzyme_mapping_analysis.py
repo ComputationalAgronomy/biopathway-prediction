@@ -37,8 +37,11 @@ class Result():
                     continue
                 else:
                     if count_compound:
-                        compound_id, compound_score = line.split(":")[0:2]
-                        compound_score = float(compound_score)
+                        compound_id, compound_score = line.split(": ")[0:2]
+                        try:
+                            compound_score = float(compound_score)
+                        except ValueError:
+                            compound_score = float(compound_score == "True")
                         self.compound_dict[compound_id] = compound_score
                         try:
                             total_compound_dict[compound_id].append(
@@ -46,8 +49,11 @@ class Result():
                         except KeyError:
                             total_compound_dict[compound_id] = [compound_score]
                     elif count_enzyme:
-                        enzyme_id, enzyme_score = line.split(":")[0:2]
-                        enzyme_score = float(enzyme_score)
+                        enzyme_id, enzyme_score = line.split(": ")[0:2]
+                        try:
+                            enzyme_score = float(enzyme_score)
+                        except ValueError:
+                            enzyme_score = float(enzyme_score == "True")
                         self.enzyme_dict[enzyme_id] = enzyme_score
                         try:
                             total_enzyme_dict[enzyme_id].append(enzyme_score)
