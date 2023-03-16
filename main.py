@@ -58,7 +58,7 @@ class Configuration():
 
     def check_param(self):
         if self.type == "blast":
-            self.database = self.args.database
+            self.database = os.path.normpath(self.args.database)
             if self.database is None:
                 database_path = self.default["database"]["path"]
                 self.database = os.path.normpath(database_path)
