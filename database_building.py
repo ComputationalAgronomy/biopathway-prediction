@@ -20,7 +20,7 @@ def parent_arguments():
 
 
 def run_add_id(args):
-    add_id_folder = os.path.join(args.output, "add_id")
+    add_id_folder = os.path.join(os.path.normpath(args.output), "add_id")
     os.makedirs(add_id_folder, exist_ok=True)
     input_file = args.input
     basename = os.path.basename(input_file)
@@ -31,7 +31,7 @@ def run_add_id(args):
 
 
 def run_get_entry(args):
-    get_entry_folder = os.path.join(args.output, "get_entry")
+    get_entry_folder = os.path.join(os.path.normpath(args.output), "get_entry")
     os.makedirs(get_entry_folder, exist_ok=True)
     input_file = args.input
     basename = os.path.basename(input_file)
@@ -41,7 +41,8 @@ def run_get_entry(args):
 
 
 def run_filter_database(args):
-    filter_database_folder = os.path.join(args.output, "filter_database")
+    filter_database_folder = os.path.join(os.path.normpath(args.output),
+                                          "filter_database")
     os.makedirs(filter_database_folder, exist_ok=True)
     database = args.input
     entry_list = args.entry_list
@@ -52,7 +53,8 @@ def run_filter_database(args):
 
 
 def run_filter_partial(args):
-    filter_partial_folder = os.path.join(args.output, "filter_partial")
+    filter_partial_folder = os.path.join(os.path.normpath(args.output),
+                                         "filter_partial")
     os.makedirs(filter_partial_folder, exist_ok=True)
     database = args.input
     basename = os.path.basename(database)

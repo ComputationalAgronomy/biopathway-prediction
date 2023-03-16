@@ -18,7 +18,7 @@ def parent_arguments():
 
 
 def run_func(args):
-    output_folder = os.path.join(args.output, args.type)
+    output_folder = os.path.join(os.path.normpath(args.output), args.type)
     os.makedirs(output_folder, exist_ok=True)
     if args.type == "cytoscape":
         cytoscape_format_conversion(args.input, output_folder)
