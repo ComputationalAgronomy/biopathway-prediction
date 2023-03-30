@@ -108,8 +108,7 @@ def parse_blast(filename, output_filename):
                             write_list.append(to_write)
                     output.writelines(write_list)
             except ValueError:
-                print(f"find empty XML file: {os.path.basename(filename)}")
-                pass
+                print(f"Find empty XML file: {os.path.basename(filename)}")
     except FileNotFoundError:
         print(f"Cannot find '{filename}'")
         sys.exit()

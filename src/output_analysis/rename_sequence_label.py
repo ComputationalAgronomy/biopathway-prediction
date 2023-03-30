@@ -14,7 +14,8 @@ Examples
 $ python rename_sequence_label.py folder_with_sequences fna
 
 2. Use the information in the downloaded sequences to rename other files
-$ python rename_sequence_label.py folder_with_sequences fna  
+$ python rename_sequence_label.py folder_with_sequences fna \
+  folder_with_files_to_be_renamed txt  
 
 """
 import glob
@@ -38,7 +39,7 @@ try:
     rename_other_files = True
     rename_type = sys.argv[4]
 except Exception:
-    pass
+    rename_other_files = False
 
 mapping_dict = {}
 
@@ -77,7 +78,7 @@ def process_label_prodigal(filename):
 if os.path.isdir(input_dir):
     file_list = get_files(input_dir, input_type)
     for file in file_list:
-        input_basename, species_name = process_label_prodigal(file)
+        input_basename, species_name = process_label_fna(file)
         mapping_dict[input_basename] = species_name
     with open("filename_mapping.csv", "w") as f:
         for input_basename, species_name in mapping_dict.items():

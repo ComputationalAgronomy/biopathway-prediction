@@ -58,10 +58,10 @@ class Configuration():
 
     def check_param(self):
         if self.type == "blast":
-            self.database = os.path.normpath(self.args.database)
+            self.database = self.args.database
             if self.database is None:
                 database_path = self.default["database"]["path"]
-                self.database = os.path.normpath(database_path)
+            self.database = os.path.normpath(database_path)
             Configuration.check_blast_database(self.database)
         elif self.type == "best_blast":
             self.criteria = self.args.criteria
