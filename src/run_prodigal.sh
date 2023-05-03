@@ -9,7 +9,6 @@ function check_prodigal_input () {
 export -f check_prodigal_input
 export tmpfolder
 
-echo "Start prodigal gene prediction"
 if [ -d "$1" ]; then
     filename=$(find "$1" -name "*.fna")
     filecount=$(echo "$filename" | wc -w)
@@ -25,9 +24,8 @@ elif [ -f "$1" ]; then
     base_name=$(basename -s .fna "$1")
     prodigal -i "$1" -o "$tmpfolder/$base_name.genes" -a "$tmpfolder/$base_name.faa" 2> /dev/null
 else
-    echo "Invalid input"
+    exit 3
 fi
-echo "Finish prodigal gene prediction"
 
 unset check_prodigal_input
 unset tmpfolder

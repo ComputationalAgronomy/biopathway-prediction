@@ -4,7 +4,6 @@ tmpfolder="$2"
 db="$3"
 cpus=$4
 mkdir -p $tmpfolder
-echo "Start blastp alignment"
 if [ -d "$1" ]; then
     filename=$(find "$1" -name "*$filetype")
     filecount=$(echo "$filename" | wc -w)
@@ -22,6 +21,5 @@ elif [ -f "$1" ]; then
     diamond blastp -d ${db%.fasta} -q $1 --outfmt 5 --xml-blord-format -o $tmpfolder/$base_name.xml 2> /dev/null
     # cat "$1" | parallel --gnu --plain -j $cpus --block-size 10K --recstart '>' --pipe blastp -query - -db "$db" -num_threads 1 -evalue 1e-10 -num_alignments 3 -outfmt 5 >> "$tmpfolder/$base_name.xml" 2> /dev/null
 else
-    echo "Invalid input"
+    exit 3
 fi
-echo "Finish blastp alignment"

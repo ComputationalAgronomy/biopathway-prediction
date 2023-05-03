@@ -1,7 +1,9 @@
 import argparse
 import glob
+import logging
 import os
 import time
+from datetime import datetime
 
 import tomli
 from tqdm import tqdm
@@ -23,6 +25,7 @@ class Configuration():
                               "best_blast": {"input": "csv", "output": "csv"},
                               "match_enzyme": {"input": "csv", "output": "txt"}}
         self.load_default_config()
+        self.config_logging()
         self.thread_num = Configuration.get_thread_num()
 
     def check_io(self, type):
@@ -35,7 +38,7 @@ class Configuration():
                 self.get_base_path()
             self.input_path = self.output_path
         else:
-            self.input_path = self.args.input
+            self.input_path = os.path.normpath(self.args.input)
             self.get_base_path()
         self.output_path = os.path.join(self.base_path, type)
         self.type = type
@@ -62,7 +65,7 @@ class Configuration():
             if self.database is None:
                 database_path = self.default["database"]["path"]
             self.database = os.path.normpath(database_path)
-            Configuration.check_blast_database(self.database)
+            self.check_blast_database(self.database)
         elif self.type == "best_blast":
             self.criteria = self.args.criteria
             if self.criteria is None:
@@ -77,7 +80,7 @@ class Configuration():
 
     def get_base_path(self):
         try:
-            self.base_path = os.path.abspath(self.args.output)
+            self.base_path = os.path.normpath(os.path.abspath(self.args.output))
         except TypeError:
             if self.__module:
                 self.base_path = os.path.join(FILE_DIR, "module_output")
@@ -102,16 +105,37 @@ class Configuration():
             file_list = [input_path]
         return file_list
 
+    def config_logging(self):
+        now = datetime.now().strftime("%y%m%d%H%M%S")
+        logger = logging.getLogger("pipeline_log")
+        logger.setLevel(logging.INFO)
+
+        sh = logging.StreamHandler()
+        formatter = logging.Formatter("%(asctime)s\t[%(levelname)s]\t%(message)s",
+                                    "%Y-%m-%d %H:%M:%S")
+        sh.setFormatter(formatter)
+        logger.addHandler(sh)
+
+        try:
+            logging_path = os.path.join(self.args.output, f"log_{now}.txt")
+            os.makedirs(self.args.output, exist_ok=True)
+        except TypeError:
+            logging_path = os.path.join(FILE_DIR)
+
+        fh = logging.FileHandler(logging_path)
+        fh.setFormatter(formatter)
+        logger.addHandler(fh)
+        self.logger = logger
+
     @staticmethod
     def find_file(input_path, pattern):
         file_list = glob.glob(os.path.join(input_path, pattern), recursive=True)
         return file_list
 
-    @staticmethod
-    def check_blast_database(database_path):
-        print("Check blast database existence")
+    def check_blast_database(self, database_path):
+        self.logger.info("Check blast database existence")
         if os.path.isfile(database_path):
-            print(f"Database: {os.path.basename(database_path)}")
+            self.logger.info(f"Database: {os.path.basename(database_path)}")
         else:
             raise Exception("Blast database does not exist. Check config.toml before running.")
 
@@ -121,33 +145,33 @@ class Configuration():
 
 
 # run individual modules
-def run_parse_blast(config):
+def run_parse_blast(config: Configuration):
     config.check_io(type="parse_blast")
-    print("Parse blastp result")
+    config.logger.info("Parse blastp result")
     for filename in config.file_list:
         savename = config.create_savename(filename)
         parse_blast(filename=filename, output_filename=savename)
-    print("Done!")
+    config.logger.info("Done!")
 
 
-def run_find_best_blast(config):
+def run_find_best_blast(config: Configuration):
     config.check_io(type="best_blast")
-    print("Select the best blastp result based on the configuration")
+    config.logger.info("Select the best blastp result based on the configuration")
     for filename in config.file_list:
         savename = config.create_savename(filename)
         find_best_blast(filename=filename, output_filename=savename,
                         criteria=config.criteria, filter=config.filter)
-    print("Done!")
+    config.logger.info("Done!")
 
 
-def run_match_enzyme(config):
-    config.check_io(type="match_enzyme")
-    print("Match the best blastp result to enzyme pathway")
+def run_match_enzyme(config: Configuration):
+    config.check_io("match_enzyme")
+    config.logger.info("Match the best blastp result to the pathway")
     for filename in config.file_list:
         savename = config.create_savename(filename)
         start_match_enzyme(filename=filename, output_filename=savename,
-                           model=config.model, quiet=config.args.quiet)
-    print("Done!")
+                        model=config.model, quiet=config.args.quiet)
+    config.logger.info("Done!")
 
 
 def parent_arguments():
@@ -188,6 +212,8 @@ def optional_arguments(case="main"):
         optional_parser.add_argument(
             "-f", "--filter", nargs="*", type=str, help="filter options")
     elif case == "match_enzyme":
+        optional_parser.add_argument("param_start", type=int)
+        optional_parser.add_argument("param_end", type=int)
         optional_parser.add_argument(
             "-m", "--model", type=str, help="model name")
         optional_parser.add_argument("--quiet", action="store_true",
@@ -242,7 +268,7 @@ def parse_arguments():
     return args
 
 
-def main(config):
+def main(config: Configuration):
     # count total execution time
     time_start = time.time()
 
@@ -265,10 +291,14 @@ def main(config):
     run_match_enzyme(config)
 
     time_end = time.time()
-    print(f"Elapsed time: {round(time_end - time_start, 2)}sec")
+    config.logger.info(f"Elapsed time: {round(time_end - time_start, 2)}sec")
+
+
 
 
 if __name__ == "__main__":
     args = parse_arguments()
     config = Configuration(args)
     args.func(config)
+
+
