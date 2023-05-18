@@ -4,8 +4,23 @@ import pandas as pd
 from .existence_score_model import existence_score_model
 from .pathway import enzyme_list, pathway_list
 
+def start_match_enzyme(filename, output_filename, model, quiet,
+                      enzyme_list=enzyme_list, pathway_list=pathway_list):
+    """
+    Perform pathway mapping from the predicted enzymes and output scores
+    evaluated from the model
+    """
+    match_enzyme_existence(filename, enzyme_list)
+    traverse_enzyme_reaction(pathway_list[1], enzyme_list, pathway_list)
+    result = []
+    result.extend(get_pathway_result(pathway_list, model, quiet))
+    result.extend(get_enzyme_result(enzyme_list, model, quiet))
+    with open(output_filename, "w") as f:
+        f.writelines(result)
+    reset_enzyme_and_pathway(enzyme_list, pathway_list)
 
-def match_enzyme_existence(filename, enzyme_list, param):
+
+def match_enzyme_existence(filename, enzyme_list):
     """
     Calculate scores (0 - 1) from the given model and count the number of
     enzymes that have the same function
@@ -26,7 +41,7 @@ def match_enzyme_existence(filename, enzyme_list, param):
     """
     data = pd.read_csv(filename, usecols=["enzyme_id", "identity"])
     data = data[data["enzyme_id"] != "-"]
-    data["existence_score"] = existence_score_model(data["identity"], param)
+    data["existence_score"] = existence_score_model(data["identity"])
     data = data.groupby("enzyme_id").agg(
         count=("enzyme_id", "count"),
         prob=("existence_score", lambda x: 1 - np.nanprod(1 - x))).reset_index()
@@ -49,7 +64,7 @@ def traverse_enzyme_reaction(material, enzyme_list, pathway_list):
             product = pathway_list[enzyme_list[enzyme].product]
             reactant = pathway_list[enzyme_list[enzyme].reactant]
             next_material = product.react(enzyme_list[enzyme], reactant)
-        except AttributeError:
+        except (KeyError, AttributeError):
             next_material = None
         if next_material is not None:
             traverse_enzyme_reaction(next_material, enzyme_list, pathway_list)
@@ -121,18 +136,5 @@ def reset_enzyme_and_pathway(enzyme_list, pathway_list):
         pathway.reset()
 
 
-def start_match_enzyme(filename, output_filename, model, quiet,
-                      enzyme_list=enzyme_list, pathway_list=pathway_list, param=10):
-    """
-    Perform pathway mapping from the predicted enzymes and output scores
-    evaluated from the model
-    """
-    match_enzyme_existence(filename, enzyme_list, param)
-    traverse_enzyme_reaction(pathway_list[1], enzyme_list, pathway_list)
-    result = []
-    result.extend(get_pathway_result(pathway_list, model, quiet))
-    result.extend(get_enzyme_result(enzyme_list, model, quiet))
-    with open(output_filename, "w") as f:
-        f.writelines(result)
-    reset_enzyme_and_pathway(enzyme_list, pathway_list)
+
 

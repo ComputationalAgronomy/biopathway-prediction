@@ -1,4 +1,5 @@
 import os
+import tempfile
 
 import pytest
 
@@ -53,21 +54,23 @@ def test_parse_alignment_title():
 
 
 def test_parse_ncbi():
-    filename = "tests/test_data/GCF_example.xml"
-    tmpfile = "tmp_parse_ncbi.csv"
-    parse_blast(filename, tmpfile)
-    with open(tmpfile, "r") as f:
-        results = f.read()
+    testfilepath = "tests/test_data/GCF_example.xml"
+    with tempfile.TemporaryDirectory() as tmpdirname:
+        tmpfilename = "tmp_parse_ncbi.csv"
+        tmpfilepath = os.path.join(tmpdirname, tmpfilename)
+        parse_blast(testfilepath, tmpfilepath)
+        with open(tmpfilepath, "r") as f:
+            results = f.read()
     expected = (
         "id,start,end,alignment_id,enzyme_id,enzyme_code,product,organism,existence,gene,score,evalue,identity,coverage\n"
         "NZ_CP012401.1_70,81257,82396,Q0KDL6,5,IPA3,Alcohol dehydrogenase,Cupriavidus necator (strain ATCC 17699 / DSM 428 / KCTC 22496 / NCIMB 10442 / H16 / Stanier 337),1,adh,118.627,5.7216e-32,30.491,88.158\n"
         "NZ_CP012401.1_70,81257,82396,P14940,5,IPA3,Alcohol dehydrogenase,Cupriavidus necator,3,adh,117.857,1.05788e-31,30.491,88.158\n"
     )
-    os.remove(tmpfile)
+    # os.remove(tmpfile)
     assert results == expected
 
-    filename = "tests/test_data/no_this_file.xml"
+    testfilepath = "tests/test_data/no_this_file.xml"
     tmpfile = "tmp_parse_ncbi.csv"
     with pytest.raises(SystemExit) as excinfo:
-        parse_blast(filename, tmpfile)
+        parse_blast(testfilepath, tmpfile)
     assert True

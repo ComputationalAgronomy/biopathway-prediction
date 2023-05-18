@@ -11,13 +11,16 @@ class PathwayNode():
         self.pre_enzyme = pre_enzyme
         self.next_enzyme = next_enzyme
         self.reacted = 0
-        self.indegree = len(pre_enzyme)
         # has this compound been made from an enzyme?
         # (or if it's a starting material)
         self.default_visited = default_visited
         self.visited = self.default_visited
         self.existence_prob = float(self.default_visited)
         self.existence_prob_list = []
+        try:
+            self.indegree = len(pre_enzyme)
+        except TypeError:
+            self.indegree = 0
 
     def react(self, enzyme, reactant):
         # once the product has been visited, there's no need to call the next
@@ -62,9 +65,9 @@ class Enzyme():
         self.prob = 0
 
 
-pathway_list = {1: PathwayNode("trp", [0], [1, 3, 7, 9], True),
+pathway_list = {1: PathwayNode("trp", [None], [1, 3, 7, 9], True),
                 2: PathwayNode("iam_1", [1, 12], [2], False),
-                3: PathwayNode("iaa", [2, 5, 6, 11], [0], False),
+                3: PathwayNode("iaa", [2, 5, 6, 11], [None], False),
                 4: PathwayNode("ipa_1", [3], [4, 6], False),
                 5: PathwayNode("ipa_2", [4, 8], [5], False),
                 6: PathwayNode("tam_1", [7], [8], False),
