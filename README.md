@@ -1,10 +1,10 @@
-# Biofertilizer Prediction
+# Biopathway Prediction
 
 ## Aim
-To identify potential bacteria strains that may facilitate plant growth.
+To identify potential bacteria strains that may produce IAA and thus facilitate plant growth.
 
 ## Description
-The potential and application of microbial products on crops have long been investigated in order to reduce the usage of synthetic fertilizers. Several mechanisms in promoting plant growth have been proposed and confirmed through field trials, including N-fixation, phosphage solubilization, phytohormone production and so on. Therefore, in this project we focus on the enzymes involved in these biological pathways. Based on the assumption that the enzymes in a certain biological pathway must exist for a microorganism to successfully catalyze the compounds available from the environment to accessible products for plants, this package provides the pipeline from microbial genome annotation to biological pathway mapping. This allows us to conduct a high-throughput screening from available genome datasets and constructs a model to evaluate the potential of individual microbial genomes. 
+The potential and application of microbial products on crops have long been investigated in order to reduce the usage of synthetic fertilizers. Several mechanisms in promoting plant growth have been proposed and confirmed through field trials, including N-fixation, phosphage solubilization, phytohormone production and so on. Therefore, in this project we focus on the enzymes involved in these biological pathways, using auxin biosynthesis pathway as an example. Based on the assumption that the enzymes in a certain biological pathway must exist for a microorganism to successfully catalyze the compounds available from the environment to accessible products for plants, this package provides the pipeline from microbial genome annotation to biological pathway mapping. This allows us to conduct a high-throughput screening from available genome datasets and constructs a model to evaluate the potential of individual microbial genomes. 
 
 The current version is able to process genome datasets in NCBI format (i.e. `*.fna` format) and estimate the pathway completeness automatically. The current custom-built pathway includes part of the bacteria IAA production pathway.
 
@@ -13,10 +13,11 @@ The current version is able to process genome datasets in NCBI format (i.e. `*.f
 ### Annotation and mapping from downloaded NCBI genome datasets
 
 ```bash
-python main.py INPUT_PATH
+python main.py -i [INPUT_PATH] -o [OUTPUT_PATH]
 ```
 #### Options
-`INPUT_PATH`: **a single .fna file** or **a folder that contains multiple .fna files**. 
+`INPUT_PATH`: **a single .fna file** or **a folder that contains multiple .fna files**.
+`OUTPUT_PATH`: where the results are stored. 
 #### Output
 - **tmp** folder with files from each intermediate step of this program.
 - **result** folder with the result from enzyme mapping.   
@@ -24,12 +25,13 @@ python main.py INPUT_PATH
 
 ### Run individual modules
 ```bash
-python module.py --MODULE_NAME ARGS_REQUIRED
+python main.py MODULE_NAME ARGS_REQUIRED
 ```
 #### Options
 MODULE_NAME  
-`--run_prodigal`, `--run_blast`, `--parse_ncbi_xml`, `--best_blast`, `--match_enzyme`
-Each module handles the output from the previous one. Use `python module.py -h` to see the arguments required. The `INPUT_PATH` can be a file or directory.
+`prodigal`, `blastp`, `parse_xml`, `best_blast`, `match_enzyme`  
+
+Each module handles the output from the previous one. Use `python main.py -h` to see the arguments required.
 
 #### Output
 - **module_output** folder with a MODULE_NAME subfolder that contains the result. 
@@ -38,11 +40,11 @@ Each module handles the output from the previous one. Use `python module.py -h` 
 *Note: this section entails modification of `pathway.py`, otherwise the enzyme mapping will be incorrect.* 
 #### Command
 ```bash
-python database_building.py --MODULE_NAME ARGS_REQUIRED
+python database_building.py MODULE_NAME ARGS_REQUIRED
 ```
 #### Options
 MODULE_NAME  
-`--add_id`, `--get_entry`, `--filter_database`  
+`add_id`, `get_entry`, `filter_database`  
 Use `python database_building.py -h` to see the arguments required.  
 - Building a custom UniProt database:  
 A tag with the format `{enzyme_id}_{enzyme_code}` (e.g. 1_IAM, 2_IPA) is added to the given UniProt database entries.  
@@ -56,9 +58,9 @@ UniProt IDs are then extracted from the custom database entries and used as filt
 - Example input
 ```bash
 # a single file
-python main.py example_genome.fna
+python main.py -i example_genome.fna -o [output_path]
 # multiple files in a folder
-python main.py example_dataset/
+python main.py -i example_dataset/ -o [output_path]
 ```
 - Example output
 ```bash
@@ -77,17 +79,25 @@ trp_ipa_1: 1
 
 
 ## Installation
+```
+python setup.py install
+```
 *Note:*  
 *To use this package, installation of **prodigal**, **blast** and some of the python modules is required (See the software requirement section). Also, this package has only been tested locally. Dependency issues may occur if only this repository is copied to a brand new environment.*
+
+### Testing
+```
+pytest
+# With coverage
+pytest --cov=src
+```
+
 
 ### Set up blast database path
 After the database has been made through `makeblastdb` command in `blast`, modify the `path` value in `config.toml` to tell the program which database is used for blastp alignment. (An absolute path is recommended)
 
+
+
 ### Software requirement
 prodigal: <https://github.com/hyattpd/Prodigal>  
 blast: <https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/>  
-python module: `requirements.txt` will be added after a stable version is built.
-
-## Roadmap
-### Next Version
-Complete the IAA pathway and maybe others.

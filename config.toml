@@ -1,5 +1,9 @@
 [database]
-path = "./database/IAA_database_v1.fasta"
+path = "../blast_database/IAA_database_complete.dmnd"
 
 [criteria]
 column = "score"
+filter = ["coverage=50"]
+
+[match_enzyme]
+model = "prob"
