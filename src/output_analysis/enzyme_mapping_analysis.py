@@ -6,12 +6,12 @@ import sys
 import pandas as pd
 from tqdm import tqdm
 
-result_list = []
 total_compound_dict = {}
 total_enzyme_dict = {}
 
-
 class Result():
+    total_compound_dict = {}
+    total_enzyme_dict = {}
 
     def __init__(self, filename):
         self.get_name(filename)
@@ -102,6 +102,9 @@ def write_prediction(result_list, output_path):
 
 
 def enzyme_mapping_analysis(path, output_path):
+    result_list = []
+    Result.total_compound_dict = {}
+    Result.total_enzyme_dict = {}
     if os.path.isdir(path):
         file_list = glob.glob(os.path.join(path, "**/*.txt"), recursive=True)
         for filename in tqdm(file_list):

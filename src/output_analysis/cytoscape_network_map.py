@@ -31,14 +31,17 @@ def parse_result(filename):
             else:
                 if count_compound:
                     compound_id += 1
-                    exist = eval(line.split(":")[1])
+                    exist = eval(line.split(": ")[1])
                     try:
                         compound_dict[compound_id] += exist
                     except KeyError:
                         compound_dict[compound_id] = exist
                 elif count_enzyme:
                     enzyme_id += 1
-                    num = float(line.split(":")[1])
+                    try:
+                        num = float(line.split(": ")[1])
+                    except ValueError:
+                        num = float(line.split(": ")[1] == "True")
                     try:
                         enzyme_dict[enzyme_id] += num
                     except KeyError:
