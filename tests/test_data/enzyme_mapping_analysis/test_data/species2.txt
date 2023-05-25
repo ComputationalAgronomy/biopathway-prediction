@@ -1,0 +1,23 @@
+Compound list:
+trp: 1.0
+iam_1: 0.0
+iaa: 0.137588
+ipa_1: 0.739414
+ipa_2: 0.0
+tam_1: 0.265047
+iaox: 0.0
+ian_1: 0.0
+
+Enzyme list:
+trp_iam_1: 0
+iam_1_iaa: 0.702288
+trp_ipa_1: 0.739414
+ipa_1_2: 0
+ipa_2_iaa: 0.999996
+ipa_1_iaa: 0.186078
+trp_tam_1: 0.265047
+tam_1_ipa_2: 0
+trp_iaox: 0
+iaox_ian_1: 0
+ian_1_iaa: 0.399824
+ian_1_iam_1: 0
