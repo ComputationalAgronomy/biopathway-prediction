@@ -37,28 +37,28 @@ class Result():
                     continue
                 else:
                     if count_compound:
-                        compound_id, compound_score = line.split(": ")[0:2]
-                        try:
-                            compound_score = float(compound_score)
-                        except ValueError:
-                            compound_score = float(compound_score == "True")
-                        self.compound_dict[compound_id] = compound_score
-                        try:
-                            total_compound_dict[compound_id].append(
-                                compound_score)
-                        except KeyError:
-                            total_compound_dict[compound_id] = [compound_score]
+                        self.extract_values(line, "compound")
                     elif count_enzyme:
-                        enzyme_id, enzyme_score = line.split(": ")[0:2]
-                        try:
-                            enzyme_score = float(enzyme_score)
-                        except ValueError:
-                            enzyme_score = float(enzyme_score == "True")
-                        self.enzyme_dict[enzyme_id] = enzyme_score
-                        try:
-                            total_enzyme_dict[enzyme_id].append(enzyme_score)
-                        except KeyError:
-                            total_enzyme_dict[enzyme_id] = [enzyme_score]
+                        self.extract_values(line, "enzyme")
+
+    def extract_values(self, line, type):
+        id_, score = line.split(": ")[0:2]
+        try:
+            score = float(score)
+        except ValueError:
+            score = float(score == "True")
+        if type == "compound":
+            try:
+                self.compound_dict[id_] = score
+                total_compound_dict[id_].append(score)
+            except KeyError:
+                total_compound_dict[id_] = [score]
+        elif type == "enzyme":
+            try:
+                self.enzyme_dict[id_] = score
+                total_enzyme_dict[id_].append(score)
+            except KeyError:
+                total_enzyme_dict[id_] = [score]
 
 
 def write_summary(data_dict, type, output_path):
@@ -115,8 +115,7 @@ def enzyme_mapping_analysis(path, output_path):
             key=lambda obj: obj.compound_dict["iaa"], reverse=True)
         write_prediction(result_list, output_path)
     else:
-        print("Invalid directory name")
-        sys.exit()
+        raise Exception(f"Invalid directory name: {path}")
 
 
 if __name__ == "__main__":
