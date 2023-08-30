@@ -1,239 +1,109 @@
 import argparse
-import glob
-import logging
-import os
+import subprocess
+import sys
 import time
-from datetime import datetime
+from pathlib import Path
+from typing import Literal
 
-import tomli
 from tqdm import tqdm
 
 from biopathpred.modules.best_blast import find_best_blast
 from biopathpred.modules.match_enzyme import start_match_enzyme
-from biopathpred.modules.parse_ncbi_xml import parse_blast
-from biopathpred.modules.run_scripts import run_blast, run_prodigal
-from typing import Literal
-
-ROOT_DIR = os.path.dirname(__file__)
-
-class Configuration():
-    """Configure input and output path, and check parameters.
-
-    Attributes:
-        args: The given argparse `Namespace` object for storing command-line arguments.
-        type: A single module or whole pipeline to be run.
-    """
-    def __init__(self, args):
-        """Initialize the instance based on argparse inputs.
-
-        Args:
-            args: Parsed arguments of argparse.
-        """
-        self.args = args
-        self.type = args.type
-        self._is_module = False if self.type == "main" else True
-        self._file_ext_dict = {"parse_blast": {"input": "xml", "output": "csv"},
-                               "best_blast": {"input": "csv", "output": "csv"},
-                               "match_enzyme": {"input": "csv", "output": "txt"}}
-        self._load_default_config()
-        self._config_logging()
-
-    def check_io(self, type: Literal["parse_blast", "best_blast", "match_enzyme"]):
-        """Determine the input and output path for each module.
-        
-        Args:
-            type: 
-        """
-        # If "True" means we pipeline the results from the previous step, so
-        # self.type has not yet been changed.
-        if type != self.type and self.type != "main":
-            try:
-                self.base_path
-            except AttributeError:
-                self.get_base_path()
-            self.input_path = self.output_path
-        else:
-            self.input_path = os.path.normpath(self.args.input)
-            self.get_base_path()
-        self.output_path = os.path.join(self.base_path, type)
-        self.type = type
-
-        # prodigal and blast scripts will handle this part
-        # check input filetype
-        try:
-            self._file_ext_dict[type]
-            self.file_list = self.check_files_in_path()
-            os.makedirs(self.output_path, exist_ok=True)
-        except KeyError:
-            pass
-
-        # check extra param
-        self.check_param()
-
-    def _load_default_config(self):
-        with open(os.path.join(ROOT_DIR, "config.toml"), "rb") as f:
-            self.default = tomli.load(f)
-
-    def check_param(self):
-        if self.type == "parse_blast":
-            self.database = self.args.database
-            if self.database is None:
-                database_path = self.default["database"]["path"]
-            self.database = os.path.normpath(database_path)
-            self.check_blast_database(self.database)
-        elif self.type == "best_blast":
-            self.criteria = self.args.criteria
-            if self.criteria is None:
-                self.criteria = self.default["criteria"]["column"]
-            self.filter = self.args.filter
-            if self.filter is None:
-                self.filter = self.default["criteria"]["filter"]
-        elif self.type == "match_enzyme":
-            self.model = self.args.model
-            if self.model is None:
-                self.model = self.default["match_enzyme"]["model"]
-
-    def get_base_path(self):
-        try:
-            self.base_path = os.path.normpath(os.path.abspath(self.args.output))
-        except TypeError:
-            if self._is_module:
-                self.base_path = os.path.join(ROOT_DIR, "module_output")
-            else:
-                self.base_path = os.path.join(ROOT_DIR, "tmp")
-
-    def create_savename(self, filename):
-        filetype = self._file_ext_dict[self.type]["output"]
-        basename = os.path.basename(filename)
-        basename_no_extension = basename.rsplit(".", 1)[0]
-        savename_no_extension = os.path.join(self.output_path, basename_no_extension)
-        savename_new_extension = f"{savename_no_extension}.{filetype}"
-        return savename_new_extension
-
-    def check_files_in_path(self):
-        input_path = self.input_path
-        if os.path.isdir(input_path):
-            filetype = self._file_ext_dict[self.type]["input"]
-            pattern = f"*.{filetype}"
-            file_list = Configuration.find_file(input_path, pattern)
-        elif os.path.isfile(input_path):
-            file_list = [input_path]
-        return file_list
-
-    def _config_logging(self):
-        now = datetime.now().strftime("%y%m%d%H%M%S")
-        logger = logging.getLogger("pipeline_log")
-        logger.setLevel(logging.INFO)
-
-        sh = logging.StreamHandler()
-        formatter = logging.Formatter("%(asctime)s\t[%(levelname)s]\t%(message)s",
-                                    "%Y-%m-%d %H:%M:%S")
-        sh.setFormatter(formatter)
-        logger.addHandler(sh)
-
-        try:
-            logging_path = os.path.join(self.args.output, f"log_{now}.txt")
-            os.makedirs(self.args.output, exist_ok=True)
-        except TypeError:
-            logging_path = os.path.join(ROOT_DIR)
-
-        fh = logging.FileHandler(logging_path)
-        fh.setFormatter(formatter)
-        logger.addHandler(fh)
-        self.logger = logger
-
-    @staticmethod
-    def find_file(input_path, pattern):
-        file_list = glob.glob(os.path.join(input_path, pattern), recursive=True)
-        return file_list
-
-    def check_blast_database(self, database_path):
-        self.logger.info("Check blast database existence")
-        if os.path.isfile(database_path):
-            self.logger.info(f"Database: {os.path.basename(database_path)}")
-        else:
-            raise Exception("Blast database does not exist. Check config.toml before running.")
+from biopathpred.modules.parse_blastp_xml import parse_blast
+from biopathpred.modules.utils import Configuration
 
 
+# Run whole pipeline
+def main(config: Configuration):
+    time_start = time.perf_counter()
 
-# run individual modules
+    run_prodigal(config)
+    run_blast(config)
+    run_parse_blast(config)
+    run_find_best_blast(config)
+    run_match_enzyme(config)
+
+    time_end = time.perf_counter()
+    config.logger.info(f"Elapsed time: {round(time_end - time_start, 2)}sec")
+
+
+# Run individual module
+def run_prodigal(config: Configuration):
+    """Call the executable to run progidal gene prediction."""
+    config.check_io(module="prodigal")
+    prodigal_executable = Path(config.default["executable"]["prodigal_path"]).resolve()
+    config.logger.info("Start prodigal gene prediction")
+    for file in tqdm(config.file_list):
+        savename = config.create_savename(file)
+        prodigal_output = subprocess.run([prodigal_executable,
+                                          "-i", file,
+                                          "-a", savename],
+                                          stdout=subprocess.DEVNULL,
+                                          stderr=subprocess.STDOUT,
+                                          capture_output=False)
+
+    if prodigal_output.returncode != 0:
+        config.logger.error("prodigal runtime error!")
+        sys.exit()
+    
+    config.logger.info("Finish prodigal gene prediction")
+
+
+def run_blast(config: Configuration):
+    """Call the executable to run blastp alignment."""
+    config.check_io(module="blast")
+    blast_executable = Path(config.default["executable"]["diamond_path"])
+    config.logger.info("Start blastp alignment")
+    for file in tqdm(config.file_list):
+        savename = config.create_savename(file)
+        blast_output = subprocess.run([blast_executable,
+                                       "blastp",
+                                       "-d", config.database,
+                                       "-q", file,
+                                       "-o", savename,
+                                       "--outfmt", "5",
+                                       "--xml-blord-format"],
+                                       stdout=subprocess.DEVNULL,
+                                       stderr=subprocess.STDOUT,
+                                       capture_output=False)
+
+    if blast_output.returncode != 0:
+        config.logger.error("blastp runtime error!")
+        sys.exit()
+
+    config.logger.info("Finish blastp alignment")
+
+
 def run_parse_blast(config: Configuration):
-    config.check_io(type="parse_blast")
+    """Run parse_blastp_xml module to parse the blastp result."""
+    config.check_io(module="parse_blast")
     config.logger.info("Parse blastp result")
-    for filename in config.file_list:
-        savename = config.create_savename(filename)
-        parse_blast(filename=filename, output_filename=savename)
+    for file in tqdm(config.file_list):
+        savename = config.create_savename(file)
+        parse_blast(filepath=file, output_filename=savename)
     config.logger.info("Done!")
 
 
 def run_find_best_blast(config: Configuration):
-    config.check_io(type="best_blast")
+    """Run the best_blast module to get the best blastp result of each alignment hit."""
+    config.check_io(module="best_blast")
     config.logger.info("Select the best blastp result based on the configuration")
-    for filename in config.file_list:
-        savename = config.create_savename(filename)
-        find_best_blast(filename=filename, output_filename=savename,
+    for file in tqdm(config.file_list):
+        savename = config.create_savename(file)
+        find_best_blast(filename=file, output_filename=savename,
                         criteria=config.criteria, filter=config.filter)
     config.logger.info("Done!")
 
 
 def run_match_enzyme(config: Configuration):
+    """Run the match_enzyme module to map the best alignment hit to the pathway of interest."""
     config.check_io("match_enzyme")
     config.logger.info("Match the best blastp result to the pathway")
-    for filename in config.file_list:
-        savename = config.create_savename(filename)
-        start_match_enzyme(filename=filename, output_filename=savename,
-                        model=config.model, quiet=config.args.quiet)
+    for file in tqdm(config.file_list):
+        savename = config.create_savename(file)
+        start_match_enzyme(filepath=file, output_filepath=savename,
+                           model=config.model, verbose=config.args.verbose)
     config.logger.info("Done!")
-
-
-def parent_arguments():
-    parent_parser = argparse.ArgumentParser(description="Parent parser.",
-                                            add_help=False)
-    parent_parser.add_argument("-i", "--input", type=str, required=True,
-                               help="input a file or directory path")
-    parent_parser.add_argument("-o", "--output", type=str, help="output path")
-
-    return parent_parser
-
-
-def optional_arguments(case="main"):
-    optional_parser = argparse.ArgumentParser(description="Optional parser.",
-                                              add_help=False)
-    if case == "main":
-        optional_parser.add_argument("-i", "--input", type=str, required=False,
-                                     help="input a file or directory path")
-        optional_parser.add_argument(
-            "-db", "--database", type=str, help="database path")
-        optional_parser.add_argument(
-            "-c", "--criteria", type=str, help="selection criteria")
-        optional_parser.add_argument(
-            "-f", "--filter", nargs="*", type=str, help="filter options")
-        optional_parser.add_argument(
-            "-m", "--model", type=str, help="model name")
-        optional_parser.add_argument("--quiet", action="store_true",
-                                     help="do not print result to screen")
-        # --debug not yet implemented
-        optional_parser.add_argument("--debug", action="store_true",
-                                     help="keep tmp folder if specified")
-    elif case == "blast":
-        optional_parser.add_argument(
-            "-db", "--database", type=str, help="database path")
-    elif case == "best_blast":
-        optional_parser.add_argument(
-            "-c", "--criteria", type=str, help="selection criteria")
-        optional_parser.add_argument(
-            "-f", "--filter", nargs="*", type=str, help="filter options")
-    elif case == "match_enzyme":
-        optional_parser.add_argument("param_start", type=int)
-        optional_parser.add_argument("param_end", type=int)
-        optional_parser.add_argument(
-            "-m", "--model", type=str, help="model name")
-        optional_parser.add_argument("--quiet", action="store_true",
-                                     help="do not print result to screen")
-    else:
-        pass
-
-    return optional_parser
 
 
 def parse_arguments():
@@ -280,32 +150,54 @@ def parse_arguments():
     return args
 
 
-def main(config: Configuration):
-    # count total execution time
-    time_start = time.time()
+def parent_arguments():
+    parent_parser = argparse.ArgumentParser(description="Parent parser.",
+                                            add_help=False)
+    parent_parser.add_argument("-i", "--input", type=str, required=True,
+                               help="input a file or directory path")
+    parent_parser.add_argument("-o", "--output", type=str, help="output path")
 
-    # scripts
-    # run prodigal gene prediction
-    run_prodigal(config)
-    # run blastp protein alignment
-    run_blast(config)
-
-    # python functions
-    # parse_blast
-    run_parse_blast(config)
-
-    # find_best_blast
-    # criteria default: find highest bit-score (column: score)
-    # options: score, evalue, identity_percentage, query_coverage
-    run_find_best_blast(config)
-
-    # match_enzyme
-    run_match_enzyme(config)
-
-    time_end = time.time()
-    config.logger.info(f"Elapsed time: {round(time_end - time_start, 2)}sec")
+    return parent_parser
 
 
+def optional_arguments(case: Literal["main", "blast", "best_blast", "match_enzyme"] = "main"):
+    optional_parser = argparse.ArgumentParser(description="Optional parser.",
+                                              add_help=False)
+    if case == "main":
+        optional_parser.add_argument("-i", "--input", type=str, required=False,
+                                     help="input a file or directory path")
+        optional_parser.add_argument(
+            "-db", "--database", type=str, help="database path")
+        optional_parser.add_argument(
+            "-c", "--criteria", type=str, help="selection criteria")
+        optional_parser.add_argument(
+            "-f", "--filter", nargs="*", type=str, help="filter options")
+        optional_parser.add_argument(
+            "-m", "--model", type=str, help="model name")
+        optional_parser.add_argument("--verbose", action="store_true",
+                                     help="print match_enzyme result to screen")
+        # --debug not yet implemented
+        optional_parser.add_argument("--debug", action="store_true",
+                                     help="keep tmp folder if specified")
+    elif case == "blast":
+        optional_parser.add_argument(
+            "-db", "--database", type=str, help="database path")
+    elif case == "best_blast":
+        optional_parser.add_argument(
+            "-c", "--criteria", type=str, help="selection criteria")
+        optional_parser.add_argument(
+            "-f", "--filter", nargs="*", type=str, help="filter options")
+    elif case == "match_enzyme":
+        optional_parser.add_argument("param_start", type=int)
+        optional_parser.add_argument("param_end", type=int)
+        optional_parser.add_argument(
+            "-m", "--model", type=str, help="model name")
+        optional_parser.add_argument("--verbose", action="store_true",
+                                     help="print match_enzyme result to screen")
+    else:
+        pass
+
+    return optional_parser
 
 
 if __name__ == "__main__":

@@ -1,9 +1,8 @@
 import re
 import sys
-
+import os
 from Bio.Blast import NCBIXML
 
-from .util import *
 
 # csv column title
 HEADER_ELEMENT = ["id", "start", "end", "alignment_id", "enzyme_id",
@@ -79,12 +78,12 @@ def parse_alignment_title(alignment_title):
     return alignment_info
 
 
-def parse_blast(filename, output_filename):
+def parse_blast(filepath, output_filename):
     """
     Parse the results from diamond blastp that are in xml formats
     """
     try:
-        with open(filename, "r") as result, \
+        with open(filepath, "r") as result, \
                 open(output_filename, "w") as output:
             blast_records = NCBIXML.parse(result)
             output.write(HEADER)
@@ -108,7 +107,7 @@ def parse_blast(filename, output_filename):
                             write_list.append(to_write)
                     output.writelines(write_list)
             except ValueError:
-                print(f"Find empty XML file: {os.path.basename(filename)}")
+                print(f"Find empty XML file: {os.path.basename(filepath)}")
     except FileNotFoundError:
-        print(f"Cannot find '{filename}'")
+        print(f"Cannot find '{filepath}'")
         sys.exit()

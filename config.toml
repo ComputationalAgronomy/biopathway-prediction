@@ -2,8 +2,14 @@
 path = "../blast_database/IAA_database_complete.dmnd"
 
 [criteria]
+# criteria default: find highest bit-score (column: score)
+# options: score, evalue, identity_percentage, query_coverage
 column = "score"
 filter = ["coverage=50"]
 
 [match_enzyme]
 model = "prob"
+
+[executable]
+prodigal_path = "./bin/prodigal.windows.exe"
+diamond_path = "./bin/diamond.exe"

@@ -1,23 +1,14 @@
-"""
-==================================================================
-Scoring model used in converting features (eg. identity) to scores 
-==================================================================
-
-Parameters
-----------
-x : numpy.array
-    Features to be converted to scores
-
-Return
-------
-y : numpy.array
-    Scores
-
-"""
-
 import numpy as np
 
-def existence_score_model(x):
+def existence_score_model(x: np.ndarray) -> np.ndarray:
+    """Scoring model used in converting features (eg. identity) to scores.
+    
+    Args:
+        x: Features to be converted to scores
+    
+    Returns:
+        An array of converted scores
+    """
     # prob. ver.1
     # x = x[x >= 40]
     # y = 0.18 * np.log(0.15 * (x - 40) + 1) + 0.6

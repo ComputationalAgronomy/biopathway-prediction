@@ -2,9 +2,7 @@ import numpy as np
 
 
 class PathwayNode():
-
     def __init__(self, name, pre_enzyme, next_enzyme, default_visited):
-
         # the name of the chemical compound
         self.name = name
         # the enzymes that can catalyze this compound to another one
@@ -43,7 +41,6 @@ class PathwayNode():
 
 
 class Enzyme():
-
     def __init__(self, name, reactant_id, product_id, exist=False, count=0):
         self.name = name
         self.reactant = reactant_id
@@ -65,7 +62,7 @@ class Enzyme():
         self.prob = 0
 
 
-pathway_list = {1: PathwayNode("trp", [None], [1, 3, 7, 9], True),
+pathway_dict = {1: PathwayNode("trp", [None], [1, 3, 7, 9], True),
                 2: PathwayNode("iam_1", [1, 12], [2], False),
                 3: PathwayNode("iaa", [2, 5, 6, 11], [None], False),
                 4: PathwayNode("ipa_1", [3], [4, 6], False),
@@ -75,7 +72,7 @@ pathway_list = {1: PathwayNode("trp", [None], [1, 3, 7, 9], True),
                 8: PathwayNode("ian_1", [10], [11, 12], False)
                 }
 
-enzyme_list = {0: None,
+enzyme_dict = {0: None,
                1: Enzyme("trp_iam_1", 1, 2),
                2: Enzyme("iam_1_iaa", 2, 3),
                3: Enzyme("trp_ipa_1", 1, 4),

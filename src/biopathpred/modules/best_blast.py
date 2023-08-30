@@ -1,6 +1,6 @@
 import pandas as pd
 
-from .util import *
+from .utils import *
 
 
 def parse_filter(filter):
