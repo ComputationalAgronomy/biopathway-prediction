@@ -2,7 +2,7 @@ import os
 
 import pytest
 
-from src.database_building.database_utils import split_fasta
+from biopathpred.database_building.database_utils import split_fasta
 
 
 def test_split_fasta():

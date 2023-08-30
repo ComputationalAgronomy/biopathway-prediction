@@ -8,27 +8,42 @@ from datetime import datetime
 import tomli
 from tqdm import tqdm
 
-from src.best_blast import find_best_blast
-from src.match_enzyme import start_match_enzyme
-from src.parse_ncbi_xml import parse_blast
-from src.run_scripts import run_blast, run_prodigal
+from biopathpred.modules.best_blast import find_best_blast
+from biopathpred.modules.match_enzyme import start_match_enzyme
+from biopathpred.modules.parse_ncbi_xml import parse_blast
+from biopathpred.modules.run_scripts import run_blast, run_prodigal
+from typing import Literal
 
-FILE_DIR = os.path.dirname(__file__)
-
+ROOT_DIR = os.path.dirname(__file__)
 
 class Configuration():
+    """Configure input and output path, and check parameters.
+
+    Attributes:
+        args: The given argparse `Namespace` object for storing command-line arguments.
+        type: A single module or whole pipeline to be run.
+    """
     def __init__(self, args):
+        """Initialize the instance based on argparse inputs.
+
+        Args:
+            args: Parsed arguments of argparse.
+        """
         self.args = args
         self.type = args.type
-        self.__module = False if self.type == "main" else True
-        self.filetype_dict = {"parse_blast": {"input": "xml", "output": "csv"},
-                              "best_blast": {"input": "csv", "output": "csv"},
-                              "match_enzyme": {"input": "csv", "output": "txt"}}
-        self.load_default_config()
-        self.config_logging()
-        self.thread_num = Configuration.get_thread_num()
+        self._is_module = False if self.type == "main" else True
+        self._file_ext_dict = {"parse_blast": {"input": "xml", "output": "csv"},
+                               "best_blast": {"input": "csv", "output": "csv"},
+                               "match_enzyme": {"input": "csv", "output": "txt"}}
+        self._load_default_config()
+        self._config_logging()
 
-    def check_io(self, type):
+    def check_io(self, type: Literal["parse_blast", "best_blast", "match_enzyme"]):
+        """Determine the input and output path for each module.
+        
+        Args:
+            type: 
+        """
         # If "True" means we pipeline the results from the previous step, so
         # self.type has not yet been changed.
         if type != self.type and self.type != "main":
@@ -46,7 +61,7 @@ class Configuration():
         # prodigal and blast scripts will handle this part
         # check input filetype
         try:
-            self.filetype_dict[type]
+            self._file_ext_dict[type]
             self.file_list = self.check_files_in_path()
             os.makedirs(self.output_path, exist_ok=True)
         except KeyError:
@@ -55,12 +70,12 @@ class Configuration():
         # check extra param
         self.check_param()
 
-    def load_default_config(self):
-        with open(os.path.join(FILE_DIR, "config.toml"), "rb") as f:
+    def _load_default_config(self):
+        with open(os.path.join(ROOT_DIR, "config.toml"), "rb") as f:
             self.default = tomli.load(f)
 
     def check_param(self):
-        if self.type == "blast":
+        if self.type == "parse_blast":
             self.database = self.args.database
             if self.database is None:
                 database_path = self.default["database"]["path"]
@@ -82,13 +97,13 @@ class Configuration():
         try:
             self.base_path = os.path.normpath(os.path.abspath(self.args.output))
         except TypeError:
-            if self.__module:
-                self.base_path = os.path.join(FILE_DIR, "module_output")
+            if self._is_module:
+                self.base_path = os.path.join(ROOT_DIR, "module_output")
             else:
-                self.base_path = os.path.join(FILE_DIR, "tmp")
+                self.base_path = os.path.join(ROOT_DIR, "tmp")
 
     def create_savename(self, filename):
-        filetype = self.filetype_dict[self.type]["output"]
+        filetype = self._file_ext_dict[self.type]["output"]
         basename = os.path.basename(filename)
         basename_no_extension = basename.rsplit(".", 1)[0]
         savename_no_extension = os.path.join(self.output_path, basename_no_extension)
@@ -98,14 +113,14 @@ class Configuration():
     def check_files_in_path(self):
         input_path = self.input_path
         if os.path.isdir(input_path):
-            filetype = self.filetype_dict[self.type]["input"]
+            filetype = self._file_ext_dict[self.type]["input"]
             pattern = f"*.{filetype}"
             file_list = Configuration.find_file(input_path, pattern)
         elif os.path.isfile(input_path):
             file_list = [input_path]
         return file_list
 
-    def config_logging(self):
+    def _config_logging(self):
         now = datetime.now().strftime("%y%m%d%H%M%S")
         logger = logging.getLogger("pipeline_log")
         logger.setLevel(logging.INFO)
@@ -120,7 +135,7 @@ class Configuration():
             logging_path = os.path.join(self.args.output, f"log_{now}.txt")
             os.makedirs(self.args.output, exist_ok=True)
         except TypeError:
-            logging_path = os.path.join(FILE_DIR)
+            logging_path = os.path.join(ROOT_DIR)
 
         fh = logging.FileHandler(logging_path)
         fh.setFormatter(formatter)
@@ -139,9 +154,6 @@ class Configuration():
         else:
             raise Exception("Blast database does not exist. Check config.toml before running.")
 
-    @staticmethod
-    def get_thread_num():
-        return str(os.cpu_count())
 
 
 # run individual modules

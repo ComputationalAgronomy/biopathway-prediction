@@ -3,7 +3,7 @@ import tempfile
 
 import pytest
 
-from src.parse_ncbi_xml import (parse_alignment_title, parse_blast,
+from biopathpred.parse_ncbi_xml import (parse_alignment_title, parse_blast,
                                 parse_product_regex, parse_product_split)
 
 

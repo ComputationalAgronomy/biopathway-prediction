@@ -3,10 +3,10 @@ import os
 import pandas as pd
 import pytest
 
-from src.match_enzyme import (existence_score_model, match_enzyme_existence,
+from biopathpred.match_enzyme import (existence_score_model, match_enzyme_existence,
                               reset_enzyme_and_pathway,
                               traverse_enzyme_reaction)
-from src.pathway import enzyme_list, pathway_list
+from biopathpred.pathway import enzyme_list, pathway_list
 
 
 def test_match_enzyme_existence():

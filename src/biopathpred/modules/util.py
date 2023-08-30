@@ -11,7 +11,7 @@ def create_folder(abs_dir, foldername, foldernum=1):
         if foldernum > 100:
             raise Exception("A bug in creating a folder!")
         foldernum += 1
-        foldername = re.sub("_(\d+)$", f"_{str(foldernum)}", foldername)
+        foldername = re.sub(r"_(\d+)$", f"_{str(foldernum)}", foldername)
         folder_path = os.path.join(abs_dir, foldername)
     os.makedirs(folder_path)  
     
@@ -21,7 +21,7 @@ def create_folder(abs_dir, foldername, foldernum=1):
 def create_savename_serial(abs_dir, filename, filenum=1, new_folder=True, no_create=False):
     """This function will create a proper filename for the output file"""   
     filename = os.path.basename(filename)
-    filename = re.search("(.*)\.", filename).group(1)
+    filename = re.search(r"(.*)\.", filename).group(1)
     if no_create:
         foldername = "output"
         if not os.path.exists(os.path.join(abs_dir, foldername)):
