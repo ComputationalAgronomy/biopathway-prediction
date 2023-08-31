@@ -39,7 +39,7 @@ class Configuration():
         self._base_path = self._get_base_path()
         self.file_list = None
         self.logger = self._config_logging()
-        self.thread_num = int(os.cpu_count())
+        self.thread_num = self._get_thread_num()
         self.default = self._load_default_config()
 
         self._file_ext_dict = {"prodigal": {"input": "fna", "output": "faa"},
@@ -47,6 +47,7 @@ class Configuration():
                                "parse_blast": {"input": "xml", "output": "csv"},
                                "best_blast": {"input": "csv", "output": "csv"},
                                "match_enzyme": {"input": "csv", "output": "txt"}}
+
 
     def check_io(self, module: Literal["prodigal", "blast", "parse_blast",
                                        "best_blast", "match_enzyme"]):
@@ -59,7 +60,6 @@ class Configuration():
         Args:
             type: The name of the module to be executed.
         """
-
         if self.type == module or self.type == "main":
             self.input_path = Path(self.args.input).resolve()
         else:
@@ -75,6 +75,7 @@ class Configuration():
 
         self._load_params()
 
+
     def _get_files_in_input_path(self):
         if self.input_path.is_dir():
             filetype = self._file_ext_dict[self.type]["input"]
@@ -84,6 +85,7 @@ class Configuration():
             file_list = [self.input_path]
         
         return file_list
+
 
     def _load_params(self):
         """Load the parameters from `config.toml`.
@@ -109,6 +111,7 @@ class Configuration():
             if self.model is None:
                 self.model = self.default["match_enzyme"]["model"]
 
+
     def _get_base_path(self):
         """Determine the base output path.
         
@@ -125,7 +128,7 @@ class Configuration():
         return base_path
 
 
-    def create_savename(self, filename):
+    def create_savepath(self, filename):
         """Create the path for saving a file.
         
         The created path will be the output path appended by the given filename.
@@ -166,6 +169,23 @@ class Configuration():
         
         return logger
 
+
+    def _get_thread_num(self):
+        """Determine the maximum number of processes to be created.
+        
+        If the user doesn't specify the number of threads by --cpus argument,
+        all available threads in the computer will be used.
+        """
+        max_thread_num = int(os.cpu_count())
+        thread_num = self.args.cpus
+        if thread_num > max_thread_num or thread_num == 0:
+            thread_num = max_thread_num
+        
+        self.logger.info(f"Use {thread_num} thread(s).")
+
+        return thread_num
+
+
     def _load_default_config(self):
         config_path = ROOT_DIR.joinpath("config.toml")
         with open(config_path, "rb") as f:
@@ -174,10 +194,10 @@ class Configuration():
         
         return configs
 
+
     def _check_blast_database(self, database_path: Path):
         self.logger.info("Check blast database existence")
         if database_path.is_file():
             self.logger.info(f"Database: {database_path.name}")
         else:
             raise Exception("Blast database does not exist. Check config.toml before running.")
-

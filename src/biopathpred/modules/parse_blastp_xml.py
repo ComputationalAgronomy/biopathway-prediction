@@ -78,13 +78,13 @@ def parse_alignment_title(alignment_title):
     return alignment_info
 
 
-def parse_blast(filepath, output_filename):
+def parse_blast(filepath, output_filepath):
     """
     Parse the results from diamond blastp that are in xml formats
     """
     try:
         with open(filepath, "r") as result, \
-                open(output_filename, "w") as output:
+                open(output_filepath, "w") as output:
             blast_records = NCBIXML.parse(result)
             output.write(HEADER)
             try:

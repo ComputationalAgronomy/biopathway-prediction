@@ -16,12 +16,12 @@ def parse_filter(filter):
     return filter_dict
 
 
-def find_best_blast(filename, output_filename, criteria="score", filter=None):
-    file = pd.read_csv(filename)
+def find_best_blast(filepath, output_filepath, criteria="score", filter=None):
+    file = pd.read_csv(filepath)
     # filter the best result in each group (gene_prediction_id)
     data = file.loc[file.groupby(["id"])[criteria].idxmax()]
     filter = parse_filter(filter)
     if filter:
         for filter_key, filter_value in filter.items():
             data = data.loc[data[filter_key] >= filter_value]
-    data.to_csv(output_filename, index=False)
+    data.to_csv(output_filepath, index=False)
