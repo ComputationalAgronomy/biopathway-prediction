@@ -1,11 +1,9 @@
-import os
 from collections import defaultdict
 from pathlib import Path
-from typing import Literal, List
+from typing import List, Literal
+
 import numpy as np
 
-total_compound_dict = {}
-total_enzyme_dict = {}
 
 class Result():
     """Parse and store the result from the output of match_enzyme module"""
@@ -66,7 +64,7 @@ def write_summary(data_dict: dict, type: Literal["compound", "enzyme"], output_p
         f.writelines(f"{type}_key,{type}_value,max,min,mean,stdev\n")
         for key, value in data_dict.items():
             f.writelines(f"{key},{sum(value)},{max(value)},"
-                         f"{min(value)},{np.mean(value)},{np.stdev(value)}\n")
+                         f"{min(value)},{np.mean(value)},{np.std(value)}\n")
 
 
 def write_prediction(result_list: List[Result], output_path: Path):
@@ -100,8 +98,8 @@ def mapping_analysis(path: Path, output_path: Path):
     file_list = path.glob("**/*.txt")
     for filepath in file_list:
         result_list.append(Result(filepath))
-    write_summary(total_compound_dict, "compound", output_path)
-    write_summary(total_enzyme_dict, "enzyme", output_path)
+    write_summary(Result.total_compound_dict, "compound", output_path)
+    write_summary(Result.total_enzyme_dict, "enzyme", output_path)
     result_list.sort(
         key=lambda obj: obj.compound_dict["iaa"], reverse=True)
     write_prediction(result_list, output_path)
