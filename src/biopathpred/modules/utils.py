@@ -1,11 +1,10 @@
 import glob
 import logging
 import os
-import re
-import time
+from shutil import rmtree
 from datetime import datetime
 from pathlib import Path
-from typing import Literal
+from typing import List, Literal, Union
 
 import tomli
 
@@ -145,6 +144,22 @@ class Configuration():
         savename_new_extension = self.output_path.joinpath(f"{basename_no_extension}.{filetype}")
 
         return savename_new_extension 
+
+
+    def clean_module_outputs(self,
+        module: Union[Literal["prodigal", "blast", "parse_blast", "best_blast"], List[str]]):
+        """Remove the files generated from the module.
+
+        Args:
+            module: The module name.
+        """
+        if isinstance(module, str):
+            to_be_removed = self._base_path.joinpath(module)
+            rmtree(to_be_removed)
+        elif isinstance(module, list):
+            for single_module in module:
+                to_be_removed = self._base_path.joinpath(single_module)
+                rmtree(to_be_removed)
 
 
     def _config_logging(self):

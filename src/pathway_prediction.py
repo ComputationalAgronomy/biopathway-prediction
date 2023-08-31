@@ -28,6 +28,10 @@ def main(config: Configuration):
     run_match_enzyme(config)
     run_mapping_analysis(config)
 
+    if not config.args.debug:
+        config.clean_module_outputs(module=["prodigal", "blast", "parse_blast",
+                                            "best_blast"])
+
     time_end = time.perf_counter()
     config.logger.info(f"Elapsed time: {round(time_end - time_start, 2)}sec")
 
@@ -278,9 +282,8 @@ def optional_arguments(case: Literal["main", "prodigal", "blast", "parse_blast",
             "-m", "--model", type=str, help="model name")
         optional_parser.add_argument("--verbose", action="store_true",
                                      help="print match_enzyme result to screen")
-        # --debug not yet implemented
         optional_parser.add_argument("--debug", action="store_true",
-                                     help="keep tmp folder if specified")
+                                     help="keep all intermediate files if specified")
     elif case == "blast":
         optional_parser.add_argument(
             "-d", "--database", type=str, help="database path")
