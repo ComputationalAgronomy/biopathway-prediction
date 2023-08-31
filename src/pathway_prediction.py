@@ -11,6 +11,7 @@ from typing import Literal
 from tqdm import tqdm
 
 from biopathpred.modules.best_blast import find_best_blast
+from biopathpred.modules.mapping_analysis import mapping_analysis
 from biopathpred.modules.match_enzyme import start_match_enzyme
 from biopathpred.modules.parse_blastp_xml import parse_blast
 from biopathpred.modules.utils import Configuration
@@ -25,6 +26,7 @@ def main(config: Configuration):
     run_parse_blast(config)
     run_find_best_blast(config)
     run_match_enzyme(config)
+    run_mapping_analysis(config)
 
     time_end = time.perf_counter()
     config.logger.info(f"Elapsed time: {round(time_end - time_start, 2)}sec")
@@ -166,7 +168,7 @@ def run_find_best_blast(config: Configuration):
 
 def run_match_enzyme(config: Configuration):
     """Run the match_enzyme module to map the best alignment hit to the pathway of interest."""
-    config.check_io("match_enzyme")
+    config.check_io(module="match_enzyme")
     config.logger.info("Match the best blastp result to the pathway")
 
     if config.thread_num != 1:
@@ -185,6 +187,14 @@ def run_match_enzyme(config: Configuration):
             start_match_enzyme(filepath=file, output_filepath=savepath,
                             model=config.model, verbose=config.args.verbose)
 
+    config.logger.info("Done!")
+
+
+def run_mapping_analysis(config: Configuration):
+    """Parse the result from match_enzyme module"""
+    config.check_io(module="mapping_analysis")
+    config.logger.info("Parse the prediction result")
+    mapping_analysis(path=config.input_path, output_path=config.output_path)
     config.logger.info("Done!")
 
 
@@ -227,6 +237,13 @@ def parse_arguments():
     match_enzyme_parser.set_defaults(
         func=run_match_enzyme, type="match_enzyme")
 
+    mapping_analysis_parser = subparser.add_parser(
+        "mapping_analysis",
+        parents=[parent_arguments(), optional_arguments(case="mapping_analysis")],
+        conflict_handler="resolve")
+    mapping_analysis_parser.set_defaults(
+        func=run_mapping_analysis, type="mapping_analysis")
+
     args = parser.parse_args()
 
     return args
@@ -244,7 +261,8 @@ def parent_arguments():
     return parent_parser
 
 
-def optional_arguments(case: Literal["main", "blast", "best_blast", "match_enzyme"] = "main"):
+def optional_arguments(case: Literal["main", "prodigal", "blast", "parse_blast",
+    "best_blast", "match_enzyme", "mapping_analysis"] = "main"):
     optional_parser = argparse.ArgumentParser(description="Optional parser.",
                                               add_help=False)
     if case == "main":

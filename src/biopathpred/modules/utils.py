@@ -46,11 +46,12 @@ class Configuration():
                                "blast": {"input": "faa", "output": "xml"},
                                "parse_blast": {"input": "xml", "output": "csv"},
                                "best_blast": {"input": "csv", "output": "csv"},
-                               "match_enzyme": {"input": "csv", "output": "txt"}}
-
+                               "match_enzyme": {"input": "csv", "output": "txt"},
+                               "mapping_analysis": {"input": "txt", "output": "csv"}}
 
     def check_io(self, module: Literal["prodigal", "blast", "parse_blast",
-                                       "best_blast", "match_enzyme"]):
+                                       "best_blast", "match_enzyme",
+                                       "mapping_anaylsis"]):
         """Determine the input and output path for each module.
 
         This method will set the input and output path of the object,
