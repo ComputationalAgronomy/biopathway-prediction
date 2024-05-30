@@ -1,8 +1,8 @@
 import argparse
 import os
 
-from src.output_analysis.cytoscape_network_map import cytoscape_format_conversion
-from src.output_analysis.enzyme_mapping_analysis import enzyme_mapping_analysis
+from biopathpred.output_analysis.cytoscape_network_map import cytoscape_format_conversion
+from biopathpred.output_analysis.enzyme_mapping_analysis import enzyme_mapping_analysis
 
 
 def parent_arguments():
