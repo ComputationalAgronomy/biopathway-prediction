@@ -1,19 +1,23 @@
+from pathlib import Path
+
 import pytest
 
-from biopathpred.modules.database_building import (add_id, build_blast_db,
-                                                   parse_fasta)
+from biopathpred.modules.database_building import build_blast_db, parse_fasta
+
+DATA_DIR = Path("tests/test_data/build_db")
 
 
 @pytest.fixture(scope="session")
 def expected_database():
-    yield {"with_fragment": "tests/test_data/expected/database.fasta",
-           "no_fragment": "tests/test_data/expected/database_no_fragment.fasta"}
+    yield {"with_fragment": DATA_DIR / "expected/database.fasta",
+           "no_fragment": DATA_DIR / "expected/database_no_fragment.fasta"}
+
 
 @pytest.fixture(scope="session")
 def seq_paths():
-    yield {"seq_dir": "tests/test_data",
-           "seq1": "tests/test_data/1_seq1.fasta",
-           "seq2": "tests/test_data/2_seq2.fasta"}
+    yield {"seq_dir": DATA_DIR / "test_data",
+           "seq1": DATA_DIR / "test_data/1_seq1.fasta",
+           "seq2": DATA_DIR / "test_data/2_seq2.fasta"}
 
 
 def test_parse_fasta(seq_paths):
@@ -40,4 +44,3 @@ def test_building_blast_db(temp_dir, seq_paths, expected_database, is_filter, db
         expected = f2.read()
 
     assert result == expected, f"Result: {result}\nExpected: {expected}"
-    

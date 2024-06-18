@@ -7,4 +7,3 @@ from pathlib import Path
 def temp_dir():
     with tempfile.TemporaryDirectory() as temp:
         yield Path(temp)
-    

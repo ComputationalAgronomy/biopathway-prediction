@@ -1,13 +1,11 @@
 *.csv
 *.gff3
 *.gff
+*.exe
+*.html
 .vscode/
 example/
 input/
-module_output/
-database/
-src/database_building/database_output/
-temp/
 
 !tests/**/*.csv
 # Byte-compiled / optimized / DLL files
