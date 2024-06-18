@@ -19,12 +19,13 @@ pip install -e .
 
 ### Software requirement
 Put the following two programs into `bin` and specify their paths in `config.toml`
-prodigal: <https://github.com/hyattpd/Prodigal>  
+
+prodigal: <https://github.com/hyattpd/Prodigal> \
 diamond: <https://github.com/bbuchfink/diamond>  
 
 
 ## Basic Usage
-### Annotation and mapping from downloaded NCBI genome datasets
+### Run prediction pipeline on downloaded NCBI genome datasets
 ```
 biopathpred -i INPUT_DIR -o OUTPUT_DIR
 ```
