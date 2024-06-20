@@ -11,5 +11,5 @@ filter = ["coverage=50"]
 model = "prob"
 
 [executable]
-# prodigal_path = # download "prodigal" and put its path here
-# diamond_path = # download "diamond" and put its path here
+prodigal_path = "./bin/prodigal" # download "prodigal" and put its path here
+diamond_path = "./bin/diamond" # download "diamond" and put its path here

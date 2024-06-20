@@ -12,7 +12,7 @@ The current version is able to process genome datasets downloaded from NCBI (i.e
 ```
 conda create -n biopathpred python
 conda activate biopathpred
-pip install -e .
+pip install .
 ```
 *Note:*  
 *To use this package, installation of **prodigal**, **diamond** are required.*
@@ -25,6 +25,9 @@ diamond: <https://github.com/bbuchfink/diamond>
 
 
 ## Basic Usage
+*Note:*  
+*Always run commands where the `config.toml` is located.*
+
 ### Run prediction pipeline on downloaded NCBI genome datasets
 ```
 biopathpred -i INPUT_DIR -o OUTPUT_DIR

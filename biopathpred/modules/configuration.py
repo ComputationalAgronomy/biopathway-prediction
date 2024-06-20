@@ -4,7 +4,6 @@ from shutil import rmtree
 from datetime import datetime
 from pathlib import Path
 from typing import List, Literal, Union
-from biopathpred import ROOT_DIR
 
 import tomli
 
@@ -120,7 +119,7 @@ class Configuration():
             base_path = Path(self.args.output).resolve()
         except TypeError:
             # Raised when the user doesn't specify the output path.
-            base_path = ROOT_DIR.joinpath("output")
+            base_path = Path("./biopathpred_output")
 
         return base_path
 
@@ -167,11 +166,8 @@ class Configuration():
         sh.setFormatter(formatter)
         logger.addHandler(sh)
 
-        try:
-            logging_path = self._base_path.joinpath(f"log_{now}.txt")
-            os.makedirs(self.args.output, exist_ok=True)
-        except TypeError:
-            logging_path = ROOT_DIR.joinpath(f"log_{now}.txt")
+        logging_path = self._base_path.joinpath(f"log_{now}.txt")
+        os.makedirs(self.args.output, exist_ok=True)
 
         fh = logging.FileHandler(logging_path)
         fh.setFormatter(formatter)
@@ -195,7 +191,7 @@ class Configuration():
         return thread_num
 
     def _load_default_config(self):
-        config_path = ROOT_DIR.joinpath("config.toml")
+        config_path = "./config.toml"
         with open(config_path, "rb") as f:
             self.logger.info(f"Load configs from {config_path}")
             configs = tomli.load(f)
