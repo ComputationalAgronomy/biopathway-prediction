@@ -2,14 +2,14 @@
 path = "./pathway/database/IAA_database_complete.dmnd"
 
 [criteria]
-# criteria default: find highest bit-score (column: score)
-# options: score, evalue, identity_percentage, query_coverage
-column = "score"
-filter = ["coverage=50"]
+column = "score" # best hit criteria (default: score)
+filter = [
+    "coverage=50",
+] # options: score (bit-score), evalue, identity (%), coverage (query coverage, %)
 
 [match_enzyme]
-model = "prob"
+model = "prob" # "prob" or "binary"
 
 [executable]
 prodigal_path = "./bin/prodigal" # download "prodigal" and put its path here
-diamond_path = "./bin/diamond" # download "diamond" and put its path here
+diamond_path = "./bin/diamond"   # download "diamond" and put its path here
