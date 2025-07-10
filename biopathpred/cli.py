@@ -129,7 +129,6 @@ def single_job_executable(file, module, executable, config: Configuration):
                 savepath,
                 "--outfmt",
                 "5",
-                # "--sensitive",
                 "--xml-blord-format",
             ],
             stdout=subprocess.DEVNULL,
@@ -348,8 +347,6 @@ def optional_arguments(
             "-f", "--filter", nargs="*", type=str, help="filter options"
         )
     elif case == "match_enzyme":
-        optional_parser.add_argument("param_start", type=int)
-        optional_parser.add_argument("param_end", type=int)
         optional_parser.add_argument("-m", "--model", type=str, help="model name")
         optional_parser.add_argument(
             "--verbose", action="store_true", help="print match_enzyme result to screen"

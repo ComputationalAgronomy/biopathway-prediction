@@ -93,6 +93,8 @@ class Configuration:
             file_list = list(self.input_path.glob(pattern))
         elif self.input_path.is_file():
             file_list = [self.input_path]
+        else:
+            raise FileNotFoundError(self.input_path)
 
         return file_list
 
