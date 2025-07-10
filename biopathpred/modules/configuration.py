@@ -1,14 +1,14 @@
 import logging
 import os
-from shutil import rmtree
 from datetime import datetime
 from pathlib import Path
+from shutil import rmtree
 from typing import List, Literal, Union
 
 import tomli
 
 
-class Configuration():
+class Configuration:
     """Configure input and output path, and check parameters.
 
     Attributes:
@@ -21,6 +21,7 @@ class Configuration():
         thread_num: An integer of available cpu threads.
         default: Default configs for each module.
     """
+
     def __init__(self, args):
         """Initialize the instance based on argparse inputs.
 
@@ -31,22 +32,33 @@ class Configuration():
         self.type = args.type
         self.input_path = None
         self.output_path = None
+        self.config_path = None
         self._base_path = self._get_base_path()
         self.file_list = None
         self.logger = self._config_logging()
         self.thread_num = self._get_thread_num()
         self.default = self._load_default_config()
 
-        self._file_ext_dict = {"prodigal": {"input": "fna", "output": "faa"},
-                               "blast": {"input": "faa", "output": "xml"},
-                               "parse_blast": {"input": "xml", "output": "csv"},
-                               "best_blast": {"input": "csv", "output": "csv"},
-                               "match_enzyme": {"input": "csv", "output": "txt"},
-                               "result_summary": {"input": "txt", "output": "csv"}}
+        self._file_ext_dict = {
+            "prodigal": {"input": "fna", "output": "faa"},
+            "blast": {"input": "faa", "output": "xml"},
+            "parse_blast": {"input": "xml", "output": "csv"},
+            "best_blast": {"input": "csv", "output": "csv"},
+            "match_enzyme": {"input": "csv", "output": "txt"},
+            "result_summary": {"input": "txt", "output": "csv"},
+        }
 
-    def check_io(self, module: Literal["prodigal", "blast", "parse_blast",
-                                       "best_blast", "match_enzyme",
-                                       "result_summary"]):
+    def check_io(
+        self,
+        module: Literal[
+            "prodigal",
+            "blast",
+            "parse_blast",
+            "best_blast",
+            "match_enzyme",
+            "result_summary",
+        ],
+    ):
         """Determine the input and output path for each module.
 
         This method will set the input and output path of the object,
@@ -93,8 +105,12 @@ class Configuration():
         if self.type == "blast":
             self.database = self.args.database
             if self.database is None:
-                database_path = self.default["database"]["path"]
-            self.database = Path(database_path)
+                self.database = Path(self.default["database"]["path"])
+                self.database = (
+                    self.database
+                    if self.database.is_absolute()
+                    else self.config_path.parent / self.database
+                ).resolve()
             self._check_blast_database(self.database)
         elif self.type == "best_blast":
             self.criteria = self.args.criteria
@@ -136,12 +152,18 @@ class Configuration():
         """
         filetype = self._file_ext_dict[self.type]["output"]
         basename_no_extension = Path(filename).stem
-        savename_new_extension = self.output_path.joinpath(f"{basename_no_extension}.{filetype}")
+        savename_new_extension = self.output_path.joinpath(
+            f"{basename_no_extension}.{filetype}"
+        )
 
         return savename_new_extension
 
-    def clean_module_outputs(self,
-                             module: Union[Literal["prodigal", "blast", "parse_blast", "best_blast"], List[str]]):
+    def clean_module_outputs(
+        self,
+        module: Union[
+            Literal["prodigal", "blast", "parse_blast", "best_blast"], List[str]
+        ],
+    ):
         """Remove the files generated from the module.
 
         Args:
@@ -161,8 +183,9 @@ class Configuration():
         logger.setLevel(logging.INFO)
 
         sh = logging.StreamHandler()
-        formatter = logging.Formatter("%(asctime)s\t[%(levelname)s]\t%(message)s",
-                                      "%Y-%m-%d %H:%M:%S")
+        formatter = logging.Formatter(
+            "%(asctime)s\t[%(levelname)s]\t%(message)s", "%Y-%m-%d %H:%M:%S"
+        )
         sh.setFormatter(formatter)
         logger.addHandler(sh)
 
@@ -191,16 +214,26 @@ class Configuration():
         return thread_num
 
     def _load_default_config(self):
-        config_path = "./config.toml"
-        with open(config_path, "rb") as f:
-            self.logger.info(f"Load configs from {config_path}")
-            configs = tomli.load(f)
+        current_dir = Path.cwd()
+        config_filename = "./config.toml"
 
-        return configs
+        for parent in [current_dir] + list(current_dir.parents):
+            config_path = parent / config_filename
+            if config_path.exists():
+                self.logger.info(f"Load configs from {config_path}")
+                self.config_path = config_path
+                with open(config_path, "rb") as f:
+                    return tomli.load(f)
+
+        raise FileNotFoundError(
+            "config.toml not found in current or any parent directories."
+        )
 
     def _check_blast_database(self, database_path: Path):
         self.logger.info("Check blast database existence")
         if database_path.is_file():
             self.logger.info(f"Database: {database_path.name}")
         else:
-            raise Exception("Blast database does not exist. Check config.toml before running.")
+            raise Exception(
+                "Blast database does not exist. Check config.toml before running."
+            )
