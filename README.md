@@ -64,7 +64,7 @@ Each module handles the output from the previous pipeline stage. Use `-h` to see
 
 ### Workflow reproduction
 
-See `notebooks/MS_workflow.ipynb` for instructions on reproducing the results in the paper from raw genome sequences.
+See `notebooks/MS_workflow.ipynb` for instructions on reproducing the results in the paper from raw genome sequences. A script version of the workflow is available in `MS_workflow`.
 
 ### Database building (For development only)
 
