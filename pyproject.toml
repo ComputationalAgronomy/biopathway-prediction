@@ -1,20 +1,18 @@
 [build-system]
-requires = ["setuptools>=61.0"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling >= 1.26"]
+build-backend = "hatchling.build"
 
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["biopathpred*"]
 
 [project]
 name = "biopathpred"
-version = "0.0.1"
+version = "1.1"
 authors = [
   { name = "Zheng-Xiang Ye", email="b07613010@ntu.edu.tw"},
   { name="Steven Wu", email="stevenwu@ntu.edu.tw" },
 ]
-description = "TODO"
+description = "A tool for predicting metabolic pathways from genomic data."
 readme = "README.md"
+license-files = ["LICEN[CS]E*"]
 requires-python = ">=3.10"
 classifiers = [
     "Programming Language :: Python :: 3",
@@ -23,13 +21,20 @@ classifiers = [
 ]
 dependencies = [
   "tqdm",
-  "Bio>=1.7.1",
   "biopython",
   "numpy>=1.23.5,<2.0.0",
   "pandas>=1.5.2,<2.0.0",
-  "pytest>=7.1.2",
   "tomli>=2.0.1"
 ]
 
+[project.urls]
+"Homepage" = "https://github.com/ComputationalAgronomy/biopathway-prediction"
+"Issues" = "https://github.com/ComputationalAgronomy/biopathway-prediction/issues"
+
 [project.scripts]
 biopathpred = "biopathpred.cli:main"
+
+[project.optional-dependencies]
+test = [
+    "pytest>=7.1.2",
+]
