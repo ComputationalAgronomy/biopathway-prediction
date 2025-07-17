@@ -59,11 +59,11 @@ def write_summary(data_dict: dict, type: Literal["compound", "enzyme"], output_p
         type: The type of data, "compound" or "enzyme".
     """
     with open(output_path / f"{type}_output.csv", "w") as f:
-        f.writelines(f"{type}_key,{type}_value,max,min,mean,stdev\n")
+        f.write(f"{type}_key,{type}_value,max,min,mean,stdev\n")
         for key, value in data_dict.items():
-            f.writelines(f"{key},{round(sum(value), 6)},{max(value)},"
-                         f"{min(value)},{round(np.mean(value), 6)},"
-                         f"{round(np.std(value, ddof=1), 6)}\n")
+            f.write(f"{key},{round(sum(value), 6)},{max(value)},"
+                    f"{min(value)},{round(np.mean(value), 6)},"
+                    f"{round(np.std(value, ddof=1), 6)}\n")
 
 
 def write_prediction(result_list: List[Result], output_path: Path):
@@ -75,11 +75,11 @@ def write_prediction(result_list: List[Result], output_path: Path):
         result_list : A list containing Result objects.
     """
     with open(output_path / "prediction_output.csv", "w") as f:
-        f.writelines("species,score\n")
+        f.write("species,score\n")
         for obj in result_list:
             species = obj.name.rsplit(".", 1)[0]
             score = obj.compound_dict["iaa"]
-            f.writelines(f"{species},{score}\n")
+            f.write(f"{species},{score}\n")
 
 
 def result_summary(path: Path, output_path: Path):
@@ -99,6 +99,8 @@ def result_summary(path: Path, output_path: Path):
         result_list.append(Result(filepath))
     write_summary(Result.total_compound_dict, "compound", output_path)
     write_summary(Result.total_enzyme_dict, "enzyme", output_path)
+    # Sort by score then species name
     result_list.sort(
-        key=lambda obj: obj.compound_dict["iaa"], reverse=True)
+        key=lambda obj: (-obj.compound_dict["iaa"], obj.name.rsplit(".", 1)[0])
+    )
     write_prediction(result_list, output_path)
