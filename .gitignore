@@ -10,6 +10,8 @@ input/
 data/
 data_positive/
 data_negative/
+output_logistic/
+output_binary/
 
 !tests/**/*.csv
 # Byte-compiled / optimized / DLL files

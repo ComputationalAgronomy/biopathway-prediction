@@ -13,7 +13,7 @@ authors = [
   { name = "Zheng-Xiang Ye", email="b07613010@ntu.edu.tw"},
   { name="Steven Wu", email="stevenwu@ntu.edu.tw" },
 ]
-description = "TODO"
+description = "A Probabilistic Approach for Predicting Indole-3-Acetic Acid Synthesis in Bacteria Using Genomic Data"
 readme = "README.md"
 requires-python = ">=3.10"
 classifiers = [
@@ -23,12 +23,19 @@ classifiers = [
 ]
 dependencies = [
   "tqdm",
-  "Bio>=1.7.1",
   "biopython",
   "numpy>=1.23.5,<2.0.0",
   "pandas>=1.5.2,<2.0.0",
-  "pytest>=7.1.2",
   "tomli>=2.0.1"
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+
+[project.optional-dependencies]
+test = [
+  "pytest>=7.1.2",
 ]
 
 [project.scripts]
