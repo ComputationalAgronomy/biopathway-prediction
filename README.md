@@ -12,26 +12,31 @@ The current version is able to process genome datasets downloaded from NCBI (i.e
 
 ## Installation
 
-```
-conda create -n biopathpred python
-conda activate biopathpred
-pip install .
-```
+1. **Create and activate a conda environment:**
+   ```bash
+   conda create -n biopathpred python
+   conda activate biopathpred
+   ```
 
-_Note:_  
-_To use this package, **prodigal**, **diamond** are required._
+2. **Install the package:**
+   ```bash
+   pip install .
+   ```
 
-### Software requirement
+**Note:** This tool requires **Prodigal** and **DIAMOND** to be installed. Please see the `Software Requirements` section below for instructions.
 
-Put the following two programs into `bin` and specify their paths in `config.toml`
+### Software Requirements
 
-prodigal: <https://github.com/hyattpd/Prodigal> \
-diamond: <https://github.com/bbuchfink/diamond>
+Before running the prediction pipeline, you must install the following software and specify their paths in the `config.toml` file:
+
+- **Prodigal:** [https://github.com/hyattpd/Prodigal](https://github.com/hyattpd/Prodigal)
+- **DIAMOND:** [https://github.com/bbuchfink/diamond](https://github.com/bbuchfink/diamond)
+
+After downloading, place the executables in the `bin/` directory or any other location and update the `prodigal_path` and `diamond_path` in your `config.toml` accordingly.
 
 ## Basic Usage
 
-_Note:_  
-_Always run commands from the directory containing `config.toml`, or from a location where it can be discovered in a parent directory._
+**Note:** Always run commands from the project's root directory (the one containing `config.toml`), or from a location where it can be discovered in a parent directory.
 
 ### Run prediction pipeline on downloaded NCBI genome datasets
 

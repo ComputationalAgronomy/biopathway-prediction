@@ -1,15 +1,27 @@
+# Configuration for the pathway prediction pipeline
+
 [database]
+# Path to the DIAMOND database file for sequence alignment.
 path = "./pathway/database/IAA_database_complete.dmnd"
 
 [criteria]
-column = "score" # best hit criteria (default: score)
+# Criteria for selecting the best BLAST hit for each query sequence.
+# Available options: score (bit-score), evalue, identity, coverage.
+column = "score" # (default: score)
+
+# Filters to apply to the BLAST hits.
+# Available options: score (bit-score), evalue, identity, coverage.
 filter = [
     "coverage=50",
-] # options: score (bit-score), evalue, identity (%), coverage (query coverage, %)
+]
 
 [match_enzyme]
-model = "logistic" # "logistic" or "binary"
+# Model to use for calculating the existence score of enzymes and compounds.
+# Available options: "logistic", "binary"
+model = "logistic"
 
 [executable]
-prodigal_path = "./bin/prodigal" # download "prodigal" and put its path here
-diamond_path = "./bin/diamond"   # download "diamond" and put its path here
+# Paths to the required external executable files.
+# These can be absolute paths or relative to the location of this config file.
+prodigal_path = "./bin/prodigal" # Path to the Prodigal executable for gene prediction.
+diamond_path = "./bin/diamond"   # Path to the DIAMOND executable for protein alignment.
