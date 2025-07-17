@@ -1,20 +1,18 @@
 [build-system]
-requires = ["setuptools>=61.0"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling >= 1.26"]
+build-backend = "hatchling.build"
 
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["biopathpred*"]
 
 [project]
 name = "biopathpred"
-version = "0.0.1"
+version = "1.1"
 authors = [
   { name = "Zheng-Xiang Ye", email="b07613010@ntu.edu.tw"},
   { name="Steven Wu", email="stevenwu@ntu.edu.tw" },
 ]
-description = "A Probabilistic Approach for Predicting Indole-3-Acetic Acid Synthesis in Bacteria Using Genomic Data"
+description = "A tool for predicting metabolic pathways from genomic data."
 readme = "README.md"
+license-files = ["LICEN[CS]E*"]
 requires-python = ">=3.10"
 classifiers = [
     "Programming Language :: Python :: 3",
@@ -29,14 +27,14 @@ dependencies = [
   "tomli>=2.0.1"
 ]
 
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-
-
-[project.optional-dependencies]
-test = [
-  "pytest>=7.1.2",
-]
+[project.urls]
+"Homepage" = "https://github.com/ComputationalAgronomy/biopathway-prediction"
+"Issues" = "https://github.com/ComputationalAgronomy/biopathway-prediction/issues"
 
 [project.scripts]
 biopathpred = "biopathpred.cli:main"
+
+[project.optional-dependencies]
+test = [
+    "pytest>=7.1.2",
+]
