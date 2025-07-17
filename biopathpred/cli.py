@@ -314,13 +314,13 @@ def optional_arguments(
         description="Optional parser.", add_help=False
     )
     if case == "main":
-        optional_parser.add_argument(
-            "-i",
-            "--input",
-            type=str,
-            required=False,
-            help="input a file or directory path",
-        )
+        # optional_parser.add_argument(
+        #     "-i",
+        #     "--input",
+        #     type=str,
+        #     required=False,
+        #     help="input a file or directory path",
+        # )
         optional_parser.add_argument("-d", "--database", type=str, help="database path")
         optional_parser.add_argument(
             "-c", "--criteria", type=str, help="selection criteria"
