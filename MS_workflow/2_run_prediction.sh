@@ -31,7 +31,6 @@ INPUT_DIR="data"
 OUTPUT_DIR="output_${MODEL_TYPE}"
 
 mkdir -p "$OUTPUT_DIR"
-mkdir -p "$LOG_DIR"
 
 python -m pip install .
 python biopathpred/utils/rename_sequence_label.py data fna
