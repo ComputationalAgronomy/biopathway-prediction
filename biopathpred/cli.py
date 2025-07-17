@@ -328,7 +328,7 @@ def optional_arguments(
         optional_parser.add_argument(
             "-f", "--filter", nargs="*", type=str, help="filter options"
         )
-        optional_parser.add_argument("-m", "--model", type=str, help="model name")
+        optional_parser.add_argument( "-m", "--model", type=str, choices=["logistic", "binary"], help="model name")
         optional_parser.add_argument(
             "--verbose", action="store_true", help="print match_enzyme result to screen"
         )
@@ -347,7 +347,7 @@ def optional_arguments(
             "-f", "--filter", nargs="*", type=str, help="filter options"
         )
     elif case == "match_enzyme":
-        optional_parser.add_argument("-m", "--model", type=str, help="model name")
+        optional_parser.add_argument( "-m", "--model", type=str, choices=["logistic", "binary"], help="model name")
         optional_parser.add_argument(
             "--verbose", action="store_true", help="print match_enzyme result to screen"
         )

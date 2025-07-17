@@ -17,6 +17,8 @@ else
     exit 1
 fi
 
+echo "Warning: This script will download approximately 22.8GB of data."
+
 mkdir -p data data_positive data_negative
 
 declare -A targets=(

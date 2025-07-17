@@ -8,7 +8,7 @@ filter = [
 ] # options: score (bit-score), evalue, identity (%), coverage (query coverage, %)
 
 [match_enzyme]
-model = "prob" # "prob" or "binary"
+model = "logistic" # "logistic" or "binary"
 
 [executable]
 prodigal_path = "./bin/prodigal" # download "prodigal" and put its path here

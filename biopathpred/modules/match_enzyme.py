@@ -11,7 +11,7 @@ from biopathpred.modules.pathway import (Enzyme, PathwayNode, enzyme_dict,
 
 def start_match_enzyme(filepath: Union[str, Path],
                        output_filepath: Union[str, Path],
-                       model: Literal["prob", "binary"],
+                       model: Literal["logistic", "binary"],
                        verbose: bool,
                        enzyme_dict: Dict[int, Union[None, Enzyme]] = enzyme_dict,
                        pathway_dict: Dict[int, PathwayNode] = pathway_dict):
@@ -22,7 +22,7 @@ def start_match_enzyme(filepath: Union[str, Path],
     Args:
         filepath: The path to a .csv file containing best alignment results.
         output_filepath: The path for saving output.
-        model: The `prob` or `binary` model in calculating pathway node score.
+        model: The `logistic` or `binary` model in calculating pathway node score.
         verbose: Whether to print the result to screen.
         enzyme_dict: The dictionary that contains the enzyme info of the pathway.
         pathway_dict: The dictionary that contains the compound info of the pathway.
@@ -99,7 +99,7 @@ def traverse_enzyme_reaction(compound: PathwayNode,
 
 
 def get_pathway_result(pathway_dict: Dict[int, PathwayNode],
-                       model: Literal["prob", "binary"],
+                       model: Literal["logistic", "binary"],
                        verbose: bool) -> List[str]:
     """
     Obtain scores (0 - 1) or existence (True / False) from Compound objects.
@@ -120,7 +120,7 @@ def get_pathway_result(pathway_dict: Dict[int, PathwayNode],
     result_message.append("Compound list:\n")
     for pathwaynode in pathway_dict.values():
         compound = pathwaynode.name
-        if model == "prob":
+        if model == "logistic":
             existence = np.round(pathwaynode.existence_prob, 6)
         elif model == "binary":
             existence = pathwaynode.visited
@@ -137,7 +137,7 @@ def get_pathway_result(pathway_dict: Dict[int, PathwayNode],
 
 
 def get_enzyme_result(enzyme_dict: Dict[int, Union[None, Enzyme]],
-                      model: Literal["prob", "binary"],
+                      model: Literal["logistic", "binary"],
                       verbose: bool) -> List[str]:
     """
     Obtain scores (0 - 1) or existence (True / False) from Enzyme objects.
@@ -159,7 +159,7 @@ def get_enzyme_result(enzyme_dict: Dict[int, Union[None, Enzyme]],
     for enzyme in enzyme_dict.values():
         try:
             enzyme_name = enzyme.name
-            if model == "prob":
+            if model == "logistic":
                 enzyme_existence = np.round(enzyme.prob, 6)
             elif model == "binary":
                 enzyme_existence = enzyme.exist
