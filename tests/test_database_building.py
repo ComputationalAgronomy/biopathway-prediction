@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from biopathpred.modules.database_building import build_blast_db, parse_fasta
+from bcpip.modules.database_building import build_blast_db, parse_fasta
 
 DATA_DIR = Path("tests/test_data/build_db")
 

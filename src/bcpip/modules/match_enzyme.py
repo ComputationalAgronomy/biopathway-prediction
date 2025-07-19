@@ -4,8 +4,8 @@ from typing import Dict, List, Literal, Union
 import numpy as np
 import pandas as pd
 
-from biopathpred.modules.existence_score_model import existence_score_model
-from biopathpred.modules.pathway import (Enzyme, PathwayNode, enzyme_dict,
+from bcpip.modules.existence_score_model import existence_score_model
+from bcpip.modules.pathway import (Enzyme, PathwayNode, enzyme_dict,
                                          pathway_dict)
 
 

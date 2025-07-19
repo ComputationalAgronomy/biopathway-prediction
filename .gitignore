@@ -6,12 +6,15 @@
 *.html
 .vscode/
 example/
+example_output/
 input/
 data/
 data_positive/
 data_negative/
 output_logistic/
 output_binary/
+bin/diamond
+bin/prodigal
 
 !tests/**/*.csv
 # Byte-compiled / optimized / DLL files

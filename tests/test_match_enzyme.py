@@ -1,7 +1,7 @@
-from biopathpred.modules.match_enzyme import (match_enzyme_existence,
+from bcpip.modules.match_enzyme import (match_enzyme_existence,
                                               reset_enzyme_and_pathway,
                                               traverse_enzyme_reaction)
-from biopathpred.modules.pathway import enzyme_dict, pathway_dict
+from bcpip.modules.pathway import enzyme_dict, pathway_dict
 
 
 def test_match_enzyme_existence():
