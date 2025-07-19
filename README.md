@@ -2,13 +2,22 @@
 
 ## Aim
 
-To identify potential bacteria strains that may produce IAA and thus facilitate plant growth.
+To identify potential bacterial strains that may produce indole-3-acetic acid (IAA) and thus facilitate plant growth through an efficient computational screening approach.
 
 ## Description
+BCPIP (Biological Compound Predictor via Integrated Pathways) is a bioinformatics pipeline that predicts a bacterium's potential to produce specific biological compounds based on its genome sequence. The pipeline predicts biological compound synthesis potential by analyzing multiple metabolic pathways.
 
-The potential and application of microbial products on crops have long been investigated in order to reduce the usage of synthetic fertilizers. Several mechanisms in promoting plant growth have been proposed and confirmed through field trials, including N-fixation, phosphate solubilization, phytohormone production and so on. Therefore, in this project we focus on the enzymes involved in these biological pathways, using auxin biosynthesis pathway as an example. Based on the assumption that the enzymes in a certain biological pathway must exist for a microorganism to successfully catalyze the compounds available from the environment to accessible products for plants, this package provides the pipeline from microbial genome annotation to biological pathway mapping. This allows us to conduct a high-throughput screening from available genome datasets and constructs a model to evaluate the potential of individual microbial genomes.
+The overview of the workflow is as follows:
+1. **Gene Prediction**: Takes bacterial genomes as input and predicts protein-coding genes.
+2. **Enzyme Mapping**: Compares the predicted genes against a curated database of enzymes from specific, predefined biological pathways using DIAMOND.
+3. **Compound Prediction**: Based on the enzyme matches, predicts the likelihood that the bacterium can synthesize the final compound using multiple pathways.
 
-The current version is able to process genome datasets downloaded from NCBI (i.e. .fna format) and estimate the pathway completeness automatically. The current custom-built pathway includes part of the bacteria IAA production pathway.
+The current version is optimized for the Indole-3-Acetic Acid (IAA) biosynthesis pathway, allowing for high-throughput screening of bacterial genomes to identify potential plant-growth-promoting strains. The output provides a clear summary of predicted compound presence for each genome.
+
+
+### Background
+Microbial products have been extensively studied for plant growth promotion to reduce synthetic fertilizer usage. Several plant growth-promoting mechanisms have been confirmed, and this project focuses on enzymes involved in these biological pathways, using auxin biosynthesis as an example. Based on the assumption that specific pathway enzymes must be present for microorganisms to successfully synthesize the compounds. This software provides a pipeline to estimate the likelihood of synthesizing compounds from genomic data. This enables high-throughput screening of genome datasets to evaluate the metabolic potential of individual bacterial strains.
+
 
 ## Installation
 
@@ -62,7 +71,7 @@ bcpip MODULE_NAME ARGS_REQUIRED
 
 #### Options
 
-MODULE_NAME  
+MODULE_NAME
 `prodigal`, `blastp`, `parse_xml`, `best_blast`, `match_enzyme`, `result_summary`
 
 Each module handles the output from the previous pipeline stage. Use `-h` to see the arguments required.

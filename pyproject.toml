@@ -10,7 +10,7 @@ authors = [
   { name = "Zheng-Xiang Ye", email="b07613010@ntu.edu.tw"},
   { name="Steven Wu", email="stevenwu@ntu.edu.tw" },
 ]
-description = "A tool for predicting metabolic pathways from genomic data."
+description = "A bioinformatics pipeline to predict a bacterium's potential to produce specific biological compounds by mapping its genome against known metabolic pathways."
 readme = "README.md"
 license-files = ["LICEN[CS]E*"]
 requires-python = ">=3.10"
@@ -18,20 +18,23 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
 ]
 dependencies = [
   "tqdm",
   "biopython",
-  "numpy", #>=1.23.5,<2.0.0",
-  "pandas", #>=1.5.2,<2.0.0",
-    "tomli>=2.0.1; python_version < '3.11'"
+  "numpy",
+  "pandas",
+  "tomli>=2.0.1; python_version < '3.11'"
 ]
 
 [project.urls]
 "Homepage" = "https://github.com/ComputationalAgronomy/bcpip"
 "Issues" = "https://github.com/ComputationalAgronomy/bcpip/issues"
 
-[project.scripts]
+[project.entry-points.console_scripts]
 bcpip = "bcpip.cli:main"
 
 [project.optional-dependencies]
