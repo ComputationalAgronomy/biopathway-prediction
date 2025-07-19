@@ -8,12 +8,12 @@ from typing import Literal
 
 from tqdm.auto import tqdm
 
-from biopathpred.modules.best_blast import find_best_blast
-from biopathpred.modules.configuration import Configuration
-from biopathpred.modules.database_building import build_blast_db
-from biopathpred.modules.match_enzyme import start_match_enzyme
-from biopathpred.modules.parse_blastp_xml import parse_blast
-from biopathpred.modules.result_summary import result_summary
+from bcpip.modules.best_blast import find_best_blast
+from bcpip.modules.configuration import Configuration
+from bcpip.modules.database_building import build_blast_db
+from bcpip.modules.match_enzyme import start_match_enzyme
+from bcpip.modules.parse_blastp_xml import parse_blast
+from bcpip.modules.result_summary import result_summary
 
 
 # Run whole pipeline

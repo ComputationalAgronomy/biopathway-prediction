@@ -1,7 +1,7 @@
 import tempfile
 from pathlib import Path
 
-from biopathpred.modules.result_summary import result_summary
+from bcpip.modules.result_summary import result_summary
 
 DATA_DIR = Path(__file__).parent / "test_data/mapping_analysis/test_data"
 EXPECTED_DIR = Path(__file__).parent / "test_data/mapping_analysis/expected"

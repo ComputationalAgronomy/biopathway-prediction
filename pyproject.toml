@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 
 [project]
-name = "biopathpred"
+name = "bcpip"
 version = "1.1"
 authors = [
   { name = "Zheng-Xiang Ye", email="b07613010@ntu.edu.tw"},
@@ -22,19 +22,24 @@ classifiers = [
 dependencies = [
   "tqdm",
   "biopython",
-  "numpy>=1.23.5,<2.0.0",
-  "pandas>=1.5.2,<2.0.0",
-  "tomli>=2.0.1"
+  "numpy", #>=1.23.5,<2.0.0",
+  "pandas", #>=1.5.2,<2.0.0",
+    "tomli>=2.0.1; python_version < '3.11'"
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/ComputationalAgronomy/biopathway-prediction"
-"Issues" = "https://github.com/ComputationalAgronomy/biopathway-prediction/issues"
+"Homepage" = "https://github.com/ComputationalAgronomy/bcpip"
+"Issues" = "https://github.com/ComputationalAgronomy/bcpip/issues"
 
 [project.scripts]
-biopathpred = "biopathpred.cli:main"
+bcpip = "bcpip.cli:main"
 
 [project.optional-dependencies]
 test = [
     "pytest>=7.1.2",
+]
+
+[tool.pytest.ini_options]
+pythonpath = [
+  "src"
 ]

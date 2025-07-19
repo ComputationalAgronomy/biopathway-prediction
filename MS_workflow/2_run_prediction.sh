@@ -33,6 +33,6 @@ OUTPUT_DIR="output_${MODEL_TYPE}"
 mkdir -p "$OUTPUT_DIR"
 
 python -m pip install .
-python biopathpred/utils/rename_sequence_label.py data fna
-biopathpred -i ${INPUT_DIR} -o ${OUTPUT_DIR} -m ${MODEL_TYPE} -f coverage=50 -c score
+python bcpip/utils/rename_sequence_label.py data fna
+bcpip -i ${INPUT_DIR} -o ${OUTPUT_DIR} -m ${MODEL_TYPE} -f coverage=50 -c score
 

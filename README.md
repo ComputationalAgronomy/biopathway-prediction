@@ -1,4 +1,4 @@
-# Biopathway Prediction
+# BCPIP - Biological Compound Predictor via Integrated Pathways
 
 ## Aim
 
@@ -14,8 +14,8 @@ The current version is able to process genome datasets downloaded from NCBI (i.e
 
 1. **Create and activate a conda environment:**
    ```bash
-   conda create -n biopathpred python
-   conda activate biopathpred
+   conda create -n bcpip python
+   conda activate bcpip
    ```
 
 2. **Install the package:**
@@ -41,7 +41,7 @@ After downloading, place the executables in the `bin/` directory or any other lo
 ### Run prediction pipeline on downloaded NCBI genome datasets
 
 ```
-biopathpred -i INPUT_DIR -o OUTPUT_DIR
+bcpip -i INPUT_DIR -o OUTPUT_DIR
 ```
 
 #### Options
@@ -57,7 +57,7 @@ biopathpred -i INPUT_DIR -o OUTPUT_DIR
 ### Run individual modules
 
 ```
-biopathpred MODULE_NAME ARGS_REQUIRED
+bcpip MODULE_NAME ARGS_REQUIRED
 ```
 
 #### Options
@@ -80,7 +80,7 @@ See `notebooks/build_blast_database.ipynb`
 ### Available commands
 
 ```
-usage: biopathpred [-h] [-o OUTPUT] [--cpus CPUS] [-i INPUT] [-d DATABASE] [-c CRITERIA] [-f [FILTER ...]] [-m MODEL] [--verbose] [--debug]
+usage: bcpip [-h] [-o OUTPUT] [--cpus CPUS] [-i INPUT] [-d DATABASE] [-c CRITERIA] [-f [FILTER ...]] [-m MODEL] [--verbose] [--debug]
                    {prodigal,blastp,parse_xml,best_blast,match_enzyme,result_summary,build_db} ...
 
 positional arguments:
@@ -112,9 +112,9 @@ options:
 
 ```
 # a single file
-biopathpred -i example_data/GCF_000014005.1_ASM1400v1_genomic.fna -o example_output/
+bcpip -i example_data/GCF_000014005.1_ASM1400v1_genomic.fna -o example_output/
 # multiple files in a folder
-biopathpred -i example_data/ -o example_output/
+bcpip -i example_data/ -o example_output/
 ```
 
 - Example output (`GCF_000014005.1_ASM1400v1_genomic.txt`)
